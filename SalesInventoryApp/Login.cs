@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using System.Text;
+using MySqlConnector;
 
 namespace SalesInventoryApp
 {
@@ -10,7 +11,7 @@ namespace SalesInventoryApp
         }
 
         public readonly MySqlConnection connection = new("Server=localhost;Database=sales_inventory;User=root;Password=password;");
-        private Boolean isFound = false;
+        private Boolean isFound = false; 
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
@@ -18,32 +19,33 @@ namespace SalesInventoryApp
             {
                 try
                 {
+                    byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString());
+
                     connection.Open();
-                    MySqlCommand getAllUsers = new("SELECT * FROM users", connection);
-                    MySqlDataReader dataReader = getAllUsers.ExecuteReader();
-
-                    String password;
-
-                    if (Username.Text == "Admin")
-                        password = Password.Text;
-                    else
-                        password = HashedPassword(Password.Text);
-
-                    while (dataReader.Read())
+                    using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
                     {
-                        if (dataReader[0].ToString() == Username.Text.Trim() && dataReader[1].ToString() == password)
+                        using (MySqlDataReader dataReader = getAllUsers.ExecuteReader())
                         {
-                            ShowMessage(false, "Success", "You have successfuly login " + Username.Text + ".");
-                            connection.Close();
-                            Dashboard dashboard = new(Username.Text) { LoginForm = this, Connection = connection };
-                            dashboard.Show();
-                            Username.Text = Password.Text = "";
-                            isFound = true;
-                            break;
+                            while (dataReader.Read())
+                            {
+                                byte[] salt = Convert.FromBase64String(dataReader[2].ToString());
+                                PasswordSecurity passwordSecurity = new();
+                                byte[] hashedPass = passwordSecurity.CreateHash(passwordBytes, salt);
+                                
+                                if (dataReader[0].ToString() == Username.Text.Trim() && dataReader[1].ToString() == Convert.ToBase64String(hashedPass))
+                                {
+                                    ShowMessage(false, "Success", "You have successfuly login " + Username.Text + ".");
+                                    connection.Close();
+                                    Dashboard dashboard = new(Username.Text) { LoginForm = this, Connection = connection };
+                                    dashboard.Show();
+                                    Username.Text = Password.Text = "";
+                                    ShowPassBtn.Checked = false;
+                                    isFound = true;
+                                    break;
+                                }
+                            }
                         }
                     }
-
-                    dataReader.Close();
 
                     if (!isFound)
                         ShowMessage(true, "Invalid", "Incorrect username or password.");
@@ -74,20 +76,20 @@ namespace SalesInventoryApp
 
         private void ShowPass_CheckedChanged(object sender, EventArgs e)
         {
-            if (ShowPass.Checked == true)
+            if (ShowPassBtn.Checked == true)
                 Password.UseSystemPasswordChar = false;
             else
                 Password.UseSystemPasswordChar = true;
         }
 
-        public static string HashedPassword(string password)
+        private void iconButton1_Click(object sender, EventArgs e)
         {
-            using (var sha = System.Security.Cryptography.SHA256.Create())
-            {
-                var bytes = System.Text.Encoding.UTF8.GetBytes(password.Trim());
-                var hash = sha.ComputeHash(bytes);
-                return Convert.ToBase64String(hash);
-            }
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void LogoutBtn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

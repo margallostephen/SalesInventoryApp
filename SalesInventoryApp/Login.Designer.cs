@@ -31,19 +31,21 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Logo = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.MinimizeBtn = new FontAwesome.Sharp.IconButton();
+            this.LogoutBtn = new FontAwesome.Sharp.IconButton();
+            this.PasswordIcon = new System.Windows.Forms.Panel();
             this.LoginBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ShowPass = new System.Windows.Forms.CheckBox();
+            this.Label = new System.Windows.Forms.Label();
+            this.ShowPassBtn = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.Password = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.UsernameIcon = new System.Windows.Forms.Panel();
             this.Username = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SlateBlue;
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.Logo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -69,31 +71,33 @@
             this.panel1.Size = new System.Drawing.Size(210, 367);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // Logo
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Logo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(41, 122);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(124, 122);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
+            this.Logo.InitialImage = null;
+            this.Logo.Location = new System.Drawing.Point(41, 118);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(124, 122);
+            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Logo.TabIndex = 7;
+            this.Logo.TabStop = false;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.MinimizeBtn);
+            this.panel2.Controls.Add(this.LogoutBtn);
+            this.panel2.Controls.Add(this.PasswordIcon);
             this.panel2.Controls.Add(this.LoginBtn);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.ShowPass);
+            this.panel2.Controls.Add(this.Label);
+            this.panel2.Controls.Add(this.ShowPassBtn);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.Password);
             this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Controls.Add(this.UsernameIcon);
             this.panel2.Controls.Add(this.Username);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(210, 0);
@@ -102,15 +106,60 @@
             this.panel2.Size = new System.Drawing.Size(364, 367);
             this.panel2.TabIndex = 1;
             // 
-            // panel4
+            // MinimizeBtn
             // 
-            this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
-            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel4.Location = new System.Drawing.Point(29, 189);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(40, 32);
-            this.panel4.TabIndex = 16;
+            this.MinimizeBtn.BackColor = System.Drawing.Color.RoyalBlue;
+            this.MinimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.MinimizeBtn.FlatAppearance.BorderSize = 0;
+            this.MinimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MinimizeBtn.ForeColor = System.Drawing.Color.White;
+            this.MinimizeBtn.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.MinimizeBtn.IconColor = System.Drawing.Color.White;
+            this.MinimizeBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.MinimizeBtn.IconSize = 20;
+            this.MinimizeBtn.Location = new System.Drawing.Point(321, -3);
+            this.MinimizeBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.MinimizeBtn.Name = "MinimizeBtn";
+            this.MinimizeBtn.Padding = new System.Windows.Forms.Padding(5, 0, 4, 0);
+            this.MinimizeBtn.Size = new System.Drawing.Size(22, 22);
+            this.MinimizeBtn.TabIndex = 25;
+            this.MinimizeBtn.Text = " ";
+            this.MinimizeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.MinimizeBtn.UseVisualStyleBackColor = false;
+            this.MinimizeBtn.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // LogoutBtn
+            // 
+            this.LogoutBtn.BackColor = System.Drawing.Color.White;
+            this.LogoutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LogoutBtn.FlatAppearance.BorderSize = 0;
+            this.LogoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LogoutBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LogoutBtn.ForeColor = System.Drawing.Color.White;
+            this.LogoutBtn.IconChar = FontAwesome.Sharp.IconChar.WindowClose;
+            this.LogoutBtn.IconColor = System.Drawing.Color.Crimson;
+            this.LogoutBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.LogoutBtn.IconSize = 38;
+            this.LogoutBtn.Location = new System.Drawing.Point(340, -3);
+            this.LogoutBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.LogoutBtn.Name = "LogoutBtn";
+            this.LogoutBtn.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.LogoutBtn.Size = new System.Drawing.Size(26, 22);
+            this.LogoutBtn.TabIndex = 24;
+            this.LogoutBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LogoutBtn.UseVisualStyleBackColor = false;
+            this.LogoutBtn.Click += new System.EventHandler(this.LogoutBtn_Click);
+            // 
+            // PasswordIcon
+            // 
+            this.PasswordIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PasswordIcon.BackgroundImage")));
+            this.PasswordIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PasswordIcon.Location = new System.Drawing.Point(29, 189);
+            this.PasswordIcon.Margin = new System.Windows.Forms.Padding(2);
+            this.PasswordIcon.Name = "PasswordIcon";
+            this.PasswordIcon.Size = new System.Drawing.Size(40, 32);
+            this.PasswordIcon.TabIndex = 16;
             // 
             // LoginBtn
             // 
@@ -133,31 +182,31 @@
             this.LoginBtn.UseVisualStyleBackColor = false;
             this.LoginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
             // 
-            // label1
+            // Label
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(2, 36);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(360, 53);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Login";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Label.BackColor = System.Drawing.Color.Transparent;
+            this.Label.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Label.ForeColor = System.Drawing.Color.Black;
+            this.Label.Location = new System.Drawing.Point(2, 36);
+            this.Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Label.Name = "Label";
+            this.Label.Size = new System.Drawing.Size(360, 57);
+            this.Label.TabIndex = 19;
+            this.Label.Text = "Login";
+            this.Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ShowPass
+            // ShowPassBtn
             // 
-            this.ShowPass.BackColor = System.Drawing.Color.White;
-            this.ShowPass.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ShowPass.ForeColor = System.Drawing.Color.Black;
-            this.ShowPass.Location = new System.Drawing.Point(74, 225);
-            this.ShowPass.Name = "ShowPass";
-            this.ShowPass.Size = new System.Drawing.Size(123, 19);
-            this.ShowPass.TabIndex = 18;
-            this.ShowPass.Text = "Show Password";
-            this.ShowPass.UseVisualStyleBackColor = false;
-            this.ShowPass.CheckedChanged += new System.EventHandler(this.ShowPass_CheckedChanged);
+            this.ShowPassBtn.BackColor = System.Drawing.Color.White;
+            this.ShowPassBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ShowPassBtn.ForeColor = System.Drawing.Color.Black;
+            this.ShowPassBtn.Location = new System.Drawing.Point(74, 225);
+            this.ShowPassBtn.Name = "ShowPassBtn";
+            this.ShowPassBtn.Size = new System.Drawing.Size(123, 19);
+            this.ShowPassBtn.TabIndex = 18;
+            this.ShowPassBtn.Text = "Show Password";
+            this.ShowPassBtn.UseVisualStyleBackColor = false;
+            this.ShowPassBtn.CheckedChanged += new System.EventHandler(this.ShowPass_CheckedChanged);
             // 
             // panel3
             // 
@@ -192,15 +241,15 @@
             this.panel5.Size = new System.Drawing.Size(250, 2);
             this.panel5.TabIndex = 14;
             // 
-            // panel6
+            // UsernameIcon
             // 
-            this.panel6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel6.BackgroundImage")));
-            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel6.Location = new System.Drawing.Point(31, 122);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(38, 32);
-            this.panel6.TabIndex = 13;
+            this.UsernameIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UsernameIcon.BackgroundImage")));
+            this.UsernameIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.UsernameIcon.Location = new System.Drawing.Point(31, 122);
+            this.UsernameIcon.Margin = new System.Windows.Forms.Padding(2);
+            this.UsernameIcon.Name = "UsernameIcon";
+            this.UsernameIcon.Size = new System.Drawing.Size(38, 32);
+            this.UsernameIcon.TabIndex = 13;
             // 
             // Username
             // 
@@ -234,7 +283,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -245,16 +294,18 @@
 
         private TableLayoutPanel tableLayoutPanel1;
         private Panel panel1;
-        private PictureBox pictureBox1;
+        private PictureBox Logo;
         private Panel panel2;
         private Button LoginBtn;
-        private Label label1;
-        private Panel panel4;
-        private CheckBox ShowPass;
+        private Panel PasswordIcon;
+        private CheckBox ShowPassBtn;
         private Panel panel3;
         private TextBox Password;
         private Panel panel5;
-        private Panel panel6;
+        private Panel UsernameIcon;
         private TextBox Username;
+        private Label Label;
+        private FontAwesome.Sharp.IconButton LogoutBtn;
+        private FontAwesome.Sharp.IconButton MinimizeBtn;
     }
 }

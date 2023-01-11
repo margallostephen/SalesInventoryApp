@@ -1,5 +1,4 @@
 ﻿using SalesInventoryApp.Properties;
-using System.Windows.Forms;
 
 namespace SalesInventoryApp
 {
@@ -21,7 +20,10 @@ namespace SalesInventoryApp
                 panel1.BackColor = panel2.BackColor = ColorTranslator.FromHtml("#cf3b2e");
 
                 if (Info == "Logout")
+                {
                     PictureBox.Image = Resources.Logout;
+                    PictureBox.Location = new Point(26, 52);
+                }
                 else
                     PictureBox.Image = Resources.Error;
             }

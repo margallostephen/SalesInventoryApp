@@ -57,7 +57,7 @@
             // PictureBox
             // 
             this.PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox.Image")));
-            this.PictureBox.Location = new System.Drawing.Point(12, 52);
+            this.PictureBox.Location = new System.Drawing.Point(26, 52);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(65, 63);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

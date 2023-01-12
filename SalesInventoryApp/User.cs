@@ -6,6 +6,7 @@ namespace SalesInventoryApp
     {
         public MySqlConnection Connection { get; set; }
         public string selectedRowUsername;
+        public string selectedRowPassword;
 
         public User()
         {
@@ -16,14 +17,24 @@ namespace SalesInventoryApp
         public void LoadTableRecord()
         {
             UserTable.Rows.Clear();
-
             Connection.Open();
-            using MySqlCommand command = new("SELECT * FROM users ORDER BY username ASC", Connection);
-            using MySqlDataReader dataReader = command.ExecuteReader();
 
-            while (dataReader.Read())
-                UserTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
-
+            using (MySqlCommand command = new("SELECT * FROM users ORDER BY username ASC", Connection))
+            {
+                using (MySqlDataReader dataReader = command.ExecuteReader())
+                {
+                    if (dataReader.HasRows)
+                    {
+                        UserTable.BringToFront();
+                        ActionLabel.BringToFront();
+                        while (dataReader.Read())
+                            UserTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
+                    }
+                    else
+                        NoUserLabel.BringToFront();
+                }
+            }
+ 
             Connection.Close();
             UserTable.ClearSelection();
         }
@@ -35,9 +46,8 @@ namespace SalesInventoryApp
 
         private void AddUserBtn_Click(object sender, EventArgs e)
         {
-            UserTable.ClearSelection();
-            UserPrompt addUserForm = new("Add", this) { Connection = Connection };
-            addUserForm.ShowDialog(this);
+            UserPrompt userPrompt = new("Add", this) { Connection = Connection };
+            userPrompt.ShowDialog(this);
             LoadTableRecord();
         }
 
@@ -47,6 +57,7 @@ namespace SalesInventoryApp
             {
                 int index = UserTable.CurrentRow.Index;
                 selectedRowUsername = UserTable[0, index].Value.ToString();
+                selectedRowPassword = UserTable[1, index].Value.ToString();
             }
         }
 
@@ -56,14 +67,17 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
-                UserPrompt userPrompt= null;
+                UserTable.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.DarkSlateBlue;
+                UserTable.CurrentRow.DefaultCellStyle.SelectionForeColor = Color.White;
+
+                UserPrompt userPrompt;
 
                 if (columnName == "ColumnEdit")
                 {
                     userPrompt = new("Edit", this) { Connection = Connection };
                     userPrompt.Username.Text = selectedRowUsername;
                 }
-                else if (columnName == "ColumnDelete")
+                else
                     userPrompt = new("Delete", this) { Connection = Connection };
 
                 userPrompt.ShowDialog(this);
@@ -85,7 +99,7 @@ namespace SalesInventoryApp
         {
             if (e.Delta > 0 && UserTable.FirstDisplayedScrollingRowIndex > 0)
                 UserTable.FirstDisplayedScrollingRowIndex--;
-            else if (e.Delta < 0 && UserTable.FirstDisplayedScrollingRowIndex < UserTable.RowCount - 1)
+            else if (e.Delta < 0 && UserTable.FirstDisplayedScrollingRowIndex < UserTable.RowCount)
                 UserTable.FirstDisplayedScrollingRowIndex++;
         }
     }

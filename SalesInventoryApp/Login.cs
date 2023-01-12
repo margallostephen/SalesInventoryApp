@@ -20,8 +20,8 @@ namespace SalesInventoryApp
                 try
                 {
                     byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString());
-
                     connection.Open();
+
                     using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
                     {
                         using (MySqlDataReader dataReader = getAllUsers.ExecuteReader())
@@ -29,10 +29,8 @@ namespace SalesInventoryApp
                             while (dataReader.Read())
                             {
                                 byte[] salt = Convert.FromBase64String(dataReader[2].ToString());
-                                PasswordSecurity passwordSecurity = new();
-                                byte[] hashedPass = passwordSecurity.CreateHash(passwordBytes, salt);
-                                
-                                if (dataReader[0].ToString() == Username.Text.Trim() && dataReader[1].ToString() == Convert.ToBase64String(hashedPass))
+
+                                if (dataReader[0].ToString() == Username.Text.Trim() && PasswordSecurity.VerifyHash(passwordBytes, salt, Convert.FromBase64String(dataReader[1].ToString())))
                                 {
                                     ShowMessage(false, "Success", "You have successfuly login " + Username.Text + ".");
                                     connection.Close();
@@ -82,7 +80,7 @@ namespace SalesInventoryApp
                 Password.UseSystemPasswordChar = true;
         }
 
-        private void iconButton1_Click(object sender, EventArgs e)
+        private void MinimizeBtn_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }

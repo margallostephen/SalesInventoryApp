@@ -12,6 +12,7 @@ namespace SalesInventoryApp
         private Panel ActiveBtnPanel;
         private Form CurrentChildForm;
         private User userForm;
+        private Category categoryForm;
 
         public Dashboard(string Username)
         {
@@ -107,7 +108,8 @@ namespace SalesInventoryApp
 
         private void CategoryBtn_Click(object sender, EventArgs e)
         {
-
+            categoryForm ??= new() { Connection = Connection };
+            OpenChildForm(categoryForm);
         }
 
         private void SupplierBtn_Click(object sender, EventArgs e)
@@ -123,9 +125,24 @@ namespace SalesInventoryApp
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             Close();
+            Dispose();
             Message message = new("Logout", "Logging out.");
             message.ShowDialog();
             LoginForm.Show();
+        }
+
+        public static void ShowMessage(Form child, Form parent, String info, String Message, Boolean closePrompt)
+        {
+            Message messageform = new(info, Message);
+            child.Hide();
+            messageform.ShowDialog(parent);
+            child.Show();
+
+            if (closePrompt)
+            {
+                child.Close();
+                child.Dispose();
+            }
         }
 
         private void MinimizeBtn_Click(object sender, EventArgs e)

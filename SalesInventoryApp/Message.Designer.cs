@@ -42,24 +42,24 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(367, 16);
+            this.panel1.Size = new System.Drawing.Size(328, 12);
             this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(212)))), ((int)(((byte)(42)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 149);
+            this.panel2.Location = new System.Drawing.Point(0, 139);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(367, 16);
+            this.panel2.Size = new System.Drawing.Size(328, 12);
             this.panel2.TabIndex = 2;
             // 
             // PictureBox
             // 
             this.PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox.Image")));
-            this.PictureBox.Location = new System.Drawing.Point(26, 52);
+            this.PictureBox.Location = new System.Drawing.Point(29, 48);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(65, 63);
+            this.PictureBox.Size = new System.Drawing.Size(57, 55);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBox.TabIndex = 4;
             this.PictureBox.TabStop = false;
@@ -67,9 +67,9 @@
             // MessageLabel
             // 
             this.MessageLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.MessageLabel.Location = new System.Drawing.Point(92, 34);
+            this.MessageLabel.Location = new System.Drawing.Point(92, 27);
             this.MessageLabel.Name = "MessageLabel";
-            this.MessageLabel.Size = new System.Drawing.Size(263, 97);
+            this.MessageLabel.Size = new System.Drawing.Size(224, 97);
             this.MessageLabel.TabIndex = 6;
             this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -78,7 +78,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(367, 165);
+            this.ClientSize = new System.Drawing.Size(328, 151);
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.panel2);

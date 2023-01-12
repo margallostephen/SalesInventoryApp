@@ -24,7 +24,7 @@ namespace SalesInventoryApp
             }
             else
             {
-                this.Size = new Size(350, 180);
+                this.Size = new Size(350, 150);
                 HeaderText.Text = "Delete User";
                 BtnOne.Text = "Yes";
                 BtnTwo.Text = "No";
@@ -37,30 +37,26 @@ namespace SalesInventoryApp
 
         private void BtnOne_Click(object sender, EventArgs e)
         {
-            string username = "",
-                   info = "Invalid",
-                   message = "";
-
-            Boolean alreadyTaken = false,
-                    closePrompt = false;
+            string username = "", info = "Invalid", message;
+            Boolean alreadyTaken = false, closePrompt = false;
 
             Connection.Open();
 
             using (MySqlCommand getAllUsers = new("SELECT * FROM users", Connection))
             {
-                using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
-
-                while (dataReader.Read())
+                using (MySqlDataReader dataReader = getAllUsers.ExecuteReader())
                 {
-
-                    if (dataReader[0].ToString() == Username.Text)
+                    while (dataReader.Read())
                     {
-                        username = dataReader[0].ToString();
+                        if (dataReader[0].ToString() == Username.Text)
+                        {
+                            username = dataReader[0].ToString();
 
-                        if (BtnOne.Text != "Save")
-                            alreadyTaken = true;
+                            if (BtnOne.Text != "Yes")
+                                alreadyTaken = true;
 
-                        break;
+                            break;
+                        }
                     }
                 }
             }
@@ -75,25 +71,24 @@ namespace SalesInventoryApp
                             message = "Username have already been taken.";
                         else
                         {
-                            PasswordSecurity passwordSecurity = new();
-                            byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString()), salt = passwordSecurity.GenerateSalt();
-                            String password = Convert.ToBase64String(passwordSecurity.CreateHash(passwordBytes, salt)), saltString = Convert.ToBase64String(salt);
+                            byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString()), salt = PasswordSecurity.GenerateSalt();
+                            String password = Convert.ToBase64String(PasswordSecurity.CreateHash(passwordBytes, salt)), saltString = Convert.ToBase64String(salt);
 
                             if (BtnOne.Text == "Add")
                             {
-                                command.CommandText = "INSERT INTO users(username, password, salt) VALUES(@username, @password, @salt)";
-                                command.Parameters.Add("@username", (DbType)SqlDbType.VarChar).Value = Username.Text.Trim();
-                                command.Parameters.Add("@password", (DbType)SqlDbType.VarChar).Value = password;
-                                command.Parameters.Add("@salt", (DbType)SqlDbType.VarChar).Value = saltString;
+                                command.CommandText = "INSERT INTO users(username, password, salt) VALUES(?, ?, ?)";
+                                command.Parameters.Add("username", (DbType)SqlDbType.VarChar).Value = Username.Text.Trim();
+                                command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = password;
+                                command.Parameters.Add("salt", (DbType)SqlDbType.VarChar).Value = saltString;
                                 message = "New user added successfully.";
                             }
                             else
                             {
-                                command.CommandText = "UPDATE users SET username = @newUsername, password = @password, salt = @salt WHERE username = @username";
-                                command.Parameters.Add("@newUsername", (DbType)SqlDbType.VarChar).Value = Username.Text.Trim();
-                                command.Parameters.Add("@password", (DbType)SqlDbType.VarChar).Value = password;
-                                command.Parameters.Add("@salt", (DbType)SqlDbType.VarChar).Value = saltString;
-                                command.Parameters.Add("@username", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowUsername;
+                                command.CommandText = "UPDATE users SET username = ?, password = ?, salt = ? WHERE password = ?";
+                                command.Parameters.Add("newUsername", (DbType)SqlDbType.VarChar).Value = Username.Text.Trim();
+                                command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = password;
+                                command.Parameters.Add("salt", (DbType)SqlDbType.VarChar).Value = saltString;
+                                command.Parameters.Add("oldPassword", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowPassword;
                                 message = "User updated successfully.";
                             }
 
@@ -109,8 +104,8 @@ namespace SalesInventoryApp
                 }
                 else
                 {
-                    command.CommandText = "DELETE FROM users WHERE username = @username";
-                    command.Parameters.Add("@username", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowUsername;
+                    command.CommandText = "DELETE FROM users WHERE password = ?";
+                    command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowPassword;
                     message = "User " + username + " deleted successfully.";
                     info = "Success";
                     closePrompt = true;
@@ -120,20 +115,14 @@ namespace SalesInventoryApp
                     command.ExecuteNonQuery();
             }
 
-            Message messageForm = new(info, message);
-            Hide();
-            messageForm.ShowDialog(userForm);
-            Show();
-
-            if (closePrompt)
-                Close();
-
+            Dashboard.ShowMessage(this, userForm, info, message, closePrompt);
             Connection.Close();
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)
         {
             Close();
+            Dispose();
         }
     }
 }

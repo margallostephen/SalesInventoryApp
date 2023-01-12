@@ -1,6 +1,6 @@
 ﻿namespace SalesInventoryApp
 {
-    partial class User
+    partial class Category
     {
         /// <summary>
         /// Required designer variable.
@@ -36,62 +36,77 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(User));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Category));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.UserTable = new System.Windows.Forms.DataGridView();
+            this.AddCategoryBtn = new FontAwesome.Sharp.IconButton();
+            this.ActionLabel = new System.Windows.Forms.Label();
+            this.CategoryTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ActionLabel = new System.Windows.Forms.Label();
-            this.AddUserBtn = new FontAwesome.Sharp.IconButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.NoUserLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.UserTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CategoryTable)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // AddCategoryBtn
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel1.Location = new System.Drawing.Point(17, 51);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 2);
-            this.panel1.TabIndex = 4;
+            this.AddCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddCategoryBtn.BackColor = System.Drawing.Color.SlateBlue;
+            this.AddCategoryBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddCategoryBtn.FlatAppearance.BorderSize = 0;
+            this.AddCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddCategoryBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AddCategoryBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.AddCategoryBtn.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.AddCategoryBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.AddCategoryBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.AddCategoryBtn.IconSize = 35;
+            this.AddCategoryBtn.Location = new System.Drawing.Point(603, 454);
+            this.AddCategoryBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.AddCategoryBtn.Name = "AddCategoryBtn";
+            this.AddCategoryBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.AddCategoryBtn.Size = new System.Drawing.Size(154, 46);
+            this.AddCategoryBtn.TabIndex = 21;
+            this.AddCategoryBtn.Text = "Add Category";
+            this.AddCategoryBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.AddCategoryBtn.UseVisualStyleBackColor = false;
+            this.AddCategoryBtn.Click += new System.EventHandler(this.AddCategoryBtn_Click);
             // 
-            // label1
+            // ActionLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(18, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 37);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "User";
+            this.ActionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ActionLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.ActionLabel.Location = new System.Drawing.Point(609, 72);
+            this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ActionLabel.Name = "ActionLabel";
+            this.ActionLabel.Size = new System.Drawing.Size(146, 33);
+            this.ActionLabel.TabIndex = 20;
+            this.ActionLabel.Text = "Action";
+            this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // UserTable
+            // CategoryTable
             // 
-            this.UserTable.AllowUserToAddRows = false;
-            this.UserTable.AllowUserToDeleteRows = false;
-            this.UserTable.AllowUserToResizeColumns = false;
-            this.UserTable.AllowUserToResizeRows = false;
+            this.CategoryTable.AllowUserToAddRows = false;
+            this.CategoryTable.AllowUserToDeleteRows = false;
+            this.CategoryTable.AllowUserToResizeColumns = false;
+            this.CategoryTable.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.UserTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.UserTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.CategoryTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.CategoryTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.UserTable.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.UserTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.UserTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.CategoryTable.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.CategoryTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.CategoryTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkSlateBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -99,10 +114,10 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkSlateBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.UserTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.UserTable.ColumnHeadersHeight = 35;
-            this.UserTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.UserTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CategoryTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.CategoryTable.ColumnHeadersHeight = 35;
+            this.CategoryTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.CategoryTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.ColumnEdit,
@@ -114,16 +129,16 @@
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.UserTable.DefaultCellStyle = dataGridViewCellStyle7;
-            this.UserTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.UserTable.EnableHeadersVisualStyles = false;
-            this.UserTable.GridColor = System.Drawing.Color.DarkGray;
-            this.UserTable.Location = new System.Drawing.Point(17, 70);
-            this.UserTable.Margin = new System.Windows.Forms.Padding(2);
-            this.UserTable.MultiSelect = false;
-            this.UserTable.Name = "UserTable";
-            this.UserTable.ReadOnly = true;
-            this.UserTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.CategoryTable.DefaultCellStyle = dataGridViewCellStyle7;
+            this.CategoryTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.CategoryTable.EnableHeadersVisualStyles = false;
+            this.CategoryTable.GridColor = System.Drawing.Color.DarkGray;
+            this.CategoryTable.Location = new System.Drawing.Point(17, 70);
+            this.CategoryTable.Margin = new System.Windows.Forms.Padding(2);
+            this.CategoryTable.MultiSelect = false;
+            this.CategoryTable.Name = "CategoryTable";
+            this.CategoryTable.ReadOnly = true;
+            this.CategoryTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -131,36 +146,37 @@
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.UserTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.UserTable.RowHeadersVisible = false;
-            this.UserTable.RowHeadersWidth = 62;
-            this.UserTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.CategoryTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.CategoryTable.RowHeadersVisible = false;
+            this.CategoryTable.RowHeadersWidth = 62;
+            this.CategoryTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.UserTable.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.UserTable.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.UserTable.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.UserTable.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.UserTable.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.UserTable.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.UserTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.UserTable.RowTemplate.Height = 30;
-            this.UserTable.RowTemplate.ReadOnly = true;
-            this.UserTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.UserTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.UserTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserTable.ShowCellErrors = false;
-            this.UserTable.ShowCellToolTips = false;
-            this.UserTable.ShowEditingIcon = false;
-            this.UserTable.ShowRowErrors = false;
-            this.UserTable.Size = new System.Drawing.Size(740, 366);
-            this.UserTable.TabIndex = 5;
-            this.UserTable.TabStop = false;
-            this.UserTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserTable_CellContentClick);
-            this.UserTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserTable_CellMouseEnter);
-            this.UserTable.SelectionChanged += new System.EventHandler(this.UserTable_SelectionChanged);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.CategoryTable.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.CategoryTable.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CategoryTable.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.CategoryTable.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.CategoryTable.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.CategoryTable.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.CategoryTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CategoryTable.RowTemplate.Height = 30;
+            this.CategoryTable.RowTemplate.ReadOnly = true;
+            this.CategoryTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CategoryTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.CategoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.CategoryTable.ShowCellErrors = false;
+            this.CategoryTable.ShowCellToolTips = false;
+            this.CategoryTable.ShowEditingIcon = false;
+            this.CategoryTable.ShowRowErrors = false;
+            this.CategoryTable.Size = new System.Drawing.Size(740, 366);
+            this.CategoryTable.TabIndex = 19;
+            this.CategoryTable.TabStop = false;
+            this.CategoryTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CategoryTable_CellContentClick);
+            this.CategoryTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.CategoryTable_CellMouseEnter);
+            this.CategoryTable.SelectionChanged += new System.EventHandler(this.CategoryTable_SelectionChanged);
             // 
             // Column1
             // 
@@ -168,7 +184,7 @@
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.FillWeight = 16.49484F;
-            this.Column1.HeaderText = "Username";
+            this.Column1.HeaderText = "ID";
             this.Column1.MinimumWidth = 200;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -180,7 +196,7 @@
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.FillWeight = 183.5052F;
-            this.Column2.HeaderText = "Password";
+            this.Column2.HeaderText = "Name";
             this.Column2.MinimumWidth = 300;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -217,43 +233,27 @@
             this.ColumnDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnDelete.Width = 75;
             // 
-            // ActionLabel
+            // panel1
             // 
-            this.ActionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ActionLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.ActionLabel.Location = new System.Drawing.Point(609, 72);
-            this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ActionLabel.Name = "ActionLabel";
-            this.ActionLabel.Size = new System.Drawing.Size(146, 33);
-            this.ActionLabel.TabIndex = 15;
-            this.ActionLabel.Text = "Action";
-            this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel1.Location = new System.Drawing.Point(17, 51);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.TabIndex = 18;
             // 
-            // AddUserBtn
+            // label1
             // 
-            this.AddUserBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddUserBtn.BackColor = System.Drawing.Color.SlateBlue;
-            this.AddUserBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddUserBtn.FlatAppearance.BorderSize = 0;
-            this.AddUserBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddUserBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.AddUserBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.AddUserBtn.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
-            this.AddUserBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.AddUserBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.AddUserBtn.IconSize = 35;
-            this.AddUserBtn.Location = new System.Drawing.Point(635, 454);
-            this.AddUserBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.AddUserBtn.Name = "AddUserBtn";
-            this.AddUserBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.AddUserBtn.Size = new System.Drawing.Size(122, 46);
-            this.AddUserBtn.TabIndex = 16;
-            this.AddUserBtn.Text = "Add User";
-            this.AddUserBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.AddUserBtn.UseVisualStyleBackColor = false;
-            this.AddUserBtn.Click += new System.EventHandler(this.AddUserBtn_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(18, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 37);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Category";
             // 
             // NoUserLabel
             // 
@@ -266,28 +266,28 @@
             this.NoUserLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoUserLabel.Name = "NoUserLabel";
             this.NoUserLabel.Size = new System.Drawing.Size(718, 312);
-            this.NoUserLabel.TabIndex = 17;
-            this.NoUserLabel.Text = "No User";
+            this.NoUserLabel.TabIndex = 22;
+            this.NoUserLabel.Text = "No Category";
             this.NoUserLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // User
+            // Category
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(773, 518);
             this.Controls.Add(this.NoUserLabel);
-            this.Controls.Add(this.AddUserBtn);
+            this.Controls.Add(this.AddCategoryBtn);
             this.Controls.Add(this.ActionLabel);
-            this.Controls.Add(this.UserTable);
+            this.Controls.Add(this.CategoryTable);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "User";
-            this.Text = "Maintenance";
-            this.Load += new System.EventHandler(this.User_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.UserTable)).EndInit();
+            this.Name = "Category";
+            this.Text = "Category";
+            this.Load += new System.EventHandler(this.Category_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.CategoryTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,11 +295,11 @@
 
         #endregion
 
+        private FontAwesome.Sharp.IconButton AddCategoryBtn;
+        private Label ActionLabel;
+        public DataGridView CategoryTable;
         private Panel panel1;
         private Label label1;
-        public DataGridView UserTable;
-        private Label ActionLabel;
-        private FontAwesome.Sharp.IconButton AddUserBtn;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewImageColumn ColumnEdit;

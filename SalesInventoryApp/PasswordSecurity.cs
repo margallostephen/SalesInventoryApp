@@ -5,7 +5,7 @@ namespace SalesInventoryApp
 {
     internal class PasswordSecurity
     {
-        public byte[] CreateHash(byte[] password, byte[] salt)
+        public static byte[] CreateHash(byte[] password, byte[] salt)
         {
             using var argon2id = new Argon2id(password);
             argon2id.Salt = salt;
@@ -15,10 +15,10 @@ namespace SalesInventoryApp
             return argon2id.GetBytes(32);
         }
 
-        public bool VerifyHash(byte[] password, byte[] salt, byte[] hash) =>
+        public static bool VerifyHash(byte[] password, byte[] salt, byte[] hash) =>
             CreateHash(password, salt).SequenceEqual(hash);
 
-        public byte[] GenerateSalt()
+        public static byte[] GenerateSalt()
         {
             var buffer = new byte[32];
             using var rng = new RNGCryptoServiceProvider();

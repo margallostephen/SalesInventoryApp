@@ -9,10 +9,10 @@ namespace SalesInventoryApp
         {
             using var argon2id = new Argon2id(password);
             argon2id.Salt = salt;
-            argon2id.DegreeOfParallelism = 8;
-            argon2id.Iterations = 4;
-            argon2id.MemorySize = 1024 * 128;
-            return argon2id.GetBytes(32);
+            argon2id.DegreeOfParallelism = 10;
+            argon2id.Iterations = 8;
+            argon2id.MemorySize = 1024 *128;
+            return argon2id.GetBytes(128);
         }
 
         public static bool VerifyHash(byte[] password, byte[] salt, byte[] hash) =>
@@ -20,8 +20,8 @@ namespace SalesInventoryApp
 
         public static byte[] GenerateSalt()
         {
-            var buffer = new byte[32];
-            using var rng = new RNGCryptoServiceProvider();
+            byte[] buffer = new byte[128];
+            using RandomNumberGenerator rng = RandomNumberGenerator.Create();
             rng.GetBytes(buffer);
             return buffer;
         }

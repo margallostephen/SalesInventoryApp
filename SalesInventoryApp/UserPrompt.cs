@@ -6,68 +6,75 @@ namespace SalesInventoryApp
 {
     public partial class UserPrompt : Form
     {
-        public MySqlConnection Connection { get; set; }
-        private readonly User userForm = null;
+        public MySqlConnection connection { get; set; }
+        private readonly User userForm;
 
-        public UserPrompt(string operation, User UserForm)
+        public UserPrompt(string operation, User userForm)
         {
             InitializeComponent();
-            userForm = UserForm;
+            this.userForm = userForm;
 
             if (operation != "Delete")
             {
                 if (operation == "Edit")
                 {
-                    HeaderText.Text = "Edit User";
+                    Text = HeaderText.Text = "Edit User";
                     BtnOne.Text = "Save";
                 }
             }
             else
             {
-                this.Size = new Size(350, 150);
-                HeaderText.Text = "Delete User";
+                Size = new Size(350, 153);
+                Text = HeaderText.Text = "Delete User";
                 BtnOne.Text = "Yes";
                 BtnTwo.Text = "No";
-                MessageText.Text += userForm.selectedRowUsername + "?";
+                MessageText.Text += this.userForm.selectedRowUsername + "?";
                 MessagePanel.BringToFront();
                 BtnOne.BringToFront();
                 BtnTwo.BringToFront();
             }
+
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
         {
-            string username = "", info = "Invalid", message;
-            Boolean alreadyTaken = false, closePrompt = false;
+            string username = Username.Text.Trim(),
+                   info = "Invalid", 
+                   message;
 
-            Connection.Open();
+            Boolean alreadyTaken = false;
 
-            using (MySqlCommand getAllUsers = new("SELECT * FROM users", Connection))
+            DialogResult = DialogResult.None;
+
+            connection.Open();
+
+            using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
             {
-                using (MySqlDataReader dataReader = getAllUsers.ExecuteReader())
+                using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
+
+                while (dataReader.Read())
                 {
-                    while (dataReader.Read())
+                    if (dataReader[0].ToString() == username)
                     {
-                        if (dataReader[0].ToString() == Username.Text)
-                        {
-                            username = dataReader[0].ToString();
+                        if (BtnOne.Text != "Yes")
+                            alreadyTaken = true;
 
-                            if (BtnOne.Text != "Yes")
-                                alreadyTaken = true;
-
-                            break;
-                        }
+                        break;
                     }
                 }
             }
 
-            using (MySqlCommand command = Connection.CreateCommand())
+            using (MySqlCommand command = connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
-                    if (!string.IsNullOrWhiteSpace(Username.Text) && !string.IsNullOrWhiteSpace(Password.Text))
+                    if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(Password.Text))
                     {
-                        if (alreadyTaken)
+                        if (alreadyTaken && BtnOne.Text == "Add" || alreadyTaken && username != userForm.selectedRowUsername)
                             message = "Username have already been taken.";
                         else
                         {
@@ -77,29 +84,30 @@ namespace SalesInventoryApp
                             if (BtnOne.Text == "Add")
                             {
                                 command.CommandText = "INSERT INTO users(username, password, salt) VALUES(?, ?, ?)";
-                                command.Parameters.Add("username", (DbType)SqlDbType.VarChar).Value = Username.Text.Trim();
-                                command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = password;
-                                command.Parameters.Add("salt", (DbType)SqlDbType.VarChar).Value = saltString;
                                 message = "New user added successfully.";
                             }
                             else
                             {
                                 command.CommandText = "UPDATE users SET username = ?, password = ?, salt = ? WHERE password = ?";
-                                command.Parameters.Add("newUsername", (DbType)SqlDbType.VarChar).Value = Username.Text.Trim();
-                                command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = password;
-                                command.Parameters.Add("salt", (DbType)SqlDbType.VarChar).Value = saltString;
-                                command.Parameters.Add("oldPassword", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowPassword;
                                 message = "User updated successfully.";
                             }
 
+                            command.Parameters.Add("username", (DbType)SqlDbType.VarChar).Value = username;
+                            command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = password;
+                            command.Parameters.Add("salt", (DbType)SqlDbType.VarChar).Value = saltString;
+
+                            if (BtnOne.Text == "Save")
+                                command.Parameters.Add("oldPassword", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowPassword;
+
                             info = "Success";
-                            closePrompt = true;
+                            DialogResult = DialogResult.OK;
                         }
                     }
                     else
                     {
                         info = "Warning";
                         message = "Please fill out the required fields.";
+                        
                     }
                 }
                 else
@@ -108,21 +116,24 @@ namespace SalesInventoryApp
                     command.Parameters.Add("password", (DbType)SqlDbType.VarChar).Value = userForm.selectedRowPassword;
                     message = "User " + username + " deleted successfully.";
                     info = "Success";
-                    closePrompt = true;
+                    DialogResult = DialogResult.OK;
                 }
 
                 if (command.CommandText != "")
+                {
+                    command.Prepare();
                     command.ExecuteNonQuery();
+                }
             }
 
-            Dashboard.ShowMessage(this, userForm, info, message, closePrompt);
-            Connection.Close();
+            connection.Close();
+            Dashboard.ShowMessage(this, userForm, info, message, DialogResult);      
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
-            Dispose();
         }
     }
 }

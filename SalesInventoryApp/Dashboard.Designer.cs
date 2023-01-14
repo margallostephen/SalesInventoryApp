@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.SidePanel = new System.Windows.Forms.Panel();
             this.MaintenanceSubMenu = new System.Windows.Forms.Panel();
@@ -45,9 +46,11 @@
             this.MenuBtn = new FontAwesome.Sharp.IconButton();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.TopBar = new System.Windows.Forms.Panel();
+            this.ClockTime = new System.Windows.Forms.Label();
             this.MinimizeBtn = new FontAwesome.Sharp.IconButton();
             this.UserLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.Time = new System.Windows.Forms.Timer(this.components);
             this.SidePanel.SuspendLayout();
             this.MaintenanceSubMenu.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -93,7 +96,7 @@
             this.ItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ItemBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ItemBtn.ForeColor = System.Drawing.Color.White;
-            this.ItemBtn.IconChar = FontAwesome.Sharp.IconChar.BoxesAlt;
+            this.ItemBtn.IconChar = FontAwesome.Sharp.IconChar.Box;
             this.ItemBtn.IconColor = System.Drawing.Color.White;
             this.ItemBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ItemBtn.IconSize = 25;
@@ -145,7 +148,7 @@
             this.CategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CategoryBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CategoryBtn.ForeColor = System.Drawing.Color.White;
-            this.CategoryBtn.IconChar = FontAwesome.Sharp.IconChar.ListSquares;
+            this.CategoryBtn.IconChar = FontAwesome.Sharp.IconChar.LayerGroup;
             this.CategoryBtn.IconColor = System.Drawing.Color.White;
             this.CategoryBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.CategoryBtn.IconSize = 25;
@@ -312,7 +315,7 @@
             this.InventoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.InventoryBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InventoryBtn.ForeColor = System.Drawing.Color.White;
-            this.InventoryBtn.IconChar = FontAwesome.Sharp.IconChar.Box;
+            this.InventoryBtn.IconChar = FontAwesome.Sharp.IconChar.CubesStacked;
             this.InventoryBtn.IconColor = System.Drawing.Color.White;
             this.InventoryBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.InventoryBtn.IconSize = 30;
@@ -369,6 +372,7 @@
             // TopBar
             // 
             this.TopBar.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.TopBar.Controls.Add(this.ClockTime);
             this.TopBar.Controls.Add(this.MinimizeBtn);
             this.TopBar.Controls.Add(this.UserLabel);
             this.TopBar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -377,6 +381,19 @@
             this.TopBar.Size = new System.Drawing.Size(773, 43);
             this.TopBar.TabIndex = 1;
             this.TopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
+            // 
+            // ClockTime
+            // 
+            this.ClockTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClockTime.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.ClockTime.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ClockTime.ForeColor = System.Drawing.Color.White;
+            this.ClockTime.Location = new System.Drawing.Point(572, 11);
+            this.ClockTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ClockTime.Name = "ClockTime";
+            this.ClockTime.Size = new System.Drawing.Size(166, 22);
+            this.ClockTime.TabIndex = 30;
+            this.ClockTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MinimizeBtn
             // 
@@ -423,6 +440,12 @@
             this.MainPanel.Size = new System.Drawing.Size(773, 518);
             this.MainPanel.TabIndex = 2;
             // 
+            // Time
+            // 
+            this.Time.Enabled = true;
+            this.Time.Interval = 1000;
+            this.Time.Tick += new System.EventHandler(this.Time_Tick);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -468,5 +491,7 @@
         private FontAwesome.Sharp.IconButton SupplierBtn;
         private FontAwesome.Sharp.IconButton CategoryBtn;
         private FontAwesome.Sharp.IconButton UserBtn;
+        private Label ClockTime;
+        private System.Windows.Forms.Timer Time;
     }
 }

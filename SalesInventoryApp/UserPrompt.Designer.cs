@@ -140,7 +140,7 @@
             this.BtnTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnTwo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnTwo.ForeColor = System.Drawing.Color.White;
-            this.BtnTwo.Location = new System.Drawing.Point(270, 129);
+            this.BtnTwo.Location = new System.Drawing.Point(270, 128);
             this.BtnTwo.Margin = new System.Windows.Forms.Padding(2);
             this.BtnTwo.Name = "BtnTwo";
             this.BtnTwo.Size = new System.Drawing.Size(78, 33);
@@ -158,7 +158,7 @@
             this.BtnOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOne.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnOne.ForeColor = System.Drawing.Color.White;
-            this.BtnOne.Location = new System.Drawing.Point(26, 129);
+            this.BtnOne.Location = new System.Drawing.Point(26, 128);
             this.BtnOne.Margin = new System.Windows.Forms.Padding(2);
             this.BtnOne.Name = "BtnOne";
             this.BtnOne.Size = new System.Drawing.Size(78, 33);
@@ -195,7 +195,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(375, 173);
+            this.ClientSize = new System.Drawing.Size(375, 179);
             this.Controls.Add(this.BtnTwo);
             this.Controls.Add(this.BtnOne);
             this.Controls.Add(this.panel1);
@@ -206,6 +206,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserPrompt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Add User";
             this.panel1.ResumeLayout(false);
             this.InputPanel.ResumeLayout(false);
             this.InputPanel.PerformLayout();

@@ -6,25 +6,30 @@ namespace SalesInventoryApp
 {
     public partial class Dashboard : Form
     {
-        public Form LoginForm { get; set; }
-        public MySqlConnection Connection { get; set; }
-        private IconButton ActiveBtn;
-        private Panel ActiveBtnPanel;
-        private Form CurrentChildForm;
+        public Form loginForm { get; set; }
+        public MySqlConnection connection { get; set; }
+        private IconButton activeBtn;
+        private Panel activeBtnPanel;
+        private Form currentChildForm;
         private User userForm;
         private Category categoryForm;
+        private Supplier supplierForm;
 
-        public Dashboard(string Username)
+        public Dashboard(string username)
         {
             InitializeComponent();
-            UserLabel.Text = "Welcome " + Username;
-            ActiveBtnPanel = new Panel
+            UserLabel.Text = "Welcome " + username;
+            activeBtnPanel = new Panel
             {
                 Size = new Size(4, 51),
                 BackColor = Color.White
             };
-            SidePanel.Controls.Add(ActiveBtnPanel);
+            SidePanel.Controls.Add(activeBtnPanel);
             MaintenanceBtn_Click(MaintenanceBtn, null);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
         private void MenuBtn_Click(object sender, EventArgs e)
@@ -53,16 +58,16 @@ namespace SalesInventoryApp
 
         private void ActiveButton(object senderBtn)
         {
-            if (ActiveBtn != null)
-                ActiveBtn.BackColor = Color.SlateBlue;
+            if (activeBtn != null)
+                activeBtn.BackColor = Color.SlateBlue;
 
-            ActiveBtn = (IconButton)senderBtn;
-            ActiveBtn.BackColor = Color.DarkSlateBlue;
-            ActiveBtnPanel.Height = ActiveBtn.Height;
-            ActiveBtnPanel.Location = new Point(0, ActiveBtn.Location.Y);
-            ActiveBtnPanel.BringToFront();
+            activeBtn = (IconButton)senderBtn;
+            activeBtn.BackColor = Color.DarkSlateBlue;
+            activeBtnPanel.Height = activeBtn.Height;
+            activeBtnPanel.Location = new Point(0, activeBtn.Location.Y);
+            activeBtnPanel.BringToFront();
 
-            if (ActiveBtn != MaintenanceBtn)
+            if (activeBtn != MaintenanceBtn)
                 MaintenanceSubMenu.Visible = false;
             else
                 MaintenanceSubMenu.Visible = true;
@@ -70,14 +75,14 @@ namespace SalesInventoryApp
 
         private void OpenChildForm(Form ChildForm)
         {
-            if (CurrentChildForm != ChildForm)
+            if (currentChildForm != ChildForm)
             {
-                CurrentChildForm?.Hide();
-                CurrentChildForm = ChildForm;
-                CurrentChildForm.Dock = DockStyle.Fill;
-                CurrentChildForm.TopLevel = false;
-                MainPanel.Controls.Add(CurrentChildForm);
-                CurrentChildForm.Show();
+                currentChildForm?.Hide();
+                currentChildForm = ChildForm;
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.TopLevel = false;
+                MainPanel.Controls.Add(currentChildForm);
+                currentChildForm.Show();
             }
         }
 
@@ -102,19 +107,20 @@ namespace SalesInventoryApp
 
         private void UserBtn_Click(object sender, EventArgs e)
         {
-            userForm ??= new() { Connection = Connection };
+            userForm ??= new() { connection = connection };
             OpenChildForm(userForm);
         }
 
         private void CategoryBtn_Click(object sender, EventArgs e)
         {
-            categoryForm ??= new() { Connection = Connection };
+            categoryForm ??= new() { connection = connection };
             OpenChildForm(categoryForm);
         }
 
         private void SupplierBtn_Click(object sender, EventArgs e)
         {
-
+            supplierForm ??= new() { connection = connection };
+            OpenChildForm(supplierForm);
         }
 
         private void ItemBtn_Click(object sender, EventArgs e)
@@ -124,25 +130,22 @@ namespace SalesInventoryApp
 
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
+            Message message = new("Logout", "Logging out" + UserLabel.Text.ToString().Remove(0, 7) + ".");
             Close();
             Dispose();
-            Message message = new("Logout", "Logging out.");
             message.ShowDialog();
-            LoginForm.Show();
+            loginForm.Show();
         }
 
-        public static void ShowMessage(Form child, Form parent, String info, String Message, Boolean closePrompt)
+        public static void ShowMessage(Form child, Form parent, String info, String Message, DialogResult result)
         {
-            Message messageform = new(info, Message);
             child.Hide();
+            Message messageform = new(info, Message);
             messageform.ShowDialog(parent);
             child.Show();
 
-            if (closePrompt)
-            {
+            if (result == DialogResult.OK)
                 child.Close();
-                child.Dispose();
-            }
         }
 
         private void MinimizeBtn_Click(object sender, EventArgs e)
@@ -159,6 +162,11 @@ namespace SalesInventoryApp
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void Time_Tick(object sender, EventArgs e)
+        {
+            ClockTime.Text = DateTime.Now.ToString();
         }
     }
 }

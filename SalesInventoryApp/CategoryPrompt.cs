@@ -1,94 +1,99 @@
-﻿
-
-using MySqlConnector;
+﻿using MySqlConnector;
 using System.Data;
 
 namespace SalesInventoryApp
 {
     public partial class CategoryPrompt : Form
     {
-        public MySqlConnection Connection { get; set; }
-        private readonly Category categoryForm = null;
+        public MySqlConnection connection { get; set; }
+        private readonly Category categoryForm;
 
-        public CategoryPrompt(string operation, Category CategoryForm)
+        public CategoryPrompt(string operation, Category categoryForm)
         {
             InitializeComponent();
-            categoryForm = CategoryForm;
+            this.categoryForm = categoryForm;
 
             if (operation != "Delete")
             {
                 if (operation == "Edit")
                 {
-                    HeaderText.Text = "Edit Category";
+                    Text = HeaderText.Text = "Edit Category";
                     BtnOne.Text = "Save";
                 }
             }
             else
             {
-                HeaderText.Text = "Delete Category";
-                MessageText.Text += categoryForm.selectedRowCategory + "?";
+                Text = HeaderText.Text = "Delete Category";
+                MessageText.Text += this.categoryForm.selectedRowCategory + "?";
                 MessagePanel.BringToFront();
                 BtnOne.Text = "Yes";
                 BtnTwo.Text = "No";
             }
+
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
         {
-            string categoryName = "", 
+            string categoryName = Category.Text.Trim(), 
                    info = "Invalid", 
                    message = "";
 
-            Boolean alreadyExist = false, 
-                    closePrompt = false;
+            Boolean alreadyExist = false;
 
-            Connection.Open();
+            DialogResult = DialogResult.None;
 
-            using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", Connection))
+            connection.Open();
+
+            using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", connection))
             {
-                using (MySqlDataReader dataReader = getAllCategories.ExecuteReader())
+                using MySqlDataReader dataReader = getAllCategories.ExecuteReader();
+
+                while (dataReader.Read())
                 {
-                    while (dataReader.Read())
+                    if (dataReader[1].ToString() == categoryName)
                     {
-                        if (dataReader[1].ToString() == Category.Text)
-                        {
-                            categoryName = dataReader[1].ToString();
+                        categoryName = dataReader[1].ToString();
 
-                            if (BtnOne.Text != "Yes")
-                                alreadyExist = true;
+                        if (BtnOne.Text != "Yes")
+                            alreadyExist = true;
 
-                            break;
-                        }
+                        break;
                     }
                 }
             }
 
-            using (MySqlCommand command = Connection.CreateCommand())
+            using (MySqlCommand command = connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
-                    if (!string.IsNullOrWhiteSpace(Category.Text))
+                    if (!string.IsNullOrWhiteSpace(categoryName))
                     {
-                        if (alreadyExist)
+                        if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && categoryName != categoryForm.selectedRowCategory)
                             message = "Category already exist.";
                         else
                         {
                             if (BtnOne.Text == "Add")
                             {
                                 command.CommandText = "INSERT INTO item_category(name) VALUES(?)";
-                                command.Parameters.Add("name", (DbType)SqlDbType.VarChar).Value = Category.Text.Trim();
                                 message = "New category added successfully.";
                             }
                             else
                             {
                                 command.CommandText = "UPDATE item_category SET name = ? WHERE id = ?";
-                                command.Parameters.Add("name", (DbType)SqlDbType.VarChar).Value = Category.Text.Trim();
-                                command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = categoryForm.selectedRowId;
                                 message = "Category updated successfully.";
                             }
 
+                            command.Parameters.Add("name", (DbType)SqlDbType.VarChar).Value = categoryName;
+
+                            if (BtnOne.Text == "Save")
+                                command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = categoryForm.selectedRowId;
+
                             info = "Success";
-                            closePrompt = true;
+                            DialogResult = DialogResult.OK;
                         }
                     }
                     else
@@ -100,24 +105,27 @@ namespace SalesInventoryApp
                 else
                 {
                     command.CommandText = "DELETE FROM item_category WHERE id = ?";
-                    command.Parameters.Add("id", (DbType)SqlDbType.VarChar).Value = categoryForm.selectedRowId;
+                    command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = categoryForm.selectedRowId;
                     message = "Category " + categoryName + " deleted successfully.";
                     info = "Success";
-                    closePrompt = true;
+                    DialogResult = DialogResult.OK;
                 }
 
                 if (command.CommandText != "")
+                {
+                    command.Prepare();
                     command.ExecuteNonQuery();
+                }
             }
 
-            Dashboard.ShowMessage(this, categoryForm, info, message, closePrompt);
-            Connection.Close();
+            connection.Close();
+            Dashboard.ShowMessage(this, categoryForm, info, message, DialogResult);
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
-            Dispose();
         }
     }
 }

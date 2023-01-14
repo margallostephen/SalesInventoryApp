@@ -4,39 +4,42 @@ namespace SalesInventoryApp
 {
     public partial class Category : Form
     {
-        public MySqlConnection Connection { get; set; }
+        public MySqlConnection connection { get; set; }
         public int selectedRowId;
         public string selectedRowCategory;
 
         public Category()
         {
             InitializeComponent();
-            this.CategoryTable.MouseWheel += new MouseEventHandler(MouseWheel);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            CategoryTable.MouseWheel += new MouseEventHandler(MouseWheel);
         }
 
         public void LoadTableRecord()
         {
             CategoryTable.Rows.Clear();
-            Connection.Open();
 
-            using (MySqlCommand command = new("SELECT * FROM item_category ORDER BY id ASC", Connection))
+            connection.Open();
+
+            using (MySqlCommand command = new("SELECT * FROM item_category ORDER BY id ASC", connection))
             {
-                using (MySqlDataReader dataReader = command.ExecuteReader())
+                using MySqlDataReader dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
                 {
-                    if (dataReader.HasRows)
-                    {
-                        CategoryTable.BringToFront();
-                        ActionLabel.BringToFront();
-                        while (dataReader.Read())
-                            CategoryTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
-                    }
-                    else
-                        NoUserLabel.BringToFront();
+                    CategoryTable.BringToFront();
+                    ActionLabel.BringToFront();
+                    while (dataReader.Read())
+                        CategoryTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
                 }
+                else
+                    NoLabel.BringToFront();
             }
 
-            Connection.Close();
-            CategoryTable.ClearSelection();
+            connection.Close();
         }
 
         private void Category_Load(object sender, EventArgs e)
@@ -46,9 +49,9 @@ namespace SalesInventoryApp
 
         private void AddCategoryBtn_Click(object sender, EventArgs e)
         {
-            CategoryPrompt categoryPrompt = new("Add", this) { Connection = Connection };
-            categoryPrompt.ShowDialog(this);
-            LoadTableRecord();
+            CategoryPrompt categoryPrompt = new("Add", this) { connection = connection };
+            DialogResult result = categoryPrompt.ShowDialog(this);
+            DisposePrompt(result, categoryPrompt);
         }
 
         private void CategoryTable_SelectionChanged(object sender, EventArgs e)
@@ -74,15 +77,30 @@ namespace SalesInventoryApp
 
                 if (columnName == "ColumnEdit")
                 {
-                    categoryPrompt = new("Edit", this) { Connection = Connection };
+                    categoryPrompt = new("Edit", this) { connection = connection };
                     categoryPrompt.Category.Text = selectedRowCategory;
                 }
                 else
-                    categoryPrompt = new("Delete", this) { Connection = Connection };
+                    categoryPrompt = new("Delete", this) { connection = connection };
 
-                categoryPrompt.ShowDialog(this);
-                LoadTableRecord();
+                DialogResult result = categoryPrompt.ShowDialog(this);
+                DisposePrompt(result, categoryPrompt);
+
+                if (CategoryTable.CurrentRow != null)
+                {
+                    CategoryTable.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255);
+                    CategoryTable.CurrentRow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                }
             }
+        }
+
+        private void DisposePrompt(DialogResult result, CategoryPrompt categoryPrompt)
+        {
+            if (result == DialogResult.OK)
+                LoadTableRecord();
+
+            if (result == DialogResult.OK || result == DialogResult.Cancel)
+                categoryPrompt.Dispose();
         }
 
         private void CategoryTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -99,7 +117,7 @@ namespace SalesInventoryApp
         {
             if (e.Delta > 0 && CategoryTable.FirstDisplayedScrollingRowIndex > 0)
                 CategoryTable.FirstDisplayedScrollingRowIndex--;
-            else if (e.Delta < 0 && CategoryTable.FirstDisplayedScrollingRowIndex < CategoryTable.RowCount)
+            else if (e.Delta < 0 && CategoryTable.FirstDisplayedScrollingRowIndex < CategoryTable.RowCount - 1)
                 CategoryTable.FirstDisplayedScrollingRowIndex++;
         }
     }

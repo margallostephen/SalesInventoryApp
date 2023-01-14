@@ -4,22 +4,22 @@ namespace SalesInventoryApp
 {
     public partial class Message : Form
     {
-        public Message(String Info, String message)
+        public Message(String info, String message)
         {
             InitializeComponent();
             MessageLabel.Text = message;
 
-            if (Info == "Success")
+            if (info == "Success")
             {
                 panel1.BackColor = panel2.BackColor = ColorTranslator.FromHtml("#00bf52");
                 PictureBox.Image = Resources.Check;
             }
 
-            if (Info == "Error" || Info == "Invalid" || Info == "Logout")
+            if (info == "Error" || info == "Invalid" || info == "Logout")
             {
                 panel1.BackColor = panel2.BackColor = ColorTranslator.FromHtml("#cf3b2e");
 
-                if (Info == "Logout")
+                if (info == "Logout")
                 {
                     PictureBox.Image = Resources.Logout;
                     PictureBox.Location = new Point(26, 52);
@@ -28,12 +28,14 @@ namespace SalesInventoryApp
                     PictureBox.Image = Resources.Error;
             }
 
-            Activated += CloseForm;
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
-        private async void CloseForm(object sender, EventArgs e)
+        private void CloseTimer_Tick(object sender, EventArgs e)
         {
-            await Task.Run(() => Thread.Sleep(1000));
             Close();
             Dispose();
         }

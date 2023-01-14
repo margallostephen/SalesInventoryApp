@@ -86,10 +86,10 @@
             this.Category.BackColor = System.Drawing.Color.White;
             this.Category.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Category.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Category.Location = new System.Drawing.Point(19, 12);
+            this.Category.Location = new System.Drawing.Point(19, 11);
             this.Category.Margin = new System.Windows.Forms.Padding(2);
             this.Category.Name = "Category";
-            this.Category.PlaceholderText = "Category";
+            this.Category.PlaceholderText = "Category Name";
             this.Category.Size = new System.Drawing.Size(312, 22);
             this.Category.TabIndex = 24;
             // 
@@ -98,7 +98,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel4.Location = new System.Drawing.Point(14, 36);
+            this.panel4.Location = new System.Drawing.Point(14, 35);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(322, 2);
@@ -112,7 +112,7 @@
             this.BtnTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnTwo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnTwo.ForeColor = System.Drawing.Color.White;
-            this.BtnTwo.Location = new System.Drawing.Point(270, 97);
+            this.BtnTwo.Location = new System.Drawing.Point(270, 99);
             this.BtnTwo.Margin = new System.Windows.Forms.Padding(2);
             this.BtnTwo.Name = "BtnTwo";
             this.BtnTwo.Size = new System.Drawing.Size(78, 33);
@@ -130,7 +130,7 @@
             this.BtnOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOne.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnOne.ForeColor = System.Drawing.Color.White;
-            this.BtnOne.Location = new System.Drawing.Point(28, 97);
+            this.BtnOne.Location = new System.Drawing.Point(26, 99);
             this.BtnOne.Margin = new System.Windows.Forms.Padding(2);
             this.BtnOne.Name = "BtnOne";
             this.BtnOne.Size = new System.Drawing.Size(78, 33);
@@ -154,7 +154,7 @@
             // 
             this.MessageText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MessageText.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.MessageText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.MessageText.Location = new System.Drawing.Point(16, 0);
             this.MessageText.Name = "MessageText";
             this.MessageText.Size = new System.Drawing.Size(319, 55);
@@ -167,7 +167,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(375, 144);
+            this.ClientSize = new System.Drawing.Size(375, 151);
             this.Controls.Add(this.BtnTwo);
             this.Controls.Add(this.BtnOne);
             this.Controls.Add(this.panel1);
@@ -177,7 +177,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CategoryPrompt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CategoryPrompt";
+            this.Text = "Add Category";
             this.panel1.ResumeLayout(false);
             this.InputPanel.ResumeLayout(false);
             this.InputPanel.PerformLayout();

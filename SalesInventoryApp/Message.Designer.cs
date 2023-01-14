@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Message));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.MessageLabel = new System.Windows.Forms.Label();
+            this.CloseTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +75,12 @@
             this.MessageLabel.TabIndex = 6;
             this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // CloseTimer
+            // 
+            this.CloseTimer.Enabled = true;
+            this.CloseTimer.Interval = 1000;
+            this.CloseTimer.Tick += new System.EventHandler(this.CloseTimer_Tick);
+            // 
             // Message
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -89,6 +97,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Message";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Message";
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -100,5 +109,6 @@
         private Panel panel2;
         private PictureBox PictureBox;
         private Label MessageLabel;
+        private System.Windows.Forms.Timer CloseTimer;
     }
 }

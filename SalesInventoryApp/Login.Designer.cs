@@ -77,7 +77,7 @@
             this.Logo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
             this.Logo.InitialImage = null;
-            this.Logo.Location = new System.Drawing.Point(36, 73);
+            this.Logo.Location = new System.Drawing.Point(36, 72);
             this.Logo.Margin = new System.Windows.Forms.Padding(2);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(120, 125);

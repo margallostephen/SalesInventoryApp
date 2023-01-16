@@ -20,6 +20,8 @@ namespace SalesInventoryApp
                     Text = HeaderText.Text = "Edit Category";
                     BtnOne.Text = "Save";
                 }
+
+                MessagePanel.Visible = false;
             }
             else
             {
@@ -30,41 +32,18 @@ namespace SalesInventoryApp
                 BtnTwo.Text = "No";
             }
 
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            Dashboard.ReduceFlicker(this);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
         {
-            string categoryName = Category.Text.Trim(), 
-                   info = "Invalid", 
+            string categoryName = Category.Text.Trim(),
+                   info = "Invalid",
                    message = "";
 
             Boolean alreadyExist = false;
-
             DialogResult = DialogResult.None;
-
             connection.Open();
-
-            using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", connection))
-            {
-                using MySqlDataReader dataReader = getAllCategories.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    if (dataReader[1].ToString() == categoryName)
-                    {
-                        categoryName = dataReader[1].ToString();
-
-                        if (BtnOne.Text != "Yes")
-                            alreadyExist = true;
-
-                        break;
-                    }
-                }
-            }
 
             using (MySqlCommand command = connection.CreateCommand())
             {
@@ -72,8 +51,22 @@ namespace SalesInventoryApp
                 {
                     if (!string.IsNullOrWhiteSpace(categoryName))
                     {
+                        using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", connection))
+                        {
+                            using MySqlDataReader dataReader = getAllCategories.ExecuteReader();
+
+                            while (dataReader.Read())
+                            {
+                                if (dataReader[1].ToString() == categoryName)
+                                {
+                                    alreadyExist = true;
+                                    break;
+                                }
+                            }
+                        }
+
                         if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && categoryName != categoryForm.selectedRowCategory)
-                            message = "Category already exist.";
+                            message = "Category " + categoryName + " already exist.";
                         else
                         {
                             if (BtnOne.Text == "Add")
@@ -84,7 +77,7 @@ namespace SalesInventoryApp
                             else
                             {
                                 command.CommandText = "UPDATE item_category SET name = ? WHERE id = ?";
-                                message = "Category updated successfully.";
+                                message = "Category " + categoryForm.selectedRowCategory + " updated successfully.";
                             }
 
                             command.Parameters.Add("name", (DbType)SqlDbType.VarChar).Value = categoryName;

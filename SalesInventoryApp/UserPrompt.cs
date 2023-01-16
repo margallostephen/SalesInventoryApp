@@ -13,7 +13,6 @@ namespace SalesInventoryApp
         {
             InitializeComponent();
             this.userForm = userForm;
-
             if (operation != "Delete")
             {
                 if (operation == "Edit")
@@ -21,6 +20,7 @@ namespace SalesInventoryApp
                     Text = HeaderText.Text = "Edit User";
                     BtnOne.Text = "Save";
                 }
+                MessagePanel.Visible = false;
             }
             else
             {
@@ -33,11 +33,7 @@ namespace SalesInventoryApp
                 BtnOne.BringToFront();
                 BtnTwo.BringToFront();
             }
-
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            Dashboard.ReduceFlicker(this);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
@@ -46,27 +42,11 @@ namespace SalesInventoryApp
                    info = "Invalid", 
                    message;
 
-            Boolean alreadyTaken = false;
+            Boolean alreadyExist = false;
 
             DialogResult = DialogResult.None;
 
             connection.Open();
-
-            using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
-            {
-                using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    if (dataReader[0].ToString() == username)
-                    {
-                        if (BtnOne.Text != "Yes")
-                            alreadyTaken = true;
-
-                        break;
-                    }
-                }
-            }
 
             using (MySqlCommand command = connection.CreateCommand())
             {
@@ -74,8 +54,22 @@ namespace SalesInventoryApp
                 {
                     if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(Password.Text))
                     {
-                        if (alreadyTaken && BtnOne.Text == "Add" || alreadyTaken && username != userForm.selectedRowUsername)
-                            message = "Username have already been taken.";
+                        using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
+                        {
+                            using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
+
+                            while (dataReader.Read())
+                            {
+                                if (dataReader[0].ToString() == username)
+                                {
+                                    alreadyExist = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && username != userForm.selectedRowUsername)
+                            message = "Username " + username + " have already been taken.";
                         else
                         {
                             byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString()), salt = PasswordSecurity.GenerateSalt();
@@ -89,7 +83,7 @@ namespace SalesInventoryApp
                             else
                             {
                                 command.CommandText = "UPDATE users SET username = ?, password = ?, salt = ? WHERE password = ?";
-                                message = "User updated successfully.";
+                                message = "User " + userForm.selectedRowUsername + " updated successfully.";
                             }
 
                             command.Parameters.Add("username", (DbType)SqlDbType.VarChar).Value = username;
@@ -107,7 +101,6 @@ namespace SalesInventoryApp
                     {
                         info = "Warning";
                         message = "Please fill out the required fields.";
-                        
                     }
                 }
                 else
@@ -127,7 +120,7 @@ namespace SalesInventoryApp
             }
 
             connection.Close();
-            Dashboard.ShowMessage(this, userForm, info, message, DialogResult);      
+            Dashboard.ShowMessage(this, userForm, info, message, DialogResult);
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)

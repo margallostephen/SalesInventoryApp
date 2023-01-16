@@ -6,7 +6,7 @@ namespace SalesInventoryApp
 {
     public partial class SupplierPrompt : Form
     {
-        public MySqlConnection Connection { get; set; }
+        public MySqlConnection connection { get; set; }
         private readonly Supplier supplierForm;
 
         public SupplierPrompt(string operation, Supplier supplierForm)
@@ -21,6 +21,8 @@ namespace SalesInventoryApp
                     Text = HeaderText.Text = "Edit Supplier";
                     BtnOne.Text = "Save";
                 }
+
+                MessagePanel.Visible = false;
             }
             else
             {
@@ -35,10 +37,7 @@ namespace SalesInventoryApp
                 BtnTwo.BringToFront();
             }
 
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            Dashboard.ReduceFlicker(this);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
@@ -49,96 +48,90 @@ namespace SalesInventoryApp
                    info = "Invalid",
                    message = "";
 
-            Boolean alreadyExist = false,
-                    supplierExist = false,
+            Boolean supplierExist = false,
                     addressExist = false,
                     contactNumberExist = false,
                     allExist = false;
 
             DialogResult = DialogResult.None;
+            connection.Open();
 
-            Connection.Open();
-
-            using (MySqlCommand getAllSuppliers = new("SELECT * FROM supplier", Connection))
-            {
-                using MySqlDataReader dataReader = getAllSuppliers.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    if (dataReader[1].ToString() == supplierNameInput || dataReader[2].ToString() == addressInput || dataReader[3].ToString() == contactNumberInput)
-                    {
-                        if (dataReader[1].ToString() == supplierNameInput)
-                            supplierExist = true;   
-
-                        if (dataReader[2].ToString() == addressInput)
-                            addressExist = true;
-
-                        if (dataReader[3].ToString() == contactNumberInput)
-                            contactNumberExist = true;
-
-                        if (BtnOne.Text != "Yes")
-                            alreadyExist = true;
-
-                        if (supplierExist && addressExist && contactNumberExist)
-                        {
-                            allExist = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            using (MySqlCommand command = Connection.CreateCommand())
+            using (MySqlCommand command = connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
-                    if (!string.IsNullOrWhiteSpace(supplierNameInput) && !string.IsNullOrWhiteSpace(addressInput) && !string.IsNullOrWhiteSpace(contactNumberInput) && Regex.IsMatch(ContactNumber.Text.Trim(), "^[0-9]+$"))
+                    if (!string.IsNullOrWhiteSpace(supplierNameInput) && !string.IsNullOrWhiteSpace(addressInput) && !string.IsNullOrWhiteSpace(contactNumberInput))
                     {
-                        if (allExist && BtnOne.Text == "Add" || allExist && supplierNameInput != supplierForm.selectedRowSupplier && addressInput != supplierForm.selectedRowAddress && contactNumberInput != supplierForm.selectedRowContactNumber)
-                            message = "All info already exist";
-                        else if (supplierExist && addressExist && BtnOne.Text == "Add" || supplierExist && addressExist && supplierNameInput != supplierForm.selectedRowSupplier && addressInput != supplierForm.selectedRowAddress)
-                            message = "Supplier and address already exist.";
-                        else if (addressExist && contactNumberExist && BtnOne.Text == "Add" || addressExist && contactNumberExist && addressInput != supplierForm.selectedRowAddress && contactNumberInput != supplierForm.selectedRowContactNumber)
-                            message = "Address and contact number already exist.";
-                        else if (contactNumberExist && supplierExist && BtnOne.Text == "Add" || contactNumberExist && supplierExist && contactNumberInput != supplierForm.selectedRowContactNumber && supplierNameInput != supplierForm.selectedRowSupplier)
-                            message = "Supplier and contact number already exist.";
-                        else if (supplierExist && BtnOne.Text == "Add" || supplierExist && supplierNameInput != supplierForm.selectedRowSupplier)
-                            message = "Supplier already exist.";
-                        else if (addressExist && BtnOne.Text == "Add" || addressExist && addressInput != supplierForm.selectedRowAddress)
-                            message = "Address already exist.";
-                        else if (contactNumberExist && BtnOne.Text == "Add" || contactNumberExist && contactNumberInput != supplierForm.selectedRowContactNumber)
-                            message = "Contact number already exist.";
-                        else
+                        using (MySqlCommand getAllSuppliers = new("SELECT * FROM supplier", connection))
                         {
-                            if (BtnOne.Text == "Add")
+                            using MySqlDataReader dataReader = getAllSuppliers.ExecuteReader();
+
+                            while (dataReader.Read())
                             {
-                                command.CommandText = "INSERT INTO supplier(name, address, contact_number) VALUES(?, ?, ?)";
-                                message = "New supplier added successfully.";
+                                if (dataReader[1].ToString() == supplierNameInput)
+                                    supplierExist = true;
+
+                                if (dataReader[2].ToString() == addressInput)
+                                    addressExist = true;
+
+                                if (dataReader[3].ToString() == contactNumberInput)
+                                    contactNumberExist = true;
+
+                                if (supplierExist && addressExist && contactNumberExist)
+                                {
+                                    allExist = true;
+                                    break;
+                                }
                             }
+                        }
+
+                        if (Regex.IsMatch(ContactNumber.Text.Trim(), "^[0-9]+$"))
+                        {
+                            if (allExist && BtnOne.Text == "Add" || allExist && supplierNameInput != supplierForm.selectedRowSupplier && addressInput != supplierForm.selectedRowAddress && contactNumberInput != supplierForm.selectedRowContactNumber)
+                                message = "All info already exist";
+                            else if (supplierExist && addressExist && BtnOne.Text == "Add" || supplierExist && addressExist && supplierNameInput != supplierForm.selectedRowSupplier && addressInput != supplierForm.selectedRowAddress)
+                                message = "Supplier and address already exist.";
+                            else if (addressExist && contactNumberExist && BtnOne.Text == "Add" || addressExist && contactNumberExist && addressInput != supplierForm.selectedRowAddress && contactNumberInput != supplierForm.selectedRowContactNumber)
+                                message = "Address and contact number already exist.";
+                            else if (contactNumberExist && supplierExist && BtnOne.Text == "Add" || contactNumberExist && supplierExist && contactNumberInput != supplierForm.selectedRowContactNumber && supplierNameInput != supplierForm.selectedRowSupplier)
+                                message = "Supplier and contact number already exist.";
+                            else if (supplierExist && BtnOne.Text == "Add" || supplierExist && supplierNameInput != supplierForm.selectedRowSupplier)
+                                message = "Supplier already exist.";
+                            else if (addressExist && BtnOne.Text == "Add" || addressExist && addressInput != supplierForm.selectedRowAddress)
+                                message = "Address already exist.";
+                            else if (contactNumberExist && BtnOne.Text == "Add" || contactNumberExist && contactNumberInput != supplierForm.selectedRowContactNumber)
+                                message = "Contact number already exist.";
                             else
                             {
-                                command.CommandText = "UPDATE supplier SET name = ?, address = ?, contact_number = ? WHERE id = ?";
-                                message = "Supplier updated successfully.";
+                                if (BtnOne.Text == "Add")
+                                {
+                                    command.CommandText = "INSERT INTO supplier(name, address, contact_number) VALUES(?, ?, ?)";
+                                    message = "New supplier added successfully.";
+                                }
+                                else
+                                {
+                                    command.CommandText = "UPDATE supplier SET name = ?, address = ?, contact_number = ? WHERE id = ?";
+                                    message = "Supplier " + supplierForm.selectedRowSupplier + " updated successfully.";
+                                }
+
+                                command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = Supplier.Text.Trim();
+                                command.Parameters.Add("address", (DbType)SqlDbType.VarChar).Value = Address.Text.Trim();
+                                command.Parameters.Add("contactNumber", (DbType)SqlDbType.VarChar).Value = ContactNumber.Text.Trim();
+
+                                if (BtnOne.Text == "Save")
+                                    command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = supplierForm.selectedRowId;
+
+                                info = "Success";
+                                DialogResult = DialogResult.OK;
                             }
-
-                            command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = Supplier.Text.Trim();
-                            command.Parameters.Add("address", (DbType)SqlDbType.VarChar).Value = Address.Text.Trim();
-                            command.Parameters.Add("contactNumber", (DbType)SqlDbType.VarChar).Value = ContactNumber.Text.Trim();
-
-                            if (BtnOne.Text == "Save")
-                                command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = supplierForm.selectedRowId;
-
-                            info = "Success";
-                            DialogResult = DialogResult.OK;
-                        }
+                        } 
+                        else
+                            message = "Please input a valid contact number.";
                     }
                     else
                     {
                         info = "Warning";
-                        if (!Regex.IsMatch(ContactNumber.Text.Trim(), "^[0-9]+$"))
-                            message = "Please input a valid contact number.";
-                        else
-                            message = "Please fill out the required fields.";
+                        message = "Please fill out the required fields.";
                     }
                 }
                 else
@@ -157,7 +150,7 @@ namespace SalesInventoryApp
                 }
             }
 
-            Connection.Close();
+            connection.Close();
             Dashboard.ShowMessage(this, supplierForm, info, message, DialogResult);
         }
 

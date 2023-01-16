@@ -68,7 +68,7 @@
             // 
             // MessageLabel
             // 
-            this.MessageLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.MessageLabel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.MessageLabel.Location = new System.Drawing.Point(92, 27);
             this.MessageLabel.Name = "MessageLabel";
             this.MessageLabel.Size = new System.Drawing.Size(224, 97);
@@ -78,7 +78,7 @@
             // CloseTimer
             // 
             this.CloseTimer.Enabled = true;
-            this.CloseTimer.Interval = 1000;
+            this.CloseTimer.Interval = 1250;
             this.CloseTimer.Tick += new System.EventHandler(this.CloseTimer_Tick);
             // 
             // Message

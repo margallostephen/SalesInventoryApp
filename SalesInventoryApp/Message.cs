@@ -28,10 +28,7 @@ namespace SalesInventoryApp
                     PictureBox.Image = Resources.Error;
             }
 
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            Dashboard.ReduceFlicker(this);
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)

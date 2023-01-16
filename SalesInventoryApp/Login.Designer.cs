@@ -88,17 +88,17 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.UsernameIcon);
+            this.panel2.Controls.Add(this.PasswordIcon);
             this.panel2.Controls.Add(this.ShowPassBtn);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.MinimizeBtn);
             this.panel2.Controls.Add(this.LogoutBtn);
-            this.panel2.Controls.Add(this.PasswordIcon);
             this.panel2.Controls.Add(this.LoginBtn);
             this.panel2.Controls.Add(this.Label);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.Password);
             this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.UsernameIcon);
             this.panel2.Controls.Add(this.Username);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(193, 0);
@@ -185,10 +185,10 @@
             // 
             this.PasswordIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PasswordIcon.BackgroundImage")));
             this.PasswordIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PasswordIcon.Location = new System.Drawing.Point(30, 130);
+            this.PasswordIcon.Location = new System.Drawing.Point(28, 130);
             this.PasswordIcon.Margin = new System.Windows.Forms.Padding(2);
             this.PasswordIcon.Name = "PasswordIcon";
-            this.PasswordIcon.Size = new System.Drawing.Size(38, 32);
+            this.PasswordIcon.Size = new System.Drawing.Size(39, 32);
             this.PasswordIcon.TabIndex = 16;
             // 
             // LoginBtn
@@ -228,7 +228,7 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(82)))), ((int)(((byte)(255)))));
+            this.panel3.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.panel3.Location = new System.Drawing.Point(73, 160);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
@@ -254,7 +254,7 @@
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(82)))), ((int)(((byte)(255)))));
+            this.panel5.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.panel5.Location = new System.Drawing.Point(73, 105);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
@@ -265,10 +265,10 @@
             // 
             this.UsernameIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UsernameIcon.BackgroundImage")));
             this.UsernameIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.UsernameIcon.Location = new System.Drawing.Point(30, 76);
+            this.UsernameIcon.Location = new System.Drawing.Point(29, 75);
             this.UsernameIcon.Margin = new System.Windows.Forms.Padding(2);
             this.UsernameIcon.Name = "UsernameIcon";
-            this.UsernameIcon.Size = new System.Drawing.Size(38, 32);
+            this.UsernameIcon.Size = new System.Drawing.Size(39, 32);
             this.UsernameIcon.TabIndex = 13;
             // 
             // Username

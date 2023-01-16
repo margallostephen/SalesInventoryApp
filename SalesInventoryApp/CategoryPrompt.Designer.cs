@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryPrompt));
             this.panel1 = new System.Windows.Forms.Panel();
             this.HeaderText = new System.Windows.Forms.Label();
             this.InputPanel = new System.Windows.Forms.Panel();
@@ -44,10 +45,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.panel1.Controls.Add(this.HeaderText);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(375, 40);
@@ -55,15 +55,14 @@
             // 
             // HeaderText
             // 
-            this.HeaderText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HeaderText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HeaderText.Font = new System.Drawing.Font("Segoe UI Variable Display", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.HeaderText.ForeColor = System.Drawing.Color.White;
             this.HeaderText.Location = new System.Drawing.Point(0, 0);
             this.HeaderText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.HeaderText.Name = "HeaderText";
-            this.HeaderText.Size = new System.Drawing.Size(375, 39);
-            this.HeaderText.TabIndex = 2;
+            this.HeaderText.Size = new System.Drawing.Size(375, 40);
+            this.HeaderText.TabIndex = 3;
             this.HeaderText.Text = "Add Category";
             this.HeaderText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -86,7 +85,7 @@
             this.Category.BackColor = System.Drawing.Color.White;
             this.Category.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Category.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Category.Location = new System.Drawing.Point(19, 11);
+            this.Category.Location = new System.Drawing.Point(19, 13);
             this.Category.Margin = new System.Windows.Forms.Padding(2);
             this.Category.Name = "Category";
             this.Category.PlaceholderText = "Category Name";
@@ -98,7 +97,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel4.Location = new System.Drawing.Point(14, 35);
+            this.panel4.Location = new System.Drawing.Point(14, 37);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(322, 2);
@@ -154,7 +153,7 @@
             // 
             this.MessageText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MessageText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.MessageText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.MessageText.Location = new System.Drawing.Point(16, 0);
             this.MessageText.Name = "MessageText";
             this.MessageText.Size = new System.Drawing.Size(319, 55);
@@ -175,6 +174,7 @@
             this.Controls.Add(this.MessagePanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CategoryPrompt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Category";
@@ -189,7 +189,6 @@
         #endregion
 
         private Panel panel1;
-        private Label HeaderText;
         private Panel InputPanel;
         public TextBox Category;
         private Panel panel4;
@@ -197,5 +196,6 @@
         private Button BtnOne;
         private Panel MessagePanel;
         private Label MessageText;
+        private Label HeaderText;
     }
 }

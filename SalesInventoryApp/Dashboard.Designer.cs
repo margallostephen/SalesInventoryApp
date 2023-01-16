@@ -388,12 +388,12 @@
             this.ClockTime.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ClockTime.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ClockTime.ForeColor = System.Drawing.Color.White;
-            this.ClockTime.Location = new System.Drawing.Point(572, 11);
+            this.ClockTime.Location = new System.Drawing.Point(549, 10);
             this.ClockTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ClockTime.Name = "ClockTime";
-            this.ClockTime.Size = new System.Drawing.Size(166, 22);
+            this.ClockTime.Size = new System.Drawing.Size(189, 22);
             this.ClockTime.TabIndex = 30;
-            this.ClockTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ClockTime.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // MinimizeBtn
             // 
@@ -434,6 +434,7 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.BackColor = System.Drawing.Color.White;
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(211, 43);
             this.MainPanel.Name = "MainPanel";

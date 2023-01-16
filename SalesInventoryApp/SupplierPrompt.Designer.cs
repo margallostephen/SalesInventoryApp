@@ -59,15 +59,14 @@
             // 
             // HeaderText
             // 
-            this.HeaderText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HeaderText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HeaderText.Font = new System.Drawing.Font("Segoe UI Variable Display", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.HeaderText.ForeColor = System.Drawing.Color.White;
             this.HeaderText.Location = new System.Drawing.Point(0, 0);
             this.HeaderText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.HeaderText.Name = "HeaderText";
-            this.HeaderText.Size = new System.Drawing.Size(375, 39);
-            this.HeaderText.TabIndex = 4;
+            this.HeaderText.Size = new System.Drawing.Size(375, 40);
+            this.HeaderText.TabIndex = 5;
             this.HeaderText.Text = "Add Supplier";
             this.HeaderText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -213,7 +212,7 @@
             // 
             this.MessageText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MessageText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.MessageText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.MessageText.Location = new System.Drawing.Point(14, 0);
             this.MessageText.Name = "MessageText";
             this.MessageText.Size = new System.Drawing.Size(322, 61);
@@ -249,7 +248,6 @@
         #endregion
 
         private Panel panel1;
-        private Label HeaderText;
         private Button BtnTwo;
         private Button BtnOne;
         private Panel InputPanel;
@@ -261,5 +259,6 @@
         private Label MessageText;
         public TextBox ContactNumber;
         private Panel panel3;
+        private Label HeaderText;
     }
 }

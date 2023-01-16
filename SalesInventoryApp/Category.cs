@@ -1,4 +1,6 @@
 ﻿using MySqlConnector;
+using System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace SalesInventoryApp
 {
@@ -11,47 +13,20 @@ namespace SalesInventoryApp
         public Category()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             CategoryTable.MouseWheel += new MouseEventHandler(MouseWheel);
-        }
-
-        public void LoadTableRecord()
-        {
-            CategoryTable.Rows.Clear();
-
-            connection.Open();
-
-            using (MySqlCommand command = new("SELECT * FROM item_category ORDER BY id ASC", connection))
-            {
-                using MySqlDataReader dataReader = command.ExecuteReader();
-
-                if (dataReader.HasRows)
-                {
-                    CategoryTable.BringToFront();
-                    ActionLabel.BringToFront();
-                    while (dataReader.Read())
-                        CategoryTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
-                }
-                else
-                    NoLabel.BringToFront();
-            }
-
-            connection.Close();
+            Dashboard.ReduceFlicker(this);
         }
 
         private void Category_Load(object sender, EventArgs e)
         {
-            LoadTableRecord();
+            Dashboard.LoadTableRecord(CategoryTable, ActionLabel, NoLabel, connection);
         }
 
         private void AddCategoryBtn_Click(object sender, EventArgs e)
         {
             CategoryPrompt categoryPrompt = new("Add", this) { connection = connection };
             DialogResult result = categoryPrompt.ShowDialog(this);
-            DisposePrompt(result, categoryPrompt);
+            Dashboard.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
         }
 
         private void CategoryTable_SelectionChanged(object sender, EventArgs e)
@@ -70,8 +45,7 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
-                CategoryTable.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.DarkSlateBlue;
-                CategoryTable.CurrentRow.DefaultCellStyle.SelectionForeColor = Color.White;
+                Dashboard.SelectedRowChangeColor(CategoryTable, true);
 
                 CategoryPrompt categoryPrompt;
 
@@ -81,44 +55,45 @@ namespace SalesInventoryApp
                     categoryPrompt.Category.Text = selectedRowCategory;
                 }
                 else
-                    categoryPrompt = new("Delete", this) { connection = connection };
-
-                DialogResult result = categoryPrompt.ShowDialog(this);
-                DisposePrompt(result, categoryPrompt);
-
-                if (CategoryTable.CurrentRow != null)
                 {
-                    CategoryTable.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255);
-                    CategoryTable.CurrentRow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    connection.Open();
+                    using MySqlCommand command = new("SELECT * FROM items WHERE category_id = ?", connection);
+                    command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = selectedRowId;
+                    command.Prepare();
+                    using MySqlDataReader dataReader = command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        connection.Close();
+                        categoryPrompt = null;
+                        Message messageform = new("Error", "This category cannot be deleted because there are items in it.");
+                        messageform.ShowDialog(this);
+                    }
+                    else
+                    {
+                        connection.Close();
+                        categoryPrompt = new("Delete", this) { connection = connection };
+                    }
                 }
+                
+                if (categoryPrompt != null)
+                {
+                    DialogResult result = categoryPrompt.ShowDialog(this);
+                    Dashboard.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
+                }
+
+                Dashboard.SelectedRowChangeColor(CategoryTable, false);
             }
-        }
-
-        private void DisposePrompt(DialogResult result, CategoryPrompt categoryPrompt)
-        {
-            if (result == DialogResult.OK)
-                LoadTableRecord();
-
-            if (result == DialogResult.OK || result == DialogResult.Cancel)
-                categoryPrompt.Dispose();
         }
 
         private void CategoryTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            string columnName = CategoryTable.Columns[e.ColumnIndex].Name;
-
-            if (columnName != "ColumnEdit" && columnName != "ColumnDelete")
-                CategoryTable.Cursor = Cursors.Default;
-            else
-                CategoryTable.Cursor = Cursors.Hand;
+            Dashboard.ChangeCursor(CategoryTable, e);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0 && CategoryTable.FirstDisplayedScrollingRowIndex > 0)
-                CategoryTable.FirstDisplayedScrollingRowIndex--;
-            else if (e.Delta < 0 && CategoryTable.FirstDisplayedScrollingRowIndex < CategoryTable.RowCount - 1)
-                CategoryTable.FirstDisplayedScrollingRowIndex++;
+            Dashboard.ScrollUpDown(CategoryTable, e);
         }
     }
 }

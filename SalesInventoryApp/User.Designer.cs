@@ -41,13 +41,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.UserTable = new System.Windows.Forms.DataGridView();
+            this.ActionLabel = new System.Windows.Forms.Label();
+            this.AddUserBtn = new FontAwesome.Sharp.IconButton();
+            this.NoLabel = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ActionLabel = new System.Windows.Forms.Label();
-            this.AddUserBtn = new FontAwesome.Sharp.IconButton();
-            this.NoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,61 +162,6 @@
             this.UserTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserTable_CellMouseEnter);
             this.UserTable.SelectionChanged += new System.EventHandler(this.UserTable_SelectionChanged);
             // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column1.FillWeight = 16.49484F;
-            this.Column1.HeaderText = "Username";
-            this.Column1.MinimumWidth = 200;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column2.FillWeight = 183.5052F;
-            this.Column2.HeaderText = "Password";
-            this.Column2.MinimumWidth = 300;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ColumnEdit
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle5.NullValue")));
-            this.ColumnEdit.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColumnEdit.HeaderText = "";
-            this.ColumnEdit.Image = ((System.Drawing.Image)(resources.GetObject("ColumnEdit.Image")));
-            this.ColumnEdit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.ColumnEdit.MinimumWidth = 55;
-            this.ColumnEdit.Name = "ColumnEdit";
-            this.ColumnEdit.ReadOnly = true;
-            this.ColumnEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnEdit.Width = 55;
-            // 
-            // ColumnDelete
-            // 
-            this.ColumnDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle6.NullValue")));
-            this.ColumnDelete.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ColumnDelete.HeaderText = "";
-            this.ColumnDelete.Image = ((System.Drawing.Image)(resources.GetObject("ColumnDelete.Image")));
-            this.ColumnDelete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.ColumnDelete.MinimumWidth = 55;
-            this.ColumnDelete.Name = "ColumnDelete";
-            this.ColumnDelete.ReadOnly = true;
-            this.ColumnDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnDelete.Width = 55;
-            // 
             // ActionLabel
             // 
             this.ActionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -269,6 +214,63 @@
             this.NoLabel.TabIndex = 17;
             this.NoLabel.Text = "No User";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column1.FillWeight = 16.49484F;
+            this.Column1.HeaderText = "Username";
+            this.Column1.MinimumWidth = 200;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column2.FillWeight = 183.5052F;
+            this.Column2.HeaderText = "Password";
+            this.Column2.MinimumWidth = 300;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnEdit
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle5.NullValue")));
+            this.ColumnEdit.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColumnEdit.HeaderText = "";
+            this.ColumnEdit.Image = ((System.Drawing.Image)(resources.GetObject("ColumnEdit.Image")));
+            this.ColumnEdit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.ColumnEdit.MinimumWidth = 55;
+            this.ColumnEdit.Name = "ColumnEdit";
+            this.ColumnEdit.ReadOnly = true;
+            this.ColumnEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnEdit.Width = 55;
+            // 
+            // ColumnDelete
+            // 
+            this.ColumnDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle6.NullValue")));
+            this.ColumnDelete.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ColumnDelete.HeaderText = "";
+            this.ColumnDelete.Image = ((System.Drawing.Image)(resources.GetObject("ColumnDelete.Image")));
+            this.ColumnDelete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.ColumnDelete.MinimumWidth = 55;
+            this.ColumnDelete.Name = "ColumnDelete";
+            this.ColumnDelete.ReadOnly = true;
+            this.ColumnDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnDelete.Width = 55;
             // 
             // User
             // 

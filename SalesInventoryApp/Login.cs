@@ -5,17 +5,14 @@ namespace SalesInventoryApp
 {
     public partial class Login : Form
     {
+        private readonly MySqlConnection connection = new("Server=localhost;Database=sales_inventory;User=root;Password=password;");
+        private Boolean isFound;
+
         public Login()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            Dashboard.ReduceFlicker(this);
         }
-
-        public readonly MySqlConnection connection = new("Server=localhost;Database=sales_inventory;User=root;Password=password;");
-        private Boolean isFound = false; 
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
@@ -23,29 +20,25 @@ namespace SalesInventoryApp
             {
                 try
                 {
+                    connection.Open();
+                    using MySqlCommand getAllUsers = new("SELECT * FROM users", connection);
+                    using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
                     byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString());
 
-                    connection.Open();
-
-                    using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
+                    while (dataReader.Read())
                     {
-                        using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
+                        byte[] salt = Convert.FromBase64String(dataReader[2].ToString());
 
-                        while (dataReader.Read())
+                        if (dataReader[0].ToString() == Username.Text.Trim() && PasswordSecurity.VerifyHash(passwordBytes, salt, Convert.FromBase64String(dataReader[1].ToString())))
                         {
-                            byte[] salt = Convert.FromBase64String(dataReader[2].ToString());
-
-                            if (dataReader[0].ToString() == Username.Text.Trim() && PasswordSecurity.VerifyHash(passwordBytes, salt, Convert.FromBase64String(dataReader[1].ToString())))
-                            {
-                                ShowMessage(false, "Success", "You have successfuly login " + Username.Text + ".");
-                                connection.Close();
-                                Dashboard dashboard = new(Username.Text) { loginForm = this, connection = connection };
-                                dashboard.Show();
-                                Username.Text = Password.Text = "";
-                                ShowPassBtn.Checked = false;
-                                isFound = true;
-                                break;
-                            }
+                            ShowMessage(false, "Success", "You have successfuly login " + Username.Text.Trim() + ".");
+                            connection.Close();
+                            Dashboard dashboard = new(Username.Text.Trim()) { loginForm = this, connection = connection };
+                            dashboard.Show();
+                            Username.Text = Password.Text = "";
+                            ShowPassBtn.Checked = false;
+                            isFound = true;
+                            break;
                         }
                     }
 

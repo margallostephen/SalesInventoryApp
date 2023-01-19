@@ -16,7 +16,9 @@ namespace SalesInventoryApp
         private Supplier supplierForm;
         private Item itemForm;
         private User userForm;
-        private Inventory inventory;
+        private Inventory inventoryForm;
+        private Sales salesForm;
+        private Delivery deliveryForm;
 
         public Dashboard(string username)
         {
@@ -94,19 +96,24 @@ namespace SalesInventoryApp
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            inventory ??= new() { connection = connection };
-            OpenChildForm(inventory);
+            inventoryForm ??= new() { connection = connection };
+            OpenChildForm(inventoryForm);
         }
 
         private void SalesBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
+            salesForm ??= new() { connection = connection };
+            OpenChildForm(salesForm);
         }
 
         private void DeliveryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
+            deliveryForm??= new() { connection = connection };
+            OpenChildForm(deliveryForm);
         }
+
         private void MaintenanceBtn_Click(object sender, EventArgs? e)
         {
             ActiveButton(sender);
@@ -168,6 +175,12 @@ namespace SalesInventoryApp
                 case "InventoryTable":
                     query = "SELECT items.id, items.name, inventory_stocks.quantity FROM items INNER JOIN inventory_stocks ON items.id = inventory_stocks.item_id ORDER BY id ASC";
                     break;
+                case "SalesTable":
+                    query = "SELECT * FROM sales ORDER BY id ASC";
+                    break;
+                case "DeliveryTable":
+                    query = "SELECT * FROM delivery ORDER BY id ASC";
+                    break;
             }
 
             using MySqlCommand command = new(query, connection);
@@ -185,19 +198,19 @@ namespace SalesInventoryApp
                     switch (formTable.Name.ToString())
                     {
                         case "UserTable":
-                            formTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
+                        case "CategoryTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1]);
+                            break;
+                        case "InventoryTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2]);
                             break;
                         case "SupplierTable":
                             formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3]);
                             break;
-                        case "CategoryTable":
-                            formTable.Rows.Add(dataReader[0], dataReader[1]);
-                            break;
                         case "ItemTable":
+                        case "SalesTable":
+                        case "DeliveryTable":
                             formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3], dataReader[4]);
-                            break;
-                        case "InventoryTable":
-                            formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2]);
                             break;
                     }
                 }

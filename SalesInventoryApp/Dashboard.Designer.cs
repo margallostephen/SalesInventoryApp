@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            this.SidePanel = new System.Windows.Forms.Panel();
+            this.SideBar = new System.Windows.Forms.Panel();
             this.MaintenanceSubMenu = new System.Windows.Forms.Panel();
             this.ItemBtn = new FontAwesome.Sharp.IconButton();
             this.SupplierBtn = new FontAwesome.Sharp.IconButton();
@@ -46,34 +46,34 @@
             this.MenuBtn = new FontAwesome.Sharp.IconButton();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.TopBar = new System.Windows.Forms.Panel();
-            this.ClockTime = new System.Windows.Forms.Label();
             this.MinimizeBtn = new FontAwesome.Sharp.IconButton();
+            this.ClockTime = new System.Windows.Forms.Label();
             this.UserLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.Time = new System.Windows.Forms.Timer(this.components);
-            this.SidePanel.SuspendLayout();
+            this.SideBar.SuspendLayout();
             this.MaintenanceSubMenu.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.TopBar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SidePanel
+            // SideBar
             // 
-            this.SidePanel.BackColor = System.Drawing.Color.SlateBlue;
-            this.SidePanel.Controls.Add(this.MaintenanceSubMenu);
-            this.SidePanel.Controls.Add(this.MaintenanceBtn);
-            this.SidePanel.Controls.Add(this.DeliveryBtn);
-            this.SidePanel.Controls.Add(this.panel1);
-            this.SidePanel.Controls.Add(this.LogoutBtn);
-            this.SidePanel.Controls.Add(this.SalesBtn);
-            this.SidePanel.Controls.Add(this.InventoryBtn);
-            this.SidePanel.Controls.Add(this.panel2);
-            this.SidePanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.SidePanel.Location = new System.Drawing.Point(0, 0);
-            this.SidePanel.Name = "SidePanel";
-            this.SidePanel.Size = new System.Drawing.Size(211, 561);
-            this.SidePanel.TabIndex = 0;
+            this.SideBar.BackColor = System.Drawing.Color.SlateBlue;
+            this.SideBar.Controls.Add(this.MaintenanceSubMenu);
+            this.SideBar.Controls.Add(this.MaintenanceBtn);
+            this.SideBar.Controls.Add(this.DeliveryBtn);
+            this.SideBar.Controls.Add(this.panel1);
+            this.SideBar.Controls.Add(this.LogoutBtn);
+            this.SideBar.Controls.Add(this.SalesBtn);
+            this.SideBar.Controls.Add(this.InventoryBtn);
+            this.SideBar.Controls.Add(this.panel2);
+            this.SideBar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.SideBar.Location = new System.Drawing.Point(0, 0);
+            this.SideBar.Name = "SideBar";
+            this.SideBar.Size = new System.Drawing.Size(52, 561);
+            this.SideBar.TabIndex = 0;
             // 
             // MaintenanceSubMenu
             // 
@@ -85,8 +85,9 @@
             this.MaintenanceSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.MaintenanceSubMenu.Location = new System.Drawing.Point(0, 267);
             this.MaintenanceSubMenu.Name = "MaintenanceSubMenu";
-            this.MaintenanceSubMenu.Size = new System.Drawing.Size(211, 161);
+            this.MaintenanceSubMenu.Size = new System.Drawing.Size(52, 238);
             this.MaintenanceSubMenu.TabIndex = 12;
+            this.MaintenanceSubMenu.Visible = false;
             // 
             // ItemBtn
             // 
@@ -101,7 +102,7 @@
             this.ItemBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ItemBtn.IconSize = 25;
             this.ItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ItemBtn.Location = new System.Drawing.Point(53, 80);
+            this.ItemBtn.Location = new System.Drawing.Point(0, 80);
             this.ItemBtn.Margin = new System.Windows.Forms.Padding(0);
             this.ItemBtn.Name = "ItemBtn";
             this.ItemBtn.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
@@ -127,7 +128,7 @@
             this.SupplierBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.SupplierBtn.IconSize = 25;
             this.SupplierBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.SupplierBtn.Location = new System.Drawing.Point(53, 40);
+            this.SupplierBtn.Location = new System.Drawing.Point(0, 40);
             this.SupplierBtn.Margin = new System.Windows.Forms.Padding(0);
             this.SupplierBtn.Name = "SupplierBtn";
             this.SupplierBtn.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
@@ -153,7 +154,7 @@
             this.CategoryBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.CategoryBtn.IconSize = 25;
             this.CategoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.CategoryBtn.Location = new System.Drawing.Point(53, 0);
+            this.CategoryBtn.Location = new System.Drawing.Point(0, 0);
             this.CategoryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.CategoryBtn.Name = "CategoryBtn";
             this.CategoryBtn.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
@@ -179,7 +180,7 @@
             this.UserBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.UserBtn.IconSize = 25;
             this.UserBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.UserBtn.Location = new System.Drawing.Point(53, 120);
+            this.UserBtn.Location = new System.Drawing.Point(0, 120);
             this.UserBtn.Margin = new System.Windows.Forms.Padding(0);
             this.UserBtn.Name = "UserBtn";
             this.UserBtn.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
@@ -209,10 +210,9 @@
             this.MaintenanceBtn.Margin = new System.Windows.Forms.Padding(0);
             this.MaintenanceBtn.Name = "MaintenanceBtn";
             this.MaintenanceBtn.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.MaintenanceBtn.Size = new System.Drawing.Size(211, 51);
+            this.MaintenanceBtn.Size = new System.Drawing.Size(52, 51);
             this.MaintenanceBtn.TabIndex = 11;
             this.MaintenanceBtn.Tag = "   Maintenance";
-            this.MaintenanceBtn.Text = "   Maintenance";
             this.MaintenanceBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.MaintenanceBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MaintenanceBtn.UseVisualStyleBackColor = true;
@@ -235,10 +235,9 @@
             this.DeliveryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.DeliveryBtn.Name = "DeliveryBtn";
             this.DeliveryBtn.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.DeliveryBtn.Size = new System.Drawing.Size(211, 51);
+            this.DeliveryBtn.Size = new System.Drawing.Size(52, 51);
             this.DeliveryBtn.TabIndex = 10;
             this.DeliveryBtn.Tag = "   Delivery";
-            this.DeliveryBtn.Text = "   Delivery";
             this.DeliveryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.DeliveryBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.DeliveryBtn.UseVisualStyleBackColor = true;
@@ -249,10 +248,10 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel1.Location = new System.Drawing.Point(11, 503);
+            this.panel1.Location = new System.Drawing.Point(11, 506);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(189, 2);
+            this.panel1.Size = new System.Drawing.Size(30, 2);
             this.panel1.TabIndex = 9;
             // 
             // LogoutBtn
@@ -268,14 +267,13 @@
             this.LogoutBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.LogoutBtn.IconSize = 30;
             this.LogoutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LogoutBtn.Location = new System.Drawing.Point(0, 510);
+            this.LogoutBtn.Location = new System.Drawing.Point(0, 509);
             this.LogoutBtn.Margin = new System.Windows.Forms.Padding(0);
             this.LogoutBtn.Name = "LogoutBtn";
             this.LogoutBtn.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.LogoutBtn.Size = new System.Drawing.Size(211, 51);
+            this.LogoutBtn.Size = new System.Drawing.Size(52, 52);
             this.LogoutBtn.TabIndex = 6;
             this.LogoutBtn.Tag = "   Logout";
-            this.LogoutBtn.Text = "   Logout";
             this.LogoutBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LogoutBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.LogoutBtn.UseVisualStyleBackColor = true;
@@ -298,10 +296,9 @@
             this.SalesBtn.Margin = new System.Windows.Forms.Padding(0);
             this.SalesBtn.Name = "SalesBtn";
             this.SalesBtn.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.SalesBtn.Size = new System.Drawing.Size(211, 51);
+            this.SalesBtn.Size = new System.Drawing.Size(52, 51);
             this.SalesBtn.TabIndex = 5;
             this.SalesBtn.Tag = "   Sales";
-            this.SalesBtn.Text = "   Sales";
             this.SalesBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.SalesBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.SalesBtn.UseVisualStyleBackColor = true;
@@ -324,10 +321,9 @@
             this.InventoryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.InventoryBtn.Name = "InventoryBtn";
             this.InventoryBtn.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.InventoryBtn.Size = new System.Drawing.Size(211, 51);
+            this.InventoryBtn.Size = new System.Drawing.Size(52, 51);
             this.InventoryBtn.TabIndex = 4;
             this.InventoryBtn.Tag = "   Inventory";
-            this.InventoryBtn.Text = "   Inventory";
             this.InventoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.InventoryBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.InventoryBtn.UseVisualStyleBackColor = true;
@@ -340,7 +336,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(211, 63);
+            this.panel2.Size = new System.Drawing.Size(52, 63);
             this.panel2.TabIndex = 1;
             // 
             // MenuBtn
@@ -352,7 +348,7 @@
             this.MenuBtn.IconColor = System.Drawing.Color.White;
             this.MenuBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MenuBtn.IconSize = 30;
-            this.MenuBtn.Location = new System.Drawing.Point(159, 0);
+            this.MenuBtn.Location = new System.Drawing.Point(0, 0);
             this.MenuBtn.Name = "MenuBtn";
             this.MenuBtn.Size = new System.Drawing.Size(52, 63);
             this.MenuBtn.TabIndex = 2;
@@ -372,28 +368,15 @@
             // TopBar
             // 
             this.TopBar.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.TopBar.Controls.Add(this.ClockTime);
             this.TopBar.Controls.Add(this.MinimizeBtn);
+            this.TopBar.Controls.Add(this.ClockTime);
             this.TopBar.Controls.Add(this.UserLabel);
             this.TopBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopBar.Location = new System.Drawing.Point(211, 0);
+            this.TopBar.Location = new System.Drawing.Point(52, 0);
             this.TopBar.Name = "TopBar";
-            this.TopBar.Size = new System.Drawing.Size(773, 43);
+            this.TopBar.Size = new System.Drawing.Size(932, 43);
             this.TopBar.TabIndex = 1;
             this.TopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
-            // 
-            // ClockTime
-            // 
-            this.ClockTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClockTime.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.ClockTime.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ClockTime.ForeColor = System.Drawing.Color.White;
-            this.ClockTime.Location = new System.Drawing.Point(549, 10);
-            this.ClockTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ClockTime.Name = "ClockTime";
-            this.ClockTime.Size = new System.Drawing.Size(189, 22);
-            this.ClockTime.TabIndex = 30;
-            this.ClockTime.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // MinimizeBtn
             // 
@@ -408,16 +391,31 @@
             this.MinimizeBtn.IconColor = System.Drawing.Color.White;
             this.MinimizeBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.MinimizeBtn.IconSize = 20;
-            this.MinimizeBtn.Location = new System.Drawing.Point(751, -3);
+            this.MinimizeBtn.Location = new System.Drawing.Point(910, 0);
             this.MinimizeBtn.Margin = new System.Windows.Forms.Padding(0);
             this.MinimizeBtn.Name = "MinimizeBtn";
             this.MinimizeBtn.Padding = new System.Windows.Forms.Padding(5, 0, 4, 0);
             this.MinimizeBtn.Size = new System.Drawing.Size(22, 22);
-            this.MinimizeBtn.TabIndex = 29;
+            this.MinimizeBtn.TabIndex = 31;
             this.MinimizeBtn.Text = " ";
             this.MinimizeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.MinimizeBtn.UseMnemonic = false;
             this.MinimizeBtn.UseVisualStyleBackColor = false;
             this.MinimizeBtn.Click += new System.EventHandler(this.MinimizeBtn_Click);
+            // 
+            // ClockTime
+            // 
+            this.ClockTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClockTime.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.ClockTime.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ClockTime.ForeColor = System.Drawing.Color.White;
+            this.ClockTime.Location = new System.Drawing.Point(697, 11);
+            this.ClockTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ClockTime.Name = "ClockTime";
+            this.ClockTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ClockTime.Size = new System.Drawing.Size(194, 18);
+            this.ClockTime.TabIndex = 30;
+            this.ClockTime.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // UserLabel
             // 
@@ -436,9 +434,9 @@
             // 
             this.MainPanel.BackColor = System.Drawing.Color.White;
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(211, 43);
+            this.MainPanel.Location = new System.Drawing.Point(52, 43);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(773, 518);
+            this.MainPanel.Size = new System.Drawing.Size(932, 518);
             this.MainPanel.TabIndex = 2;
             // 
             // Time
@@ -454,14 +452,14 @@
             this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.TopBar);
-            this.Controls.Add(this.SidePanel);
+            this.Controls.Add(this.SideBar);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
-            this.SidePanel.ResumeLayout(false);
+            this.SideBar.ResumeLayout(false);
             this.MaintenanceSubMenu.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
@@ -473,7 +471,7 @@
 
         #endregion
 
-        private Panel SidePanel;
+        private Panel SideBar;
         private Panel panel2;
         private PictureBox Logo;
         private FontAwesome.Sharp.IconButton MenuBtn;
@@ -484,7 +482,6 @@
         private Label UserLabel;
         private Panel MainPanel;
         private Panel panel1;
-        private FontAwesome.Sharp.IconButton MinimizeBtn;
         private FontAwesome.Sharp.IconButton MaintenanceBtn;
         private FontAwesome.Sharp.IconButton DeliveryBtn;
         private Panel MaintenanceSubMenu;
@@ -494,5 +491,6 @@
         private FontAwesome.Sharp.IconButton UserBtn;
         private Label ClockTime;
         private System.Windows.Forms.Timer Time;
+        private FontAwesome.Sharp.IconButton MinimizeBtn;
     }
 }

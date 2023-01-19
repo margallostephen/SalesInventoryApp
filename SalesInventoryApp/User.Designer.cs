@@ -41,13 +41,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.UserTable = new System.Windows.Forms.DataGridView();
-            this.ActionLabel = new System.Windows.Forms.Label();
-            this.AddUserBtn = new FontAwesome.Sharp.IconButton();
-            this.NoLabel = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ActionLabel = new System.Windows.Forms.Label();
+            this.AddUserBtn = new FontAwesome.Sharp.IconButton();
+            this.NoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.Size = new System.Drawing.Size(899, 2);
             this.panel1.TabIndex = 4;
             // 
             // label1
@@ -155,65 +155,12 @@
             this.UserTable.ShowCellToolTips = false;
             this.UserTable.ShowEditingIcon = false;
             this.UserTable.ShowRowErrors = false;
-            this.UserTable.Size = new System.Drawing.Size(740, 366);
+            this.UserTable.Size = new System.Drawing.Size(899, 366);
             this.UserTable.TabIndex = 5;
             this.UserTable.TabStop = false;
             this.UserTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserTable_CellContentClick);
             this.UserTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserTable_CellMouseEnter);
             this.UserTable.SelectionChanged += new System.EventHandler(this.UserTable_SelectionChanged);
-            // 
-            // ActionLabel
-            // 
-            this.ActionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ActionLabel.ForeColor = System.Drawing.Color.White;
-            this.ActionLabel.Location = new System.Drawing.Point(647, 72);
-            this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ActionLabel.Name = "ActionLabel";
-            this.ActionLabel.Size = new System.Drawing.Size(108, 33);
-            this.ActionLabel.TabIndex = 15;
-            this.ActionLabel.Text = "Action";
-            this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // AddUserBtn
-            // 
-            this.AddUserBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddUserBtn.BackColor = System.Drawing.Color.SlateBlue;
-            this.AddUserBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddUserBtn.FlatAppearance.BorderSize = 0;
-            this.AddUserBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddUserBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.AddUserBtn.ForeColor = System.Drawing.Color.White;
-            this.AddUserBtn.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
-            this.AddUserBtn.IconColor = System.Drawing.Color.White;
-            this.AddUserBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.AddUserBtn.IconSize = 35;
-            this.AddUserBtn.Location = new System.Drawing.Point(635, 454);
-            this.AddUserBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.AddUserBtn.Name = "AddUserBtn";
-            this.AddUserBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.AddUserBtn.Size = new System.Drawing.Size(122, 46);
-            this.AddUserBtn.TabIndex = 16;
-            this.AddUserBtn.Text = "Add User";
-            this.AddUserBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.AddUserBtn.UseVisualStyleBackColor = false;
-            this.AddUserBtn.Click += new System.EventHandler(this.AddUserBtn_Click);
-            // 
-            // NoLabel
-            // 
-            this.NoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.NoLabel.ForeColor = System.Drawing.Color.Black;
-            this.NoLabel.Location = new System.Drawing.Point(28, 114);
-            this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(718, 312);
-            this.NoLabel.TabIndex = 17;
-            this.NoLabel.Text = "No User";
-            this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Column1
             // 
@@ -272,12 +219,65 @@
             this.ColumnDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnDelete.Width = 55;
             // 
+            // ActionLabel
+            // 
+            this.ActionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ActionLabel.ForeColor = System.Drawing.Color.White;
+            this.ActionLabel.Location = new System.Drawing.Point(825, 72);
+            this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ActionLabel.Name = "ActionLabel";
+            this.ActionLabel.Size = new System.Drawing.Size(70, 33);
+            this.ActionLabel.TabIndex = 15;
+            this.ActionLabel.Text = "Action";
+            this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AddUserBtn
+            // 
+            this.AddUserBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddUserBtn.BackColor = System.Drawing.Color.SlateBlue;
+            this.AddUserBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddUserBtn.FlatAppearance.BorderSize = 0;
+            this.AddUserBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddUserBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AddUserBtn.ForeColor = System.Drawing.Color.White;
+            this.AddUserBtn.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.AddUserBtn.IconColor = System.Drawing.Color.White;
+            this.AddUserBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.AddUserBtn.IconSize = 35;
+            this.AddUserBtn.Location = new System.Drawing.Point(794, 454);
+            this.AddUserBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.AddUserBtn.Name = "AddUserBtn";
+            this.AddUserBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.AddUserBtn.Size = new System.Drawing.Size(122, 46);
+            this.AddUserBtn.TabIndex = 16;
+            this.AddUserBtn.Text = "Add User";
+            this.AddUserBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.AddUserBtn.UseVisualStyleBackColor = false;
+            this.AddUserBtn.Click += new System.EventHandler(this.AddUserBtn_Click);
+            // 
+            // NoLabel
+            // 
+            this.NoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.NoLabel.ForeColor = System.Drawing.Color.Black;
+            this.NoLabel.Location = new System.Drawing.Point(28, 114);
+            this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.NoLabel.Name = "NoLabel";
+            this.NoLabel.Size = new System.Drawing.Size(877, 312);
+            this.NoLabel.TabIndex = 17;
+            this.NoLabel.Text = "No User";
+            this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // User
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(773, 518);
+            this.ClientSize = new System.Drawing.Size(932, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.AddUserBtn);
             this.Controls.Add(this.ActionLabel);

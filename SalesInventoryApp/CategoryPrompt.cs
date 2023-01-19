@@ -31,8 +31,6 @@ namespace SalesInventoryApp
                 BtnOne.Text = "Yes";
                 BtnTwo.Text = "No";
             }
-
-            Dashboard.ReduceFlicker(this);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
@@ -41,15 +39,18 @@ namespace SalesInventoryApp
                    info = "Invalid",
                    message = "";
 
-            Boolean alreadyExist = false;
+            bool alreadyExist = false,
+                 categoryNull = string.IsNullOrWhiteSpace(categoryName);
+
             DialogResult = DialogResult.None;
+
             connection.Open();
 
             using (MySqlCommand command = connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
-                    if (!string.IsNullOrWhiteSpace(categoryName))
+                    if (!categoryNull)
                     {
                         using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", connection))
                         {
@@ -92,7 +93,7 @@ namespace SalesInventoryApp
                     else
                     {
                         info = "Warning";
-                        message = "Please fill out the required fields.";
+                        message = "Please input a category name.";
                     }
                 }
                 else

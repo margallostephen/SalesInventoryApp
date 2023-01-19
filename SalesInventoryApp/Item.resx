@@ -76,7 +76,7 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="dataGridViewCellStyle5.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="dataGridViewCellStyle14.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAALVJREFUOE+lkrENwjAURDObp/ASpCY1qUJLdgBKUoYFPAMwAAQEadweOku2guwY
@@ -88,7 +88,7 @@
   <data name="ColumnEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAeoAAAFACAYAAABz6j+yAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAEuhJREFUeF7t3XuQnWV9wHG11ku1VtuOVeptbK12Wm2rrVatbbVj22k7VSFyNwYE
+        vAAADrwBlbxySQAAEuhJREFUeF7t3XuQnWV9wHG11ku1VtuOVeptbK12Wm2rrVatbbVj22k7VSFyNwYE
         FVCEIkRFEC2jIEpERC6ijcpFRgVUIKIIuRFCks2FzT3ZJIQkhFsghNzI5em+O2dn1vhwctn3Ofs753x+
         mc9/J+/zPm8y+909e855n/bQupQAgJiEGgACE2oACEyoASAwoQaAwIQaAAITagAITKgBIDChBoDAhBoA
         AhNqAAhMqAEgMKEGgMCEGgACE2oACEyoASAwoQaAwIQaAAITagAITKgBIDChBoDAhBoAAhNqAAhMqAEg
@@ -175,7 +175,7 @@
   <metadata name="ColumnDelete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="dataGridViewCellStyle15.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAALVJREFUOE+lkrENwjAURDObp/ASpCY1qUJLdgBKUoYFPAMwAAQEadweOku2guwY
@@ -187,7 +187,7 @@
   <data name="ColumnDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAeoAAAFACAYAAABz6j+yAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAFlpJREFUeF7t3fuXXWV5wPH+RW21tqsWRXBxR0CwiCgKiqJ4q6KSIKKgtGgVrBbx
+        vAAADrwBlbxySQAAFlpJREFUeF7t3fuXXWV5wPH+RW21tqsWRXBxR0CwiCgKiqJ4q6KSIKKgtGgVrBbx
         gop3Ra1YWnABQqmgGComGXKZmVwml5ncQ67kNpO8zZ6eWWs6vuxkJvs985x9Ps9an9+S8+73zM75Zs7M
         2fvPtm9KCQCISagBIDChBoDAhBoAAhNqAAhMqAEgMKEGgMCEGgACE2oACEyoASAwoQaAwIQaAAITagAI
         TKgBIDChBoDAhBoAAhNqAAhMqAEgMKEGgMCEGgACE2oACEyoASAwoQaAwIQaAAITagAITKgBIDChBoDA

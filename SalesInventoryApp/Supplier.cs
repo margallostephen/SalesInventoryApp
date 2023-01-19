@@ -12,7 +12,6 @@ namespace SalesInventoryApp
         {
             InitializeComponent();
             SupplierTable.MouseWheel += new MouseEventHandler(MouseWheel);
-            Dashboard.ReduceFlicker(this);
         }
 
         private void Supplier_Load(object sender, EventArgs e)
@@ -32,7 +31,6 @@ namespace SalesInventoryApp
             if (SupplierTable.Rows.Count > 0)
             {
                 int index = SupplierTable.CurrentRow.Index;
-
                 selectedRowId = Convert.ToInt32(SupplierTable[0, index].Value);
                 selectedRowSupplier = SupplierTable[1, index].Value.ToString();
                 selectedRowAddress = SupplierTable[2, index].Value.ToString();

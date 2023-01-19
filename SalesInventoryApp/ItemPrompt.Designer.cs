@@ -101,13 +101,13 @@
             this.ItemImage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ItemImage.BackgroundImage")));
             this.ItemImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ItemImage.InitialImage = null;
-            this.ItemImage.Location = new System.Drawing.Point(5, 3);
+            this.ItemImage.Location = new System.Drawing.Point(4, 3);
             this.ItemImage.Name = "ItemImage";
             this.ItemImage.Size = new System.Drawing.Size(113, 110);
             this.ItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ItemImage.TabIndex = 36;
             this.ItemImage.TabStop = false;
-            this.ItemImage.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.ItemImage.Click += new System.EventHandler(this.ItemImage_Click);
             // 
             // Quantity
             // 
@@ -214,11 +214,11 @@
             this.Category.BackColor = System.Drawing.Color.White;
             this.Category.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Category.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Category.Location = new System.Drawing.Point(125, 12);
+            this.Category.Location = new System.Drawing.Point(133, 13);
             this.Category.Margin = new System.Windows.Forms.Padding(2);
             this.Category.Name = "Category";
             this.Category.PlaceholderText = "Category";
-            this.Category.Size = new System.Drawing.Size(94, 22);
+            this.Category.Size = new System.Drawing.Size(183, 22);
             this.Category.TabIndex = 38;
             // 
             // BtnTwo
@@ -247,7 +247,7 @@
             this.BtnOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOne.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnOne.ForeColor = System.Drawing.Color.White;
-            this.BtnOne.Location = new System.Drawing.Point(17, 171);
+            this.BtnOne.Location = new System.Drawing.Point(16, 171);
             this.BtnOne.Margin = new System.Windows.Forms.Padding(2);
             this.BtnOne.Name = "BtnOne";
             this.BtnOne.Size = new System.Drawing.Size(78, 33);
@@ -288,8 +288,8 @@
             this.ClientSize = new System.Drawing.Size(373, 215);
             this.Controls.Add(this.BtnTwo);
             this.Controls.Add(this.BtnOne);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.InputPanel);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.MessagePanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

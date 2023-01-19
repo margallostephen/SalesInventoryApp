@@ -11,7 +11,6 @@ namespace SalesInventoryApp
         {
             InitializeComponent();
             UserTable.MouseWheel += new MouseEventHandler(MouseWheel);
-            Dashboard.ReduceFlicker(this);
         }
 
         private void User_Load(object sender, EventArgs e)
@@ -31,7 +30,6 @@ namespace SalesInventoryApp
             if (UserTable.Rows.Count > 0)
             {
                 int index = UserTable.CurrentRow.Index;
-
                 selectedRowUsername = UserTable[0, index].Value.ToString();
                 selectedRowPassword = UserTable[1, index].Value.ToString();
             }

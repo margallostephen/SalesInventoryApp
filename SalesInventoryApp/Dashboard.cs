@@ -16,6 +16,7 @@ namespace SalesInventoryApp
         private Supplier supplierForm;
         private Item itemForm;
         private User userForm;
+        private Inventory inventory;
 
         public Dashboard(string username)
         {
@@ -28,33 +29,36 @@ namespace SalesInventoryApp
                 BackColor = Color.White
             };
 
-            SidePanel.Controls.Add(activeBtnPanel);
-            MaintenanceBtn_Click(MaintenanceBtn, null);
-            ReduceFlicker(this);
+            SideBar.Controls.Add(activeBtnPanel);
         }
 
         private void MenuBtn_Click(object sender, EventArgs e)
         {
-            if (SidePanel.Width > 200)
+            if (SideBar.Width == 52)
             {
-                SidePanel.Width = 52;
-
-                foreach (Button menuBtn in SidePanel.Controls.OfType<Button>())
-                    menuBtn.Text = "";
+                SideBar.Width = 211;
 
                 foreach (Button subMenuBtn in MaintenanceSubMenu.Controls.OfType<Button>())
-                    subMenuBtn.Location = new Point(0, subMenuBtn.Location.Y);
+                    subMenuBtn.Location = new Point(52, subMenuBtn.Location.Y);
+
+                if (SideBar.Width > 160)
+                    foreach (Button menuBtn in SideBar.Controls.OfType<Button>())
+                        menuBtn.Text = menuBtn.Tag.ToString();
             }
             else
             {
-                SidePanel.Width = 211;
+                SideBar.Width = 52;
 
-                foreach (Button menuBtn in SidePanel.Controls.OfType<Button>())
-                    menuBtn.Text = menuBtn.Tag.ToString();
+                if (SideBar.Width < 106)
+                    foreach (Button subMenuBtn in MaintenanceSubMenu.Controls.OfType<Button>())
+                        subMenuBtn.Location = new Point(0, subMenuBtn.Location.Y);
 
-                foreach (Button subMenuBtn in MaintenanceSubMenu.Controls.OfType<Button>())
-                    subMenuBtn.Location = new Point(51, subMenuBtn.Location.Y);
+                if (SideBar.Width < 150)
+                    foreach (Button menuBtn in SideBar.Controls.OfType<Button>())
+                        menuBtn.Text = "";
             }
+
+            Refresh();
         }
 
         private void ActiveButton(object senderBtn)
@@ -90,6 +94,8 @@ namespace SalesInventoryApp
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
+            inventory ??= new() { connection = connection };
+            OpenChildForm(inventory);
         }
 
         private void SalesBtn_Click(object sender, EventArgs e)
@@ -159,39 +165,46 @@ namespace SalesInventoryApp
                 case "ItemTable":
                     query = "SELECT * FROM items ORDER BY id ASC";
                     break;
+                case "InventoryTable":
+                    query = "SELECT items.id, items.name, inventory_stocks.quantity FROM items INNER JOIN inventory_stocks ON items.id = inventory_stocks.item_id ORDER BY id ASC";
+                    break;
             }
 
-            using (MySqlCommand command = new(query, connection))
-            {
-                using MySqlDataReader dataReader = command.ExecuteReader();
+            using MySqlCommand command = new(query, connection);
+            using MySqlDataReader dataReader = command.ExecuteReader();
 
-                if (dataReader.HasRows)
-                {
-                    formTable.BringToFront();
+            if (dataReader.HasRows)
+            {
+                formTable.BringToFront();
+                
+                if (actionLabel != null)
                     actionLabel.BringToFront();
-                    while (dataReader.Read())
+
+                while (dataReader.Read())
+                {
+                    switch (formTable.Name.ToString())
                     {
-                        switch (formTable.Name.ToString())
-                        {
-                            case "UserTable":
-                                formTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
-                                break;
-                            case "SupplierTable":
-                                formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3]);
-                                break;
-                            case "CategoryTable":
-                                formTable.Rows.Add(dataReader[0], dataReader[1]);
-                                break;
-                            case "ItemTable":
-                                formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3], dataReader[4]);
-                                break;
-                        }
+                        case "UserTable":
+                            formTable.Rows.Add(dataReader[0].ToString(), dataReader[1].ToString());
+                            break;
+                        case "SupplierTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3]);
+                            break;
+                        case "CategoryTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1]);
+                            break;
+                        case "ItemTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3], dataReader[4]);
+                            break;
+                        case "InventoryTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2]);
+                            break;
                     }
                 }
-                else
-                    noLabel.BringToFront();
             }
-
+            else
+                noLabel.BringToFront();
+            
             connection.Close();
         }
 
@@ -206,7 +219,6 @@ namespace SalesInventoryApp
                 child.Close();
         }
 
-
         public static void DisposePrompt(DialogResult result, Form promptForm, DataGridView formTable, Label actionLabel, Label noLabel, MySqlConnection connection)
         {
             if (result == DialogResult.OK)
@@ -215,14 +227,10 @@ namespace SalesInventoryApp
 
                 if (promptForm.Name.ToString() == "CategoryPrompt")
                 {
-                    FormCollection forms = Application.OpenForms;
+                    Item itemForm = FindForm("Item") as Item;
 
-                    foreach (Form form in forms)
-                        if (form.Name == "Item")
-                        {
-                            Item itemForm = form as Item;
-                            LoadTableRecord(itemForm.ItemTable, itemForm.ActionLabel, itemForm.NoLabel, connection);
-                        }
+                    if (itemForm != null)
+                        LoadTableRecord(itemForm.ItemTable, itemForm.ActionLabel, itemForm.NoLabel, connection);
                 }
             }
 
@@ -236,7 +244,7 @@ namespace SalesInventoryApp
             {
                 formTable.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.SlateBlue;
                 formTable.CurrentRow.DefaultCellStyle.SelectionForeColor = Color.White;
-            } 
+            }
             else
             {
                 if (formTable.CurrentRow != null)
@@ -265,6 +273,17 @@ namespace SalesInventoryApp
                 formTable.FirstDisplayedScrollingRowIndex++;
         }
 
+        public static Form FindForm(string formName)
+        {
+            FormCollection forms = Application.OpenForms;
+
+            foreach (Form form in forms)
+                if (form.Name == formName)
+                    return form;
+
+            return null;
+        }
+
         private void MinimizeBtn_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
@@ -284,15 +303,6 @@ namespace SalesInventoryApp
         private void Time_Tick(object sender, EventArgs e)
         {
             ClockTime.Text = DateTime.Now.ToString();
-        }
-
-        public static void ReduceFlicker(Form form)
-        {
-            foreach (Control control in form.Controls)
-            {
-                var doubleBuffer = control.GetType().GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance);
-                doubleBuffer.SetValue(control, true, null);
-            }
         }
     }
 }

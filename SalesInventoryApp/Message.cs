@@ -27,8 +27,6 @@ namespace SalesInventoryApp
                 else
                     PictureBox.Image = Resources.Error;
             }
-
-            Dashboard.ReduceFlicker(this);
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)

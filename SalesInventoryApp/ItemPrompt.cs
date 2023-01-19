@@ -32,7 +32,7 @@ namespace SalesInventoryApp
                     Text = HeaderText.Text = "View Image";
                     Size = new Size(275, 306);
                     InputPanel.Height = 245;
-                    ItemImage.Size = new Size(242, 204);
+                    ItemImage.Size = new Size(243, 204);
                     BtnOne.Visible = false;
                     BtnTwo.Text = "Close";
                     BtnTwo.Location = new Point(100, 263);
@@ -52,8 +52,6 @@ namespace SalesInventoryApp
                 BtnOne.BringToFront();
                 BtnTwo.BringToFront();
             }
-
-            Dashboard.ReduceFlicker(this);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
@@ -64,111 +62,167 @@ namespace SalesInventoryApp
                    info = "Invalid",
                    message = "";
 
-            Boolean alreadyExist = false;
+            bool alreadyExist = false,
+                 imageNull = ItemImage.Image == null,
+                 categoryNull = Category.Text == "",
+                 itemNull = string.IsNullOrWhiteSpace(itemName),
+                 priceNull = string.IsNullOrWhiteSpace(price),
+                 quantityNull = string.IsNullOrWhiteSpace(quantity),
+                 priceValid = Regex.IsMatch(price, "^[0-9.]+$"),
+                 quantityValid = Regex.IsMatch(quantity, "^[0-9.]+$");
+
             DialogResult = DialogResult.None;
+
             connection.Open();
 
-            using MySqlCommand command = connection.CreateCommand();
-            
-            if (BtnOne.Text != "Yes")
+            using (MySqlCommand command = connection.CreateCommand())
             {
-                if (!string.IsNullOrWhiteSpace(itemName) && !string.IsNullOrWhiteSpace(price) && (!string.IsNullOrWhiteSpace(quantity) || BtnOne.Text == "Save") && ItemImage.Image != null && Category.Text != "")
+                if (BtnOne.Text != "Yes")
                 {
-                    using MySqlCommand getAllItems = new("SELECT * FROM items", connection);
-                    using MySqlDataReader dataReader = getAllItems.ExecuteReader();
-
-                    while (dataReader.Read())
+                    if (!imageNull && !categoryNull && !itemNull && !priceNull && (quantityNull && BtnOne.Text == "Save" || !quantityNull && BtnOne.Text == "Add"))
                     {
-                        if (dataReader[1].ToString() == itemName)
+                        using (MySqlCommand getAllItems = new("SELECT * FROM items", connection))
                         {
-                            alreadyExist = true;
-                            break;
+                            using MySqlDataReader dataReader = getAllItems.ExecuteReader();
+
+                            while (dataReader.Read())
+                            {
+                                if (dataReader[2].ToString() == itemName)
+                                {
+                                    alreadyExist = true;
+                                    break;
+                                }
+                            }
                         }
-                    }
-                    
-                    if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && itemName != itemForm.selectedRowItem)
-                        message = "Item " + itemName + " already exist.";
-                    else
-                    {
-                        if (!Regex.IsMatch(price, "^[0-9.]+$") && (!Regex.IsMatch(quantity, "^[0-9.]+$") && BtnOne.Text == "Add"))
-                            message = "Please input a valid price and quantity.";
-                        else if (!Regex.IsMatch(price, "^[0-9.]+$"))
-                            message = "Please input a valid price.";
-                        else if (!Regex.IsMatch(quantity, "^[0-9.]+$") && BtnOne.Text == "Add")
-                            message = "Please input a valid quantity.";
+
+                        if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && itemName != itemForm.selectedRowItem)
+                            message = "Item " + itemName + " already exist.";
                         else
                         {
-                            byte[] itemImage;
-
-                            if (BtnOne.Text == "Add")
-                            {
-                                command.CommandText = "INSERT INTO items(image, name, category_id, price) VALUES(?, ?, ?, ?)";
-                                message = "New item added successfully.";
-                                itemImage = ConvertImageToByte();
-                            }
+                            if (!priceValid && (!quantityValid && BtnOne.Text == "Add"))
+                                message = "Please input a valid price and quantity.";
+                            else if (!priceValid)
+                                message = "Please input a valid price.";
+                            else if (!quantityValid && BtnOne.Text == "Add")
+                                message = "Please input a valid quantity.";
                             else
                             {
-                                command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? WHERE id = ?";
-                                message = "Item " + itemForm.selectedRowItem + " updated successfully.";
-                                
-                                if (imageChange)
+                                byte[] itemImage;
+
+                                if (BtnOne.Text == "Add")
+                                {
+                                    command.CommandText = "INSERT INTO items(image, name, category_id, price) VALUES(?, ?, ?, ?)";
+                                    message = "New item added successfully.";
                                     itemImage = ConvertImageToByte();
+                                }
                                 else
-                                    itemImage = itemForm.selectedItemImage;
+                                {
+                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? WHERE id = ?";
+                                    message = "Item " + itemForm.selectedRowItem + " updated successfully.";
+
+                                    if (imageChange)
+                                        itemImage = ConvertImageToByte();
+                                    else
+                                        itemImage = itemForm.selectedItemImage;
+                                }
+
+                                command.Parameters.Add("image", (DbType)SqlDbType.Binary).Value = itemImage;
+                                command.Parameters.Add("itemName", (DbType)SqlDbType.VarChar).Value = itemName;
+                                command.Parameters.Add("categoryId", (DbType)SqlDbType.Int).Value = Convert.ToInt32(Category.Text);
+                                command.Parameters.Add("price", (DbType)SqlDbType.Decimal).Value = Convert.ToDecimal(price);
+
+                                if (BtnOne.Text == "Save")
+                                    command.Parameters.Add("id", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowItemId;
+
+                                info = "Success";
+                                DialogResult = DialogResult.OK;
                             }
-
-                            command.Parameters.Add("image", (DbType)SqlDbType.Binary).Value = itemImage;
-                            command.Parameters.Add("itemName", (DbType)SqlDbType.VarChar).Value = itemName;
-                            command.Parameters.Add("categoryId", (DbType)SqlDbType.Int).Value = Convert.ToInt32(Category.Text);
-                            command.Parameters.Add("price", (DbType)SqlDbType.Decimal).Value = Convert.ToDecimal(price);
-
-                            if (BtnOne.Text == "Save")
-                                command.Parameters.Add("id", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowItemId;
-
-                            info = "Success";
-                            DialogResult = DialogResult.OK;
                         }
+                    }
+                    else
+                    {
+                        info = "Warning";
+
+                        if (imageNull && categoryNull && itemNull && priceNull && quantityNull)
+                            message = "Please fill all the required fields.";
+                        else if (imageNull && categoryNull && itemNull && priceNull)
+                            message = "Please select picture and a category, then input the item name and price.";
+                        else if (imageNull && categoryNull && itemNull && quantityNull)
+                            message = "Please select picture and a category, then input the item name and quantity.";
+                        else if (imageNull && categoryNull && priceNull && quantityNull)
+                            message = "Please select picture and a category, then input the price and quantity.";
+                        else if (imageNull && itemNull && priceNull && quantityNull)
+                            message = "Please select a picture, then input the item name, price, and quantity.";
+                        else if (categoryNull && itemNull && priceNull && quantityNull)
+                            message = "Please select a category, then input the item name, price, and quantity.";
+                        else if (imageNull && categoryNull && itemNull)
+                            message = "Please select picture and a category, then input the item name.";
+                        else if (imageNull && categoryNull && priceNull)
+                            message = "Please select picture and a category, then input the price.";
+                        else if (imageNull && categoryNull && quantityNull)
+                            message = "Please select picture and a category, then input the quantity.";
+                        else if (categoryNull && itemNull && priceNull)
+                            message = "Please select a category, then input the item name and price.";
+                        else if (categoryNull && itemNull && quantityNull)
+                            message = "Please select a category, then input the item name and quantity.";
+                        else if (itemNull && priceNull && quantityNull)
+                            message = "Please input the item name, price, and quantity.";
+                        else if (imageNull && categoryNull)
+                            message = "Please select picture and a category.";
+                        else if (imageNull && itemNull)
+                            message = "Please select picture and input the item name.";
+                        else if (imageNull && priceNull)
+                            message = "Please select picture and input the price.";
+                        else if (imageNull && quantityNull)
+                            message = "Please select picture and input the quantity.";
+                        else if (categoryNull && itemNull)
+                            message = "Please select category and input the item name.";
+                        else if (categoryNull && priceNull)
+                            message = "Please select category and input the price.";
+                        else if (categoryNull && quantityNull)
+                            message = "Please select category and input the quantity.";
+                        else if (itemNull && priceNull)
+                            message = "Please input the item name and price.";
+                        else if (itemNull && quantityNull)
+                            message = "Please input the item name and quantity.";
+                        else if (priceNull && quantityNull)
+                            message = "Please input the price and quantity.";
+                        else if (imageNull)
+                            message = "Please select a picture.";
+                        else if (categoryNull)
+                            message = "Please select a category.";
+                        else if (itemNull)
+                            message = "Please input an item name.";
+                        else if (priceNull)
+                            message = "Please input a price.";
+                        else
+                            message = "Please input a quantity.";
                     }
                 }
                 else
                 {
-                    info = "Warning";
-
-                    if (ItemImage.Image == null)
-                        message = "Please select a picture.";
-                    else if (Category.Text == "")
-                        message = "Please select a category.";
-                    else if (string.IsNullOrWhiteSpace(itemName))
-                        message = "Please input an item name.";
-                    else if (string.IsNullOrWhiteSpace(price))
-                        message = "Please input a price.";
-                    else
-                        message = "Please input a quantity.";
+                    command.CommandText = "DELETE FROM items WHERE id = ?";
+                    command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = itemForm.selectedRowItemId;
+                    message = "Item " + itemName + " deleted successfully.";
+                    info = "Success";
+                    DialogResult = DialogResult.OK;
                 }
-            }
-            else
-            {
-                command.CommandText = "DELETE FROM items WHERE id = ?";
-                command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = itemForm.selectedRowItemId;
-                message = "Item " + itemName + " deleted successfully.";
-                info = "Success";
-                DialogResult = DialogResult.OK;
-            }
 
-            if (command.CommandText != "")
-            {
-                command.Prepare();
-                command.ExecuteNonQuery();
-                int itemId = (int)command.LastInsertedId;
-
-                if (BtnOne.Text == "Add")
+                if (command.CommandText != "")
                 {
-                    command.Parameters.Clear();
-                    command.CommandText = "INSERT INTO inventory_stocks(item_id, quantity) VALUES(?, ?)";
-                    command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
-                    command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = Convert.ToInt32(quantity);
                     command.Prepare();
                     command.ExecuteNonQuery();
+                    int itemId = (int)command.LastInsertedId;
+
+                    if (BtnOne.Text == "Add")
+                    {
+                        command.Parameters.Clear();
+                        command.CommandText = "INSERT INTO inventory_stocks(item_id, quantity) VALUES(?, ?)";
+                        command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
+                        command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = Convert.ToInt32(quantity);
+                        command.Prepare();
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
 
@@ -182,14 +236,16 @@ namespace SalesInventoryApp
             Close();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void ItemImage_Click(object sender, EventArgs e)
         {
             if (HeaderText.Text != "View Image")
             {
                 using OpenFileDialog selectPic = new();
                 selectPic.Filter = "Image Files(*.jpg; *.jpeg; *.png;) | *.jpg; *.jpeg; *.png;";
 
-                if (selectPic.ShowDialog(this) == DialogResult.OK)
+                Dashboard dashboard = Dashboard.FindForm("Dashboard") as Dashboard;
+
+                if (selectPic.ShowDialog(dashboard) == DialogResult.OK)
                 {
                     ItemImage.Image = new Bitmap(selectPic.FileName);
                     imageChange = true;
@@ -223,17 +279,17 @@ namespace SalesInventoryApp
         private void ItemPrompt_Load(object sender, EventArgs e)
         {
             ComboBox.Items.Clear();
-
             connection.Open();
 
-            using MySqlCommand command = new("SELECT id, name FROM item_category ORDER BY id ASC", connection);
-            using MySqlDataReader dataReader = command.ExecuteReader();
+            using (MySqlCommand command = new("SELECT id, name FROM item_category ORDER BY id ASC", connection))
+            {
+                using MySqlDataReader dataReader = command.ExecuteReader();
 
-            while (dataReader.Read())
-                category.Add((int)dataReader[0], dataReader[1].ToString());
+                while (dataReader.Read())
+                    category.Add((int)dataReader[0], dataReader[1].ToString());
+            }
             
             connection.Close();
-
             category.Add(-1, "Select a category");
             BindSource();
 

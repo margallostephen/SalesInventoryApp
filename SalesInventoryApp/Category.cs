@@ -1,6 +1,5 @@
 ﻿using MySqlConnector;
 using System.Data;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace SalesInventoryApp
 {
@@ -14,7 +13,6 @@ namespace SalesInventoryApp
         {
             InitializeComponent();
             CategoryTable.MouseWheel += new MouseEventHandler(MouseWheel);
-            Dashboard.ReduceFlicker(this);
         }
 
         private void Category_Load(object sender, EventArgs e)

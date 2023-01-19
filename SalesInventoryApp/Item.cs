@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using System.Data;
 
 namespace SalesInventoryApp
 {
@@ -13,7 +14,6 @@ namespace SalesInventoryApp
         {
             InitializeComponent();
             ItemTable.MouseWheel += new MouseEventHandler(MouseWheel);
-            Dashboard.ReduceFlicker(this);
         }
 
         private void Item_Load(object sender, EventArgs e)
@@ -26,7 +26,6 @@ namespace SalesInventoryApp
             if (ItemTable.Rows.Count > 0)
             {
                 int index = ItemTable.CurrentRow.Index;
-
                 selectedItemImage = (byte[])ItemTable[0, index].Value;
                 selectedRowItemId = Convert.ToInt32(ItemTable[1, index].Value);
                 selectedRowItem = ItemTable[2, index].Value.ToString();
@@ -68,22 +67,40 @@ namespace SalesInventoryApp
                 if (columnName == "ColumnEdit")
                 {
                     itemPrompt = new("Edit", this) { connection = connection };
-                    using MemoryStream ms = new(selectedItemImage);
-                    itemPrompt.ItemImage.Image = Image.FromStream(ms);
+                    itemPrompt.ItemImage.Image = ByteToImage(selectedItemImage);
                     itemPrompt.Item.Text = selectedRowItem;
                     itemPrompt.Price.Text = selectedRowBasePrice;
                 }
                 else if (columnName == "ColumnDelete")
-                    itemPrompt = new("Delete", this) { connection = connection };
+                {
+                    connection.Open();
+                    using MySqlCommand command = new("SELECT quantity FROM inventory_stocks WHERE item_id = ?", connection);
+                    command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = selectedRowItemId;
+                    command.Prepare();
+                    int quantity = (int)command.ExecuteScalar();
+                    connection.Close();
+
+                    if (quantity > 0)
+                    {
+                        itemPrompt = null;
+                        Message messageform = new("Error", "This item cannot be deleted because there are still remaining stock.");
+                        messageform.ShowDialog(this);
+                    }
+                    else
+                        itemPrompt = new("Delete", this) { connection = connection };
+                }
                 else
                 {
                     itemPrompt = new("ViewImage", this) { connection = connection };
-                    using MemoryStream ms = new(selectedItemImage);
-                    itemPrompt.ItemImage.Image = Image.FromStream(ms);
+                    itemPrompt.ItemImage.Image = ByteToImage(selectedItemImage);
                 }
 
-                DialogResult result = itemPrompt.ShowDialog(this);
-                Dashboard.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                if (itemPrompt!= null)
+                {
+                    DialogResult result = itemPrompt.ShowDialog(this);
+                    Dashboard.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                }
+
                 Dashboard.SelectedRowChangeColor(ItemTable, false);
             }
         }
@@ -96,6 +113,11 @@ namespace SalesInventoryApp
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
             Dashboard.ScrollUpDown(ItemTable, e);
+        }
+        private static Image ByteToImage(byte[] imageByte)
+        {
+            using MemoryStream ms = new(imageByte);
+            return Image.FromStream(ms);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace SalesInventoryApp
         {
             InitializeComponent();
             this.userForm = userForm;
+
             if (operation != "Delete")
             {
                 if (operation == "Edit")
@@ -20,6 +21,7 @@ namespace SalesInventoryApp
                     Text = HeaderText.Text = "Edit User";
                     BtnOne.Text = "Save";
                 }
+
                 MessagePanel.Visible = false;
             }
             else
@@ -33,7 +35,6 @@ namespace SalesInventoryApp
                 BtnOne.BringToFront();
                 BtnTwo.BringToFront();
             }
-            Dashboard.ReduceFlicker(this);
         }
 
         private void BtnOne_Click(object sender, EventArgs e)
@@ -42,7 +43,9 @@ namespace SalesInventoryApp
                    info = "Invalid", 
                    message;
 
-            Boolean alreadyExist = false;
+            bool alreadyExist = false,
+                 usernameNull = string.IsNullOrWhiteSpace(username),
+                 passwordNull = string.IsNullOrWhiteSpace(Password.Text);
 
             DialogResult = DialogResult.None;
 
@@ -52,7 +55,7 @@ namespace SalesInventoryApp
             {
                 if (BtnOne.Text != "Yes")
                 {
-                    if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(Password.Text))
+                    if (!usernameNull && !passwordNull)
                     {
                         using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
                         {
@@ -67,13 +70,14 @@ namespace SalesInventoryApp
                                 }
                             }
                         }
-
+                                                
                         if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && username != userForm.selectedRowUsername)
                             message = "Username " + username + " have already been taken.";
                         else
                         {
-                            byte[] passwordBytes = Encoding.UTF8.GetBytes(Password.Text.ToString()), salt = PasswordSecurity.GenerateSalt();
-                            String password = Convert.ToBase64String(PasswordSecurity.CreateHash(passwordBytes, salt)), saltString = Convert.ToBase64String(salt);
+                            byte[] salt = PasswordSecurity.GenerateSalt();
+                            String password = Convert.ToBase64String(PasswordSecurity.CreateHash(Encoding.UTF8.GetBytes(Password.Text.ToString()), salt)), 
+                                   saltString = Convert.ToBase64String(salt);
 
                             if (BtnOne.Text == "Add")
                             {
@@ -100,7 +104,13 @@ namespace SalesInventoryApp
                     else
                     {
                         info = "Warning";
-                        message = "Please fill out the required fields.";
+
+                        if (usernameNull && passwordNull)
+                            message = "Please fill all the required fields.";
+                        else if (usernameNull)
+                            message = "Please input a username.";
+                        else
+                            message = "Please input a password.";
                     }
                 }
                 else
@@ -118,7 +128,7 @@ namespace SalesInventoryApp
                     command.ExecuteNonQuery();
                 }
             }
-
+            
             connection.Close();
             Dashboard.ShowMessage(this, userForm, info, message, DialogResult);
         }

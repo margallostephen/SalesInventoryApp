@@ -67,7 +67,7 @@ namespace SalesInventoryApp
                 if (columnName == "ColumnEdit")
                 {
                     itemPrompt = new("Edit", this) { connection = connection };
-                    itemPrompt.ItemImage.Image = ByteToImage(selectedItemImage);
+                    itemPrompt.ItemImage.Image = Dashboard.ByteToImage(selectedItemImage);
                     itemPrompt.Item.Text = selectedRowItem;
                     itemPrompt.Price.Text = selectedRowBasePrice;
                 }
@@ -92,7 +92,7 @@ namespace SalesInventoryApp
                 else
                 {
                     itemPrompt = new("ViewImage", this) { connection = connection };
-                    itemPrompt.ItemImage.Image = ByteToImage(selectedItemImage);
+                    itemPrompt.ItemImage.Image = Dashboard.ByteToImage(selectedItemImage);
                 }
 
                 if (itemPrompt!= null)
@@ -113,11 +113,6 @@ namespace SalesInventoryApp
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
             Dashboard.ScrollUpDown(ItemTable, e);
-        }
-        private static Image ByteToImage(byte[] imageByte)
-        {
-            using MemoryStream ms = new(imageByte);
-            return Image.FromStream(ms);
         }
     }
 }

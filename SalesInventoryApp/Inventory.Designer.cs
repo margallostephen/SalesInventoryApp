@@ -225,13 +225,12 @@
         }
 
         #endregion
-
-        private Label NoLabel;
         public DataGridView InventoryTable;
         private Panel panel1;
         private Label label1;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column2;
+        public Label NoLabel;
     }
 }

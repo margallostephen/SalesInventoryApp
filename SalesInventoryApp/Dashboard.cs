@@ -238,12 +238,22 @@ namespace SalesInventoryApp
             {
                 LoadTableRecord(formTable, actionLabel, noLabel, connection);
 
-                if (promptForm.Name.ToString() == "CategoryPrompt")
+                string promptFormName = promptForm.Name.ToString();
+
+                if (promptFormName == "CategoryPrompt")
                 {
                     Item itemForm = FindForm("Item") as Item;
 
                     if (itemForm != null)
                         LoadTableRecord(itemForm.ItemTable, itemForm.ActionLabel, itemForm.NoLabel, connection);
+                }
+
+                if (promptFormName == "SellItem" || promptFormName == "ItemPrompt")
+                {
+                    Inventory invetoryForm = Dashboard.FindForm("Inventory") as Inventory;
+
+                    if (invetoryForm != null)
+                        LoadTableRecord(invetoryForm.InventoryTable, null, invetoryForm.NoLabel, connection);
                 }
             }
 
@@ -295,6 +305,12 @@ namespace SalesInventoryApp
                     return form;
 
             return null;
+        }
+
+        public static Image ByteToImage(byte[] imageByte)
+        {
+            using MemoryStream ms = new(imageByte);
+            return Image.FromStream(ms);
         }
 
         private void MinimizeBtn_Click(object sender, EventArgs e)

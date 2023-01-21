@@ -21,26 +21,41 @@ namespace SalesInventoryApp
         private void SelItemBtn_Click(object sender, EventArgs e)
         {
             connection.Open();
-            using MySqlCommand command = new("SELECT SUM(quantity) FROM inventory_stocks", connection);
+            using MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM inventory_stocks";
             command.Prepare();
-            decimal quantity = (decimal)command.ExecuteScalar();
-            connection.Close();
+            using MySqlDataReader dataReader = command.ExecuteReader();
 
-            SellItem sellPrompt;
-
-            if (quantity < 1)
+            if (dataReader.HasRows)
             {
-                sellPrompt = null;
-                Message messageform = new("Error", "All items are out of stock.");
-                messageform.ShowDialog(this);
+                dataReader.Close();
+                command.CommandText = "SELECT SUM(quantity) FROM inventory_stocks";
+                command.Prepare();
+                decimal quantity = (decimal)command.ExecuteScalar();
+                connection.Close();
+
+                SellItem sellPrompt;
+
+                if (quantity < 1)
+                {
+                    sellPrompt = null;
+                    Message messageform = new("Error", "All items are out of stock.");
+                    messageform.ShowDialog(this);
+                }
+                else
+                    sellPrompt = new(this) { connection = connection };
+
+                if (sellPrompt != null)
+                {
+                    DialogResult result = sellPrompt.ShowDialog(this);
+                    Dashboard.DisposePrompt(result, sellPrompt, SalesTable, null, NoLabel, connection);
+                }
             }
             else
-                sellPrompt = new(this) { connection = connection };
-
-            if (sellPrompt != null)
             {
-                DialogResult result = sellPrompt.ShowDialog(this);
-                Dashboard.DisposePrompt(result, sellPrompt, SalesTable, null, NoLabel, connection);
+                connection.Close();
+                Message messageform = new("Warning", "No items are available. Please add first item.");
+                messageform.ShowDialog(this);
             }
         }
 

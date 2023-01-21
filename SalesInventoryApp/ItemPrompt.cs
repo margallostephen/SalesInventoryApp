@@ -241,9 +241,14 @@ namespace SalesInventoryApp
             if (HeaderText.Text != "View Image")
             {
                 using OpenFileDialog selectPic = new();
-                selectPic.Filter = "Image Files(*.jpg; *.jpeg; *.png;) | *.jpg; *.jpeg; *.png;";
+                selectPic.Filter = "Image Files(*.jpg; *.jpeg; *.png; *.jfif;) | *.jpg; *.jpeg; *.png; *.jfif;";
 
-                Dashboard dashboard = Dashboard.FindForm("Dashboard") as Dashboard;
+                FormCollection forms = Application.OpenForms;
+                Dashboard dashboard = null;
+
+                foreach (Form form in forms)
+                    if (form.Name == "Dashboard")
+                        dashboard = (Dashboard)form;
 
                 if (selectPic.ShowDialog(dashboard) == DialogResult.OK)
                 {

@@ -32,6 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.HeaderText = new System.Windows.Forms.Label();
             this.ItemPreviewPanel = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.RemainingQuantity = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.MinusQuantityBtn = new FontAwesome.Sharp.IconButton();
@@ -53,6 +54,7 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.SellBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.ItemPreviewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemImage)).BeginInit();
@@ -86,6 +88,7 @@
             this.ItemPreviewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemPreviewPanel.BackColor = System.Drawing.Color.White;
+            this.ItemPreviewPanel.Controls.Add(this.panel3);
             this.ItemPreviewPanel.Controls.Add(this.RemainingQuantity);
             this.ItemPreviewPanel.Controls.Add(this.label7);
             this.ItemPreviewPanel.Controls.Add(this.MinusQuantityBtn);
@@ -108,11 +111,22 @@
             this.ItemPreviewPanel.Size = new System.Drawing.Size(530, 209);
             this.ItemPreviewPanel.TabIndex = 40;
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(530, 2);
+            this.panel3.TabIndex = 60;
+            // 
             // RemainingQuantity
             // 
             this.RemainingQuantity.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RemainingQuantity.ForeColor = System.Drawing.Color.Black;
-            this.RemainingQuantity.Location = new System.Drawing.Point(303, 106);
+            this.RemainingQuantity.Location = new System.Drawing.Point(303, 107);
             this.RemainingQuantity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.RemainingQuantity.Name = "RemainingQuantity";
             this.RemainingQuantity.Size = new System.Drawing.Size(216, 21);
@@ -124,7 +138,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(174, 106);
+            this.label7.Location = new System.Drawing.Point(174, 107);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 21);
@@ -145,7 +159,7 @@
             this.MinusQuantityBtn.IconColor = System.Drawing.Color.White;
             this.MinusQuantityBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MinusQuantityBtn.IconSize = 25;
-            this.MinusQuantityBtn.Location = new System.Drawing.Point(496, 129);
+            this.MinusQuantityBtn.Location = new System.Drawing.Point(496, 130);
             this.MinusQuantityBtn.Margin = new System.Windows.Forms.Padding(2);
             this.MinusQuantityBtn.Name = "MinusQuantityBtn";
             this.MinusQuantityBtn.Size = new System.Drawing.Size(34, 32);
@@ -167,7 +181,7 @@
             this.AddQuantityBtn.IconColor = System.Drawing.Color.White;
             this.AddQuantityBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.AddQuantityBtn.IconSize = 25;
-            this.AddQuantityBtn.Location = new System.Drawing.Point(452, 129);
+            this.AddQuantityBtn.Location = new System.Drawing.Point(452, 130);
             this.AddQuantityBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddQuantityBtn.Name = "AddQuantityBtn";
             this.AddQuantityBtn.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
@@ -193,7 +207,7 @@
             // 
             this.Price.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Price.ForeColor = System.Drawing.Color.Black;
-            this.Price.Location = new System.Drawing.Point(303, 46);
+            this.Price.Location = new System.Drawing.Point(303, 47);
             this.Price.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Price.Name = "Price";
             this.Price.Size = new System.Drawing.Size(216, 21);
@@ -204,7 +218,7 @@
             // 
             this.Category.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Category.ForeColor = System.Drawing.Color.Black;
-            this.Category.Location = new System.Drawing.Point(303, 76);
+            this.Category.Location = new System.Drawing.Point(303, 77);
             this.Category.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Category.Name = "Category";
             this.Category.Size = new System.Drawing.Size(216, 21);
@@ -215,7 +229,7 @@
             // 
             this.Quantity.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Quantity.ForeColor = System.Drawing.Color.Black;
-            this.Quantity.Location = new System.Drawing.Point(303, 136);
+            this.Quantity.Location = new System.Drawing.Point(303, 137);
             this.Quantity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Quantity.Name = "Quantity";
             this.Quantity.Size = new System.Drawing.Size(137, 21);
@@ -228,17 +242,17 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel2.Location = new System.Drawing.Point(296, 10);
+            this.panel2.Location = new System.Drawing.Point(296, 2);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(2, 200);
+            this.panel2.Size = new System.Drawing.Size(2, 206);
             this.panel2.TabIndex = 52;
             // 
             // ItemName
             // 
             this.ItemName.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ItemName.ForeColor = System.Drawing.Color.Black;
-            this.ItemName.Location = new System.Drawing.Point(303, 16);
+            this.ItemName.Location = new System.Drawing.Point(303, 17);
             this.ItemName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ItemName.Name = "ItemName";
             this.ItemName.Size = new System.Drawing.Size(216, 21);
@@ -274,7 +288,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(174, 136);
+            this.label5.Location = new System.Drawing.Point(174, 137);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 21);
@@ -287,7 +301,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(174, 76);
+            this.label4.Location = new System.Drawing.Point(174, 77);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 21);
@@ -300,7 +314,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(174, 46);
+            this.label3.Location = new System.Drawing.Point(174, 47);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 21);
@@ -313,7 +327,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(174, 16);
+            this.label2.Location = new System.Drawing.Point(174, 17);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 21);
@@ -324,7 +338,7 @@
             // ItemImage
             // 
             this.ItemImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
-            this.ItemImage.Location = new System.Drawing.Point(0, 8);
+            this.ItemImage.Location = new System.Drawing.Point(0, 9);
             this.ItemImage.Name = "ItemImage";
             this.ItemImage.Size = new System.Drawing.Size(169, 156);
             this.ItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -387,10 +401,21 @@
             this.label1.Location = new System.Drawing.Point(12, 45);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 26);
+            this.label1.Size = new System.Drawing.Size(168, 26);
             this.label1.TabIndex = 44;
-            this.label1.Text = "Select Item";
+            this.label1.Text = "Select item below";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel5.Location = new System.Drawing.Point(12, 74);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(530, 2);
+            this.panel5.TabIndex = 51;
             // 
             // SellItem
             // 
@@ -398,6 +423,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(554, 432);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.SellBtn);
@@ -444,5 +470,7 @@
         private FontAwesome.Sharp.IconButton AddQuantityBtn;
         private Label label7;
         private Label RemainingQuantity;
+        private Panel panel3;
+        private Panel panel5;
     }
 }

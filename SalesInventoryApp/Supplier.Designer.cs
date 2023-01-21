@@ -98,10 +98,10 @@
             this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ActionLabel.ForeColor = System.Drawing.Color.White;
-            this.ActionLabel.Location = new System.Drawing.Point(825, 72);
+            this.ActionLabel.Location = new System.Drawing.Point(806, 72);
             this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ActionLabel.Name = "ActionLabel";
-            this.ActionLabel.Size = new System.Drawing.Size(70, 33);
+            this.ActionLabel.Size = new System.Drawing.Size(109, 33);
             this.ActionLabel.TabIndex = 26;
             this.ActionLabel.Text = "Action";
             this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

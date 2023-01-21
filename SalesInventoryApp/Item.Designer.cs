@@ -42,6 +42,8 @@
             this.AddItemBtn = new FontAwesome.Sharp.IconButton();
             this.ActionLabel = new System.Windows.Forms.Label();
             this.ItemTable = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.ColumnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,8 +51,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ItemTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,10 +99,10 @@
             this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ActionLabel.ForeColor = System.Drawing.Color.White;
-            this.ActionLabel.Location = new System.Drawing.Point(825, 72);
+            this.ActionLabel.Location = new System.Drawing.Point(806, 72);
             this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ActionLabel.Name = "ActionLabel";
-            this.ActionLabel.Size = new System.Drawing.Size(70, 33);
+            this.ActionLabel.Size = new System.Drawing.Size(109, 33);
             this.ActionLabel.TabIndex = 32;
             this.ActionLabel.Text = "Action";
             this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -199,6 +199,28 @@
             this.ItemTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemTable_CellMouseEnter);
             this.ItemTable.SelectionChanged += new System.EventHandler(this.ItemTable_SelectionChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel1.Location = new System.Drawing.Point(17, 51);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(899, 2);
+            this.panel1.TabIndex = 30;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(18, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 37);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Item";
+            // 
             // ColumnImage
             // 
             this.ColumnImage.HeaderText = "Image";
@@ -282,28 +304,6 @@
             this.ColumnDelete.ReadOnly = true;
             this.ColumnDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnDelete.Width = 55;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel1.Location = new System.Drawing.Point(17, 51);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 2);
-            this.panel1.TabIndex = 30;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(18, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 37);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Item";
             // 
             // Item
             // 

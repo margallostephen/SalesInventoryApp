@@ -1,6 +1,5 @@
 ﻿using FontAwesome.Sharp;
 using MySqlConnector;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace SalesInventoryApp
@@ -84,7 +83,7 @@ namespace SalesInventoryApp
         {
             if (currentChildForm != ChildForm)
             {
-                currentChildForm?.Hide();
+                currentChildForm?.Close();
                 currentChildForm = ChildForm;
                 currentChildForm.Dock = DockStyle.Fill;
                 currentChildForm.TopLevel = false;
@@ -96,21 +95,21 @@ namespace SalesInventoryApp
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            inventoryForm ??= new() { connection = connection };
+            inventoryForm = new() { connection = connection };
             OpenChildForm(inventoryForm);
         }
 
         private void SalesBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            salesForm ??= new() { connection = connection };
+            salesForm = new() { connection = connection };
             OpenChildForm(salesForm);
         }
 
         private void DeliveryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            deliveryForm??= new() { connection = connection };
+            deliveryForm = new() { connection = connection };
             OpenChildForm(deliveryForm);
         }
 
@@ -121,25 +120,25 @@ namespace SalesInventoryApp
 
         private void UserBtn_Click(object sender, EventArgs e)
         {
-            userForm ??= new() { connection = connection };
+            userForm = new() { connection = connection };
             OpenChildForm(userForm);
         }
 
         private void CategoryBtn_Click(object sender, EventArgs e)
         {
-            categoryForm ??= new() { connection = connection };
+            categoryForm = new() { connection = connection };
             OpenChildForm(categoryForm);
         }
 
         private void SupplierBtn_Click(object sender, EventArgs e)
         {
-            supplierForm ??= new() { connection = connection };
+            supplierForm = new() { connection = connection };
             OpenChildForm(supplierForm);
         }
 
         private void ItemBtn_Click(object sender, EventArgs e)
         {
-            itemForm ??= new() { connection = connection };
+            itemForm = new() { connection = connection };
             OpenChildForm(itemForm);
         }
 
@@ -173,7 +172,9 @@ namespace SalesInventoryApp
                     query = "SELECT * FROM items ORDER BY id ASC";
                     break;
                 case "InventoryTable":
-                    query = "SELECT items.id, items.name, inventory_stocks.quantity FROM items INNER JOIN inventory_stocks ON items.id = inventory_stocks.item_id ORDER BY id ASC";
+                    query = "SELECT items.id, items.name, inventory_stocks.quantity " +
+                             "FROM items INNER JOIN inventory_stocks ON items.id = inventory_stocks.item_id " +
+                             "ORDER BY id ASC";
                     break;
                 case "SalesTable":
                     query = "SELECT * FROM sales ORDER BY id ASC";
@@ -235,27 +236,7 @@ namespace SalesInventoryApp
         public static void DisposePrompt(DialogResult result, Form promptForm, DataGridView formTable, Label actionLabel, Label noLabel, MySqlConnection connection)
         {
             if (result == DialogResult.OK)
-            {
                 LoadTableRecord(formTable, actionLabel, noLabel, connection);
-
-                string promptFormName = promptForm.Name.ToString();
-
-                if (promptFormName == "CategoryPrompt")
-                {
-                    Item itemForm = FindForm("Item") as Item;
-
-                    if (itemForm != null)
-                        LoadTableRecord(itemForm.ItemTable, itemForm.ActionLabel, itemForm.NoLabel, connection);
-                }
-
-                if (promptFormName == "SellItem" || promptFormName == "ItemPrompt")
-                {
-                    Inventory invetoryForm = Dashboard.FindForm("Inventory") as Inventory;
-
-                    if (invetoryForm != null)
-                        LoadTableRecord(invetoryForm.InventoryTable, null, invetoryForm.NoLabel, connection);
-                }
-            }
 
             if (result == DialogResult.OK || result == DialogResult.Cancel)
                 promptForm.Dispose();
@@ -294,17 +275,6 @@ namespace SalesInventoryApp
                 formTable.FirstDisplayedScrollingRowIndex--;
             else if (e.Delta < 0 && formTable.FirstDisplayedScrollingRowIndex < formTable.RowCount - 1)
                 formTable.FirstDisplayedScrollingRowIndex++;
-        }
-
-        public static Form FindForm(string formName)
-        {
-            FormCollection forms = Application.OpenForms;
-
-            foreach (Form form in forms)
-                if (form.Name == formName)
-                    return form;
-
-            return null;
         }
 
         public static Image ByteToImage(byte[] imageByte)

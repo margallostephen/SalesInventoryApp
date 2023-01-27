@@ -21,7 +21,11 @@ namespace SalesInventoryApp
         {
             connection.Open();
 
-            using (MySqlCommand command = new("SELECT items.image, items.id FROM inventory_stocks INNER JOIN items ON inventory_stocks.item_id = items.id WHERE quantity > 0 ORDER BY item_id ASC", connection))
+            using (MySqlCommand command = new(
+                "SELECT items.image, items.id " +
+                "FROM inventory_stocks " +
+                "INNER JOIN items ON inventory_stocks.item_id = items.id " +
+                "WHERE quantity > 0 ORDER BY item_id ASC", connection))
             {
                 using MySqlDataReader dataReader = command.ExecuteReader();
 
@@ -46,7 +50,7 @@ namespace SalesInventoryApp
             if (ItemSelectionPanel.Controls.OfType<PictureBox>().Count() > 5)
             {
                 ItemSelectionPanel.Height = 118;
-                Height = 449;
+                Height = 452;
                 ItemPreviewPanel.Location = new Point(12, 194);
             }
         }
@@ -97,8 +101,6 @@ namespace SalesInventoryApp
                     TotalAmount.Text = ComputePrice();
                 }
             }
-            else
-                Dashboard.ShowMessage(this, salesForm, "Warning", "Please select an item.", DialogResult);
         }
 
         private void MinusQuantityBtn_Click(object sender, EventArgs e)

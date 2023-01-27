@@ -20,6 +20,7 @@ namespace SalesInventoryApp
 
         private void AddUserBtn_Click(object sender, EventArgs e)
         {
+            Dashboard.MinimizedSideBar();
             UserPrompt userPrompt = new("Add", this) { connection = connection };
             DialogResult result = userPrompt.ShowDialog(this);
             Dashboard.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
@@ -41,6 +42,7 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
+                Dashboard.MinimizedSideBar();
                 Dashboard.SelectedRowChangeColor(UserTable, true);
                 UserPrompt userPrompt;
 

@@ -9,6 +9,7 @@ namespace SalesInventoryApp
         public MySqlConnection connection { get; set; }
         private readonly Item itemForm;
         private Dictionary<int, string> category = new();
+        private Dictionary<int, string> supplier = new();
         private Boolean imageChange = false;
 
         public ItemPrompt(string operation, Item itemForm)
@@ -24,8 +25,10 @@ namespace SalesInventoryApp
                     BtnOne.Text = "Save";
                     Quantity.Visible = false;
                     panel3.Visible = false;
-                    Price.Width = 217;
-                    panel2.Width = 222;
+                    Price.Width = 215;
+                    Price.Location = new Point(125, 115);
+                    panel2.Width = 220;
+                    panel2.Location = new Point(123, 139);
                 } 
                 else if (operation == "ViewImage")
                 {
@@ -35,7 +38,7 @@ namespace SalesInventoryApp
                     ItemImage.Size = new Size(243, 204);
                     BtnOne.Visible = false;
                     BtnTwo.Text = "Close";
-                    BtnTwo.Location = new Point(100, 263);
+                    BtnTwo.Location = new Point(100, 264);
                 }
 
                 MessagePanel.Visible = false;
@@ -65,6 +68,7 @@ namespace SalesInventoryApp
             bool alreadyExist = false,
                  imageNull = ItemImage.Image == null,
                  categoryNull = Category.Text == "",
+                 supplierNull = Supplier.Text == "",
                  itemNull = string.IsNullOrWhiteSpace(itemName),
                  priceNull = string.IsNullOrWhiteSpace(price),
                  quantityNull = string.IsNullOrWhiteSpace(quantity),
@@ -79,7 +83,8 @@ namespace SalesInventoryApp
             {
                 if (BtnOne.Text != "Yes")
                 {
-                    if (!imageNull && !categoryNull && !itemNull && !priceNull && (quantityNull && BtnOne.Text == "Save" || !quantityNull && BtnOne.Text == "Add"))
+                    if (!imageNull && !categoryNull && !supplierNull && !itemNull && !priceNull &&
+                       (quantityNull && BtnOne.Text == "Save" || !quantityNull && BtnOne.Text == "Add"))
                     {
                         using (MySqlCommand getAllItems = new("SELECT * FROM items", connection))
                         {
@@ -111,13 +116,13 @@ namespace SalesInventoryApp
 
                                 if (BtnOne.Text == "Add")
                                 {
-                                    command.CommandText = "INSERT INTO items(image, name, category_id, price) VALUES(?, ?, ?, ?)";
+                                    command.CommandText = "INSERT INTO items(image, name, category_id, price, supplier_id) VALUES(?, ?, ?, ?, ?)";
                                     message = "New item added successfully.";
                                     itemImage = ConvertImageToByte();
                                 }
                                 else
                                 {
-                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? WHERE id = ?";
+                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? supplier_id = ? WHERE id = ?";
                                     message = "Item " + itemForm.selectedRowItem + " updated successfully.";
 
                                     if (imageChange)
@@ -130,6 +135,7 @@ namespace SalesInventoryApp
                                 command.Parameters.Add("itemName", (DbType)SqlDbType.VarChar).Value = itemName;
                                 command.Parameters.Add("categoryId", (DbType)SqlDbType.Int).Value = Convert.ToInt32(Category.Text);
                                 command.Parameters.Add("price", (DbType)SqlDbType.Decimal).Value = Convert.ToDecimal(price);
+                                command.Parameters.Add("supplierId", (DbType)SqlDbType.Int).Value = Convert.ToInt32(Supplier.Text);
 
                                 if (BtnOne.Text == "Save")
                                     command.Parameters.Add("id", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowItemId;
@@ -143,54 +149,12 @@ namespace SalesInventoryApp
                     {
                         info = "Warning";
 
-                        if (imageNull && categoryNull && itemNull && priceNull && quantityNull)
-                            message = "Please fill all the required fields.";
-                        else if (imageNull && categoryNull && itemNull && priceNull)
-                            message = "Please select picture and a category, then input the item name and price.";
-                        else if (imageNull && categoryNull && itemNull && quantityNull)
-                            message = "Please select picture and a category, then input the item name and quantity.";
-                        else if (imageNull && categoryNull && priceNull && quantityNull)
-                            message = "Please select picture and a category, then input the price and quantity.";
-                        else if (imageNull && itemNull && priceNull && quantityNull)
-                            message = "Please select a picture, then input the item name, price, and quantity.";
-                        else if (categoryNull && itemNull && priceNull && quantityNull)
-                            message = "Please select a category, then input the item name, price, and quantity.";
-                        else if (imageNull && categoryNull && itemNull)
-                            message = "Please select picture and a category, then input the item name.";
-                        else if (imageNull && categoryNull && priceNull)
-                            message = "Please select picture and a category, then input the price.";
-                        else if (imageNull && categoryNull && quantityNull)
-                            message = "Please select picture and a category, then input the quantity.";
-                        else if (categoryNull && itemNull && priceNull)
-                            message = "Please select a category, then input the item name and price.";
-                        else if (categoryNull && itemNull && quantityNull)
-                            message = "Please select a category, then input the item name and quantity.";
-                        else if (itemNull && priceNull && quantityNull)
-                            message = "Please input the item name, price, and quantity.";
-                        else if (imageNull && categoryNull)
-                            message = "Please select picture and a category.";
-                        else if (imageNull && itemNull)
-                            message = "Please select picture and input the item name.";
-                        else if (imageNull && priceNull)
-                            message = "Please select picture and input the price.";
-                        else if (imageNull && quantityNull)
-                            message = "Please select picture and input the quantity.";
-                        else if (categoryNull && itemNull)
-                            message = "Please select category and input the item name.";
-                        else if (categoryNull && priceNull)
-                            message = "Please select category and input the price.";
-                        else if (categoryNull && quantityNull)
-                            message = "Please select category and input the quantity.";
-                        else if (itemNull && priceNull)
-                            message = "Please input the item name and price.";
-                        else if (itemNull && quantityNull)
-                            message = "Please input the item name and quantity.";
-                        else if (priceNull && quantityNull)
-                            message = "Please input the price and quantity.";
-                        else if (imageNull)
+                        if (imageNull)
                             message = "Please select a picture.";
                         else if (categoryNull)
                             message = "Please select a category.";
+                        else if (supplierNull)
+                            message = "Please select a supplier.";
                         else if (itemNull)
                             message = "Please input an item name.";
                         else if (priceNull)
@@ -243,14 +207,7 @@ namespace SalesInventoryApp
                 using OpenFileDialog selectPic = new();
                 selectPic.Filter = "Image Files(*.jpg; *.jpeg; *.png; *.jfif;) | *.jpg; *.jpeg; *.png; *.jfif;";
 
-                FormCollection forms = Application.OpenForms;
-                Dashboard dashboard = null;
-
-                foreach (Form form in forms)
-                    if (form.Name == "Dashboard")
-                        dashboard = (Dashboard)form;
-
-                if (selectPic.ShowDialog(dashboard) == DialogResult.OK)
+                if (selectPic.ShowDialog(Dashboard.FindForm("Dashboard")) == DialogResult.OK)
                 {
                     ItemImage.Image = new Bitmap(selectPic.FileName);
                     imageChange = true;
@@ -265,17 +222,17 @@ namespace SalesInventoryApp
             return ms.GetBuffer();
         }
 
-        private void BindSource()
+        private void BindSource(ComboBox comboBox, Dictionary<int, string> source)
         {
-            ComboBox.DataSource = new BindingSource(category, null);
-            ComboBox.ValueMember = "Key";
-            ComboBox.DisplayMember = "Value";
+            comboBox.DataSource = new BindingSource(source, null);
+            comboBox.ValueMember = "Key";
+            comboBox.DisplayMember = "Value";
         }
 
-        private string ComboBoxFindValue(int categoryId)
+        private string ComboBoxFindValue(int id, Dictionary<int, string> keyValuePairs)
         { 
-            foreach (KeyValuePair<int, string> items in category)
-                if (items.Key == categoryId)
+            foreach (KeyValuePair<int, string> items in keyValuePairs)
+                if (items.Key == id)
                     return items.Value;
 
             return "Not Found";
@@ -283,59 +240,98 @@ namespace SalesInventoryApp
 
         private void ItemPrompt_Load(object sender, EventArgs e)
         {
-            ComboBox.Items.Clear();
             connection.Open();
 
-            using (MySqlCommand command = new("SELECT id, name FROM item_category ORDER BY id ASC", connection))
+            string[] queryTable = { "item_category", "supplier" };
+            int[] selectedId = { itemForm.selectedRowCategoryId, itemForm.selectedRowSupplierId };
+            Dictionary<int, string>[] keyValuePairs = { category, supplier };
+            ComboBox[] comboBox = { CategoryComboBox, SupplierComboBox };
+            TextBox[] textBox = { Category, Supplier };
+
+            for (int i = 0; i < 2; i++)
             {
-                using MySqlDataReader dataReader = command.ExecuteReader();
-
-                while (dataReader.Read())
-                    category.Add((int)dataReader[0], dataReader[1].ToString());
-            }
-            
-            connection.Close();
-            category.Add(-1, "Select a category");
-            BindSource();
-
-            if (BtnOne.Text == "Save")
-            {
-                string value = ComboBoxFindValue(itemForm.selectedRowCategoryId);
-
-                if (value != "Not Found")
+                using (MySqlCommand command = new("SELECT id, name FROM " + queryTable[i] + " ORDER BY id ASC", connection))
                 {
-                    ComboBox.Text = value;
-                    Category.Text = itemForm.selectedRowCategoryId.ToString();
+                    using MySqlDataReader dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                        keyValuePairs[i].Add((int)dataReader[0], dataReader[1].ToString());
                 }
+
+                keyValuePairs[i].Add(-1, "Select a " + textBox[i].Name.ToLower());
+                BindSource(comboBox[i], keyValuePairs[i]);
+
+                if (BtnOne.Text == "Save")
+                {
+                    string value = ComboBoxFindValue(selectedId[i], keyValuePairs[i]);
+
+                    if (value != "Not Found")
+                    {
+                        comboBox[i].Text = value;
+                        textBox[i].Text = selectedId[i].ToString();
+                    }
+                }
+                else
+                    comboBox[i].SelectedIndex = comboBox[i].Items.Count - 1;
             }
-            else
-                ComboBox.SelectedIndex = ComboBox.Items.Count - 1;
+
+            connection.Close();
         }
 
-        private void ComboBox_DropDown(object sender, EventArgs e)
+        private void RemoveLabel(ComboBox comboBox, Dictionary<int, string> source)
         {
-            if (category.ContainsKey(-1))
+            if (source.ContainsKey(-1))
             {
-                ComboBox.SelectedIndex = 0;
-                ComboBox.DataSource = null;
-                category.Remove(-1);
-                BindSource();
+                comboBox.SelectedIndex = 0;
+                comboBox.DataSource = null;
+                source.Remove(-1);
+                BindSource(comboBox, source);
             }
         }
 
-        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        private void AddLabel(TextBox textBox, ComboBox comboBox, Dictionary<int, string> source)
         {
-            if (string.IsNullOrWhiteSpace(Category.Text))
+            if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                category.Add(-1, "Select a category");
-                BindSource();
-                ComboBox.SelectedIndex = ComboBox.Items.Count - 1;
+                source.Add(-1, "Select a " + textBox.Name.ToLower());
+                BindSource(comboBox, source);
+                comboBox.SelectedIndex = comboBox.Items.Count - 1;
             }
         }
 
-        private void ComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private string SelectItem(ComboBox comboBox)
         {
-            Category.Text = ((KeyValuePair<int, string>)ComboBox.SelectedItem).Key.ToString();
+            return ((KeyValuePair<int, string>)comboBox.SelectedItem).Key.ToString();
+        }
+
+        private void CategoryComboBox_DropDown(object sender, EventArgs e)
+        {
+            RemoveLabel(CategoryComboBox, category);
+        }
+
+        private void CategoryComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            AddLabel(Category, CategoryComboBox, category);
+        }
+
+        private void CategoryComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Category.Text = SelectItem(CategoryComboBox);
+        }
+
+        private void SupplierComboBox_DropDown(object sender, EventArgs e)
+        {
+            RemoveLabel(SupplierComboBox, supplier);
+        }
+
+        private void SupplierComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            AddLabel(Supplier, SupplierComboBox, supplier);
+        }
+
+        private void SupplierComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Supplier.Text = SelectItem(SupplierComboBox);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace SalesInventoryApp
             activeBtnPanel = new Panel
             {
                 Size = new Size(4, 51),
-                BackColor = Color.White
+                BackColor = Color.FromArgb(235, 230, 255),
             };
 
             SideBar.Controls.Add(activeBtnPanel);
@@ -79,17 +79,14 @@ namespace SalesInventoryApp
                 MaintenanceSubMenu.Visible = true;
         }
 
-        private void OpenChildForm(Form ChildForm)
+        public void OpenChildForm(Form ChildForm)
         {
-            if (currentChildForm != ChildForm)
-            {
-                currentChildForm?.Close();
-                currentChildForm = ChildForm;
-                currentChildForm.Dock = DockStyle.Fill;
-                currentChildForm.TopLevel = false;
-                MainPanel.Controls.Add(currentChildForm);
-                currentChildForm.Show();
-            }
+            currentChildForm?.Close();
+            currentChildForm = ChildForm;
+            currentChildForm.Dock = DockStyle.Fill;
+            currentChildForm.TopLevel = false;
+            MainPanel.Controls.Add(currentChildForm);
+            currentChildForm.Show();
         }
 
         private void InventoryBtn_Click(object sender, EventArgs e)
@@ -208,10 +205,12 @@ namespace SalesInventoryApp
                         case "SupplierTable":
                             formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3]);
                             break;
-                        case "ItemTable":
                         case "SalesTable":
                         case "DeliveryTable":
                             formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3], dataReader[4]);
+                            break;
+                        case "ItemTable":
+                            formTable.Rows.Add(dataReader[0], dataReader[1], dataReader[2], dataReader[3], dataReader[4], dataReader[5]);
                             break;
                     }
                 }
@@ -275,6 +274,25 @@ namespace SalesInventoryApp
                 formTable.FirstDisplayedScrollingRowIndex--;
             else if (e.Delta < 0 && formTable.FirstDisplayedScrollingRowIndex < formTable.RowCount - 1)
                 formTable.FirstDisplayedScrollingRowIndex++;
+        }
+
+        public static Form FindForm(string formName)
+        {
+            FormCollection forms = Application.OpenForms;
+
+            foreach (Form form in forms)
+                if (form.Name == formName)
+                    return form;
+
+            return null;
+        }
+
+        public static void MinimizedSideBar()
+        {
+            Dashboard dashboardForm = Dashboard.FindForm("Dashboard") as Dashboard;
+
+            if (dashboardForm.SideBar.Width == 211)
+                dashboardForm.MenuBtn.PerformClick();
         }
 
         public static Image ByteToImage(byte[] imageByte)

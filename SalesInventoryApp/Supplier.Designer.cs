@@ -63,7 +63,7 @@
             this.NoLabel.Location = new System.Drawing.Point(28, 114);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(877, 312);
+            this.NoLabel.Size = new System.Drawing.Size(718, 312);
             this.NoLabel.TabIndex = 28;
             this.NoLabel.Text = "No Supplier";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,7 +81,7 @@
             this.AddSupplierBtn.IconColor = System.Drawing.Color.White;
             this.AddSupplierBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.AddSupplierBtn.IconSize = 35;
-            this.AddSupplierBtn.Location = new System.Drawing.Point(762, 454);
+            this.AddSupplierBtn.Location = new System.Drawing.Point(603, 454);
             this.AddSupplierBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddSupplierBtn.Name = "AddSupplierBtn";
             this.AddSupplierBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -98,10 +98,10 @@
             this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ActionLabel.ForeColor = System.Drawing.Color.White;
-            this.ActionLabel.Location = new System.Drawing.Point(806, 72);
+            this.ActionLabel.Location = new System.Drawing.Point(654, 72);
             this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ActionLabel.Name = "ActionLabel";
-            this.ActionLabel.Size = new System.Drawing.Size(109, 33);
+            this.ActionLabel.Size = new System.Drawing.Size(99, 33);
             this.ActionLabel.TabIndex = 26;
             this.ActionLabel.Text = "Action";
             this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,7 +117,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.SupplierTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.SupplierTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -190,7 +190,7 @@
             this.SupplierTable.ShowCellToolTips = false;
             this.SupplierTable.ShowEditingIcon = false;
             this.SupplierTable.ShowRowErrors = false;
-            this.SupplierTable.Size = new System.Drawing.Size(899, 366);
+            this.SupplierTable.Size = new System.Drawing.Size(740, 366);
             this.SupplierTable.TabIndex = 25;
             this.SupplierTable.TabStop = false;
             this.SupplierTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SupplierTable_CellContentClick);
@@ -212,22 +212,23 @@
             // 
             // Column2
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.FillWeight = 183.5052F;
             this.Column2.HeaderText = "Name";
-            this.Column2.MinimumWidth = 150;
+            this.Column2.MinimumWidth = 180;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 180;
             // 
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.HeaderText = "Address";
-            this.Column3.MinimumWidth = 150;
+            this.Column3.MinimumWidth = 230;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -235,13 +236,14 @@
             // 
             // Column4
             // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Column4.HeaderText = "Contact Number";
-            this.Column4.MinimumWidth = 135;
+            this.Column4.MinimumWidth = 130;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column4.Width = 135;
+            this.Column4.Width = 130;
             // 
             // ColumnEdit
             // 
@@ -283,7 +285,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 2);
+            this.panel1.Size = new System.Drawing.Size(740, 2);
             this.panel1.TabIndex = 24;
             // 
             // label1
@@ -302,7 +304,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(932, 518);
+            this.ClientSize = new System.Drawing.Size(773, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.AddSupplierBtn);
             this.Controls.Add(this.ActionLabel);

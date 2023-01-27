@@ -22,6 +22,7 @@ namespace SalesInventoryApp
 
         private void AddCategoryBtn_Click(object sender, EventArgs e)
         {
+            Dashboard.MinimizedSideBar();
             CategoryPrompt categoryPrompt = new("Add", this) { connection = connection };
             DialogResult result = categoryPrompt.ShowDialog(this);
             Dashboard.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
@@ -43,8 +44,8 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
+                Dashboard.MinimizedSideBar();
                 Dashboard.SelectedRowChangeColor(CategoryTable, true);
-
                 CategoryPrompt categoryPrompt;
 
                 if (columnName == "ColumnEdit")
@@ -64,8 +65,8 @@ namespace SalesInventoryApp
                     {
                         connection.Close();
                         categoryPrompt = null;
-                        Message messageform = new("Error", "This category cannot be deleted because there are items in it.");
-                        messageform.ShowDialog(this);
+                        Message messageForm = new("Error", "This category cannot be deleted because there are items in it.");
+                        messageForm.ShowDialog(this);
                     }
                     else
                     {

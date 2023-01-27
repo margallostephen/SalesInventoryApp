@@ -39,13 +39,13 @@
             this.NoLabel = new System.Windows.Forms.Label();
             this.SelItemBtn = new FontAwesome.Sharp.IconButton();
             this.SalesTable = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SalesTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@
             this.NoLabel.Location = new System.Drawing.Point(28, 114);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(877, 312);
+            this.NoLabel.Size = new System.Drawing.Size(718, 312);
             this.NoLabel.TabIndex = 40;
             this.NoLabel.Text = "No Sales";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -77,7 +77,7 @@
             this.SelItemBtn.IconColor = System.Drawing.Color.White;
             this.SelItemBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.SelItemBtn.IconSize = 35;
-            this.SelItemBtn.Location = new System.Drawing.Point(762, 454);
+            this.SelItemBtn.Location = new System.Drawing.Point(603, 454);
             this.SelItemBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SelItemBtn.Name = "SelItemBtn";
             this.SelItemBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -171,31 +171,9 @@
             this.SalesTable.ShowCellToolTips = false;
             this.SalesTable.ShowEditingIcon = false;
             this.SalesTable.ShowRowErrors = false;
-            this.SalesTable.Size = new System.Drawing.Size(899, 366);
+            this.SalesTable.Size = new System.Drawing.Size(740, 366);
             this.SalesTable.TabIndex = 37;
             this.SalesTable.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel1.Location = new System.Drawing.Point(17, 51);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 2);
-            this.panel1.TabIndex = 36;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(18, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 37);
-            this.label1.TabIndex = 35;
-            this.label1.Text = "Sales";
             // 
             // Column1
             // 
@@ -252,12 +230,34 @@
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel1.Location = new System.Drawing.Point(17, 51);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.TabIndex = 36;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(18, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 37);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Sales";
+            // 
             // Sales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(932, 518);
+            this.ClientSize = new System.Drawing.Size(773, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.SelItemBtn);
             this.Controls.Add(this.SalesTable);

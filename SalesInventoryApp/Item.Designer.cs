@@ -49,6 +49,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ItemTable)).BeginInit();
@@ -64,7 +65,7 @@
             this.NoLabel.Location = new System.Drawing.Point(28, 114);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(877, 312);
+            this.NoLabel.Size = new System.Drawing.Size(718, 312);
             this.NoLabel.TabIndex = 34;
             this.NoLabel.Text = "No Item";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -82,7 +83,7 @@
             this.AddItemBtn.IconColor = System.Drawing.Color.White;
             this.AddItemBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.AddItemBtn.IconSize = 35;
-            this.AddItemBtn.Location = new System.Drawing.Point(762, 454);
+            this.AddItemBtn.Location = new System.Drawing.Point(603, 454);
             this.AddItemBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddItemBtn.Name = "AddItemBtn";
             this.AddItemBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -99,10 +100,10 @@
             this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ActionLabel.ForeColor = System.Drawing.Color.White;
-            this.ActionLabel.Location = new System.Drawing.Point(806, 72);
+            this.ActionLabel.Location = new System.Drawing.Point(647, 72);
             this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ActionLabel.Name = "ActionLabel";
-            this.ActionLabel.Size = new System.Drawing.Size(109, 33);
+            this.ActionLabel.Size = new System.Drawing.Size(105, 33);
             this.ActionLabel.TabIndex = 32;
             this.ActionLabel.Text = "Action";
             this.ActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -141,6 +142,7 @@
             this.Column2,
             this.Column3,
             this.Column4,
+            this.Column5,
             this.ColumnEdit,
             this.ColumnDelete});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -192,7 +194,7 @@
             this.ItemTable.ShowCellToolTips = false;
             this.ItemTable.ShowEditingIcon = false;
             this.ItemTable.ShowRowErrors = false;
-            this.ItemTable.Size = new System.Drawing.Size(899, 366);
+            this.ItemTable.Size = new System.Drawing.Size(740, 366);
             this.ItemTable.TabIndex = 31;
             this.ItemTable.TabStop = false;
             this.ItemTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemTable_CellContentClick);
@@ -207,7 +209,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 2);
+            this.panel1.Size = new System.Drawing.Size(740, 2);
             this.panel1.TabIndex = 30;
             // 
             // label1
@@ -225,11 +227,11 @@
             // 
             this.ColumnImage.HeaderText = "Image";
             this.ColumnImage.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.ColumnImage.MinimumWidth = 65;
+            this.ColumnImage.MinimumWidth = 60;
             this.ColumnImage.Name = "ColumnImage";
             this.ColumnImage.ReadOnly = true;
             this.ColumnImage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnImage.Width = 65;
+            this.ColumnImage.Width = 60;
             // 
             // Column1
             // 
@@ -237,10 +239,12 @@
             this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.FillWeight = 16.49484F;
             this.Column1.HeaderText = "Item ID";
-            this.Column1.MinimumWidth = 100;
+            this.Column1.MinimumWidth = 75;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 75;
             // 
             // Column2
             // 
@@ -258,21 +262,31 @@
             // Column3
             // 
             this.Column3.HeaderText = "Category ID";
-            this.Column3.MinimumWidth = 100;
+            this.Column3.MinimumWidth = 98;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column3.Width = 98;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "Price";
-            this.Column4.MinimumWidth = 115;
+            this.Column4.MinimumWidth = 100;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column4.Width = 115;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Supplier ID";
+            this.Column5.MinimumWidth = 91;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column5.Width = 91;
             // 
             // ColumnEdit
             // 
@@ -310,7 +324,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(932, 518);
+            this.ClientSize = new System.Drawing.Size(773, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.AddItemBtn);
             this.Controls.Add(this.ActionLabel);
@@ -341,6 +355,7 @@
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column5;
         private DataGridViewImageColumn ColumnEdit;
         private DataGridViewImageColumn ColumnDelete;
     }

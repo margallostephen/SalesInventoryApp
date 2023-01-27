@@ -374,7 +374,7 @@
             this.TopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopBar.Location = new System.Drawing.Point(52, 0);
             this.TopBar.Name = "TopBar";
-            this.TopBar.Size = new System.Drawing.Size(932, 43);
+            this.TopBar.Size = new System.Drawing.Size(1048, 43);
             this.TopBar.TabIndex = 1;
             this.TopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
             // 
@@ -391,7 +391,7 @@
             this.MinimizeBtn.IconColor = System.Drawing.Color.White;
             this.MinimizeBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.MinimizeBtn.IconSize = 20;
-            this.MinimizeBtn.Location = new System.Drawing.Point(910, 0);
+            this.MinimizeBtn.Location = new System.Drawing.Point(1026, 0);
             this.MinimizeBtn.Margin = new System.Windows.Forms.Padding(0);
             this.MinimizeBtn.Name = "MinimizeBtn";
             this.MinimizeBtn.Padding = new System.Windows.Forms.Padding(5, 0, 4, 0);
@@ -409,7 +409,7 @@
             this.ClockTime.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ClockTime.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ClockTime.ForeColor = System.Drawing.Color.White;
-            this.ClockTime.Location = new System.Drawing.Point(697, 11);
+            this.ClockTime.Location = new System.Drawing.Point(813, 11);
             this.ClockTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ClockTime.Name = "ClockTime";
             this.ClockTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -436,7 +436,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(52, 43);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(932, 518);
+            this.MainPanel.Size = new System.Drawing.Size(1048, 518);
             this.MainPanel.TabIndex = 2;
             // 
             // Time
@@ -449,13 +449,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 561);
+            this.ClientSize = new System.Drawing.Size(1100, 561);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.TopBar);
             this.Controls.Add(this.SideBar);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
@@ -470,8 +471,6 @@
         }
 
         #endregion
-
-        private Panel SideBar;
         private Panel panel2;
         private PictureBox Logo;
         private FontAwesome.Sharp.IconButton MenuBtn;
@@ -492,5 +491,6 @@
         private Label ClockTime;
         private System.Windows.Forms.Timer Time;
         private FontAwesome.Sharp.IconButton MinimizeBtn;
+        public Panel SideBar;
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using MySqlConnector;
+﻿using MySqlConnector;
 
 namespace SalesInventoryApp
 {
@@ -20,11 +19,14 @@ namespace SalesInventoryApp
 
         private void SelItemBtn_Click(object sender, EventArgs e)
         {
+            Dashboard.MinimizedSideBar();
             connection.Open();
             using MySqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM inventory_stocks";
             command.Prepare();
             using MySqlDataReader dataReader = command.ExecuteReader();
+
+            Message messageForm = null;
 
             if (dataReader.HasRows)
             {
@@ -32,30 +34,24 @@ namespace SalesInventoryApp
                 command.CommandText = "SELECT SUM(quantity) FROM inventory_stocks";
                 command.Prepare();
                 decimal quantity = (decimal)command.ExecuteScalar();
-                connection.Close();
-
-                SellItem sellPrompt;
 
                 if (quantity < 1)
-                {
-                    sellPrompt = null;
-                    Message messageform = new("Error", "All items are out of stock.");
-                    messageform.ShowDialog(this);
-                }
+                    messageForm = new("Error", "All items are out of stock.");
                 else
-                    sellPrompt = new(this) { connection = connection };
-
-                if (sellPrompt != null)
                 {
-                    DialogResult result = sellPrompt.ShowDialog(this);
+                    connection.Close();
+                    SellItem sellPrompt = new(this) { connection = connection };
+                    DialogResult result = sellPrompt.ShowDialog();
                     Dashboard.DisposePrompt(result, sellPrompt, SalesTable, null, NoLabel, connection);
                 }
             }
             else
+                messageForm = new("Warning", "No items are available. Please add first item.");
+
+            if (messageForm != null)
             {
                 connection.Close();
-                Message messageform = new("Warning", "No items are available. Please add first item.");
-                messageform.ShowDialog(this);
+                messageForm.ShowDialog(this);
             }
         }
 

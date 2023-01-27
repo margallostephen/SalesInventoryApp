@@ -6,7 +6,7 @@ namespace SalesInventoryApp
     public partial class Item : Form
     {
         public MySqlConnection connection { get; set; }
-        public int selectedRowItemId, selectedRowCategoryId;
+        public int selectedRowItemId, selectedRowCategoryId, selectedRowSupplierId;
         public string selectedRowItem, selectedRowBasePrice;
         public byte[] selectedItemImage;
 
@@ -31,27 +31,45 @@ namespace SalesInventoryApp
                 selectedRowItem = ItemTable[2, index].Value.ToString();
                 selectedRowCategoryId = Convert.ToInt32(ItemTable[3, index].Value);
                 selectedRowBasePrice = ItemTable[4, index].Value.ToString();
+                selectedRowSupplierId = Convert.ToInt32(ItemTable[5, index].Value);
             }
         }
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
-            connection.Open();
-            using MySqlCommand command = new("SELECT * FROM item_category", connection);
-            using MySqlDataReader dataReader = command.ExecuteReader();
+            Dashboard.MinimizedSideBar();
+            bool[] tableNotNull = { false, false };
+            string[] queryTable = { "item_category", "supplier" };
 
-            if (dataReader.HasRows)
+            connection.Open();
+
+            for (int i = 0; i < 2; i++)
+            {
+                using MySqlCommand command = new("SELECT * FROM " + queryTable[i], connection);
+                using MySqlDataReader dataReader = command.ExecuteReader();
+                tableNotNull[i] = dataReader.HasRows;
+            }
+
+            Message messageForm = null;
+
+            if (tableNotNull[0] && tableNotNull[1])
             {
                 connection.Close();
                 ItemPrompt itemPrompt = new("Add", this) { connection = connection };
                 DialogResult result = itemPrompt.ShowDialog(this);
                 Dashboard.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
             }
+            else if (!tableNotNull[0] && !tableNotNull[1])
+                messageForm = new("Warning", "There are no categories and suppliers. Please add a category and supplier first.");
+            else if (!tableNotNull[0])
+                messageForm = new("Warning", "There are no categories. Please add a category first.");
             else
+                messageForm = new("Warning", "There are no suppliers. Please add a supplier first.");
+
+            if (messageForm != null)
             {
                 connection.Close();
-                Message messageform = new("Warning", "There are no categories. Please add a category first.");
-                messageform.ShowDialog(this);
+                messageForm.ShowDialog(this);
             }
         }
 
@@ -61,6 +79,7 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete" || columnName == "ColumnImage")
             {
+                Dashboard.MinimizedSideBar();
                 Dashboard.SelectedRowChangeColor(ItemTable, true);
                 ItemPrompt itemPrompt;
 
@@ -83,8 +102,8 @@ namespace SalesInventoryApp
                     if (quantity > 0)
                     {
                         itemPrompt = null;
-                        Message messageform = new("Error", "This item cannot be deleted because there are still remaining stock.");
-                        messageform.ShowDialog(this);
+                        Message messageForm = new("Error", "This item cannot be deleted because there are still remaining stock.");
+                        messageForm.ShowDialog(this);
                     }
                     else
                         itemPrompt = new("Delete", this) { connection = connection };

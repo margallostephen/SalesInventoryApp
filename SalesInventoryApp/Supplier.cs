@@ -21,6 +21,7 @@ namespace SalesInventoryApp
 
         private void AddSupplierBtn_Click(object sender, EventArgs e)
         {
+            Dashboard.MinimizedSideBar();
             SupplierPrompt supplierPrompt = new("Add", this) { connection = connection };
             DialogResult result = supplierPrompt.ShowDialog(this);
             Dashboard.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
@@ -44,6 +45,7 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
+                Dashboard.MinimizedSideBar();
                 Dashboard.SelectedRowChangeColor(SupplierTable, true);
                 SupplierPrompt supplierPrompt;
 
@@ -61,6 +63,11 @@ namespace SalesInventoryApp
                 Dashboard.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
                 Dashboard.SelectedRowChangeColor(SupplierTable, false);
             }
+        }
+
+        private void ActionLabel_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void SupplierTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)

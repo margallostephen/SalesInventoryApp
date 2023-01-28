@@ -16,15 +16,15 @@ namespace SalesInventoryApp
 
         private void Supplier_Load(object sender, EventArgs e)
         {
-            Dashboard.LoadTableRecord(SupplierTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(SupplierTable, ActionLabel, NoLabel, connection);
         }
 
         private void AddSupplierBtn_Click(object sender, EventArgs e)
         {
-            Dashboard.MinimizedSideBar();
+            Main.MinimizedSideBar();
             SupplierPrompt supplierPrompt = new("Add", this) { connection = connection };
             DialogResult result = supplierPrompt.ShowDialog(this);
-            Dashboard.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
+            Main.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
         }
 
         private void SupplierTable_SelectionChanged(object sender, EventArgs e)
@@ -45,8 +45,8 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
-                Dashboard.MinimizedSideBar();
-                Dashboard.SelectedRowChangeColor(SupplierTable, true);
+                Main.MinimizedSideBar();
+                Main.SelectedRowChangeColor(SupplierTable, true);
                 SupplierPrompt supplierPrompt;
 
                 if (columnName == "ColumnEdit")
@@ -60,8 +60,8 @@ namespace SalesInventoryApp
                     supplierPrompt = new("Delete", this) { connection = connection };
 
                 DialogResult result = supplierPrompt.ShowDialog(this);
-                Dashboard.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
-                Dashboard.SelectedRowChangeColor(SupplierTable, false);
+                Main.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
+                Main.SelectedRowChangeColor(SupplierTable, false);
             }
         }
 
@@ -72,12 +72,12 @@ namespace SalesInventoryApp
 
         private void SupplierTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            Dashboard.ChangeCursor(SupplierTable, e);
+            Main.ChangeCursor(SupplierTable, e);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            Dashboard.ScrollUpDown(SupplierTable, e);
+            Main.ScrollUpDown(SupplierTable, e);
         }
     }
 }

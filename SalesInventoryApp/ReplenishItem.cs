@@ -35,7 +35,7 @@ namespace SalesInventoryApp
                     pic.Width = 100;
                     pic.Height = 95;
                     pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pic.Image = Dashboard.ByteToImage((byte[])dataReader[0]);
+                    pic.Image = Main.ByteToImage((byte[])dataReader[0]);
                     id = new();
                     id.Text = dataReader[1].ToString();
                     id.Hide();
@@ -124,9 +124,10 @@ namespace SalesInventoryApp
                     command.Prepare();
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO delivery(date, item_id, quantity, supplier_id) VALUES(?, ?, ?, ?)";
+                    command.CommandText = "INSERT INTO delivery(date, time, item_id, quantity, supplier_id) VALUES(?, ?, ?, ?, ?)";
                     command.Parameters.Clear();
-                    command.Parameters.Add("date", (DbType)SqlDbType.DateTime2).Value = DateTime.Now;
+                    command.Parameters.Add("date", (DbType)SqlDbType.VarChar).Value = DateOnly.FromDateTime(DateTime.Now).ToString();
+                    command.Parameters.Add("time", (DbType)SqlDbType.VarChar).Value = TimeOnly.FromDateTime(DateTime.Now).ToString();
                     command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
                     command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = quantityToAdd;
                     command.Parameters.Add("supplierId", (DbType)SqlDbType.Int).Value = supplierId;
@@ -152,7 +153,7 @@ namespace SalesInventoryApp
                 message = "Please choose a quantity.";
             }
 
-            Dashboard.ShowMessage(this, deliveryForm, info, message, DialogResult);
+            Main.ShowMessage(this, deliveryForm, info, message, DialogResult);
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)

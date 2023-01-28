@@ -35,7 +35,7 @@ namespace SalesInventoryApp
                             {
                                 ShowMessage(false, "Success", "You have successfuly login " + Username.Text.Trim() + ".");
                                 connection.Close();
-                                Dashboard dashboard = new(Username.Text.Trim()) { loginForm = this, connection = connection };
+                                Main dashboard = new(Username.Text.Trim()) { loginForm = this, connection = connection };
                                 dashboard.Show();
                                 Username.Text = Password.Text = "";
                                 ShowPassBtn.Checked = false;

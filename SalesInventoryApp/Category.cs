@@ -17,15 +17,15 @@ namespace SalesInventoryApp
 
         private void Category_Load(object sender, EventArgs e)
         {
-            Dashboard.LoadTableRecord(CategoryTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(CategoryTable, ActionLabel, NoLabel, connection);
         }
 
         private void AddCategoryBtn_Click(object sender, EventArgs e)
         {
-            Dashboard.MinimizedSideBar();
+            Main.MinimizedSideBar();
             CategoryPrompt categoryPrompt = new("Add", this) { connection = connection };
             DialogResult result = categoryPrompt.ShowDialog(this);
-            Dashboard.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
+            Main.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
         }
 
         private void CategoryTable_SelectionChanged(object sender, EventArgs e)
@@ -44,8 +44,8 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
-                Dashboard.MinimizedSideBar();
-                Dashboard.SelectedRowChangeColor(CategoryTable, true);
+                Main.MinimizedSideBar();
+                Main.SelectedRowChangeColor(CategoryTable, true);
                 CategoryPrompt categoryPrompt;
 
                 if (columnName == "ColumnEdit")
@@ -78,21 +78,21 @@ namespace SalesInventoryApp
                 if (categoryPrompt != null)
                 {
                     DialogResult result = categoryPrompt.ShowDialog(this);
-                    Dashboard.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
+                    Main.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
                 }
 
-                Dashboard.SelectedRowChangeColor(CategoryTable, false);
+                Main.SelectedRowChangeColor(CategoryTable, false);
             }
         }
 
         private void CategoryTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            Dashboard.ChangeCursor(CategoryTable, e);
+            Main.ChangeCursor(CategoryTable, e);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            Dashboard.ScrollUpDown(CategoryTable, e);
+            Main.ScrollUpDown(CategoryTable, e);
         }
     }
 }

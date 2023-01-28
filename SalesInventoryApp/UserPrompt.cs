@@ -130,7 +130,7 @@ namespace SalesInventoryApp
             }
             
             connection.Close();
-            Dashboard.ShowMessage(this, userForm, info, message, DialogResult);
+            Main.ShowMessage(this, userForm, info, message, DialogResult);
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)

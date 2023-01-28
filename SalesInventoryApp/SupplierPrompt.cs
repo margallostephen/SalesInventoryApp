@@ -171,7 +171,7 @@ namespace SalesInventoryApp
             }
             
             connection.Close();
-            Dashboard.ShowMessage(this, supplierForm, info, message, DialogResult);
+            Main.ShowMessage(this, supplierForm, info, message, DialogResult);
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)

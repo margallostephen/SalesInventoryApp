@@ -15,15 +15,15 @@ namespace SalesInventoryApp
 
         private void User_Load(object sender, EventArgs e)
         {
-            Dashboard.LoadTableRecord(UserTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(UserTable, ActionLabel, NoLabel, connection);
         }
 
         private void AddUserBtn_Click(object sender, EventArgs e)
         {
-            Dashboard.MinimizedSideBar();
+            Main.MinimizedSideBar();
             UserPrompt userPrompt = new("Add", this) { connection = connection };
             DialogResult result = userPrompt.ShowDialog(this);
-            Dashboard.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
+            Main.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
         }
 
         private void UserTable_SelectionChanged(object sender, EventArgs e)
@@ -42,8 +42,8 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete")
             {
-                Dashboard.MinimizedSideBar();
-                Dashboard.SelectedRowChangeColor(UserTable, true);
+                Main.MinimizedSideBar();
+                Main.SelectedRowChangeColor(UserTable, true);
                 UserPrompt userPrompt;
 
                 if (columnName == "ColumnEdit")
@@ -55,19 +55,19 @@ namespace SalesInventoryApp
                     userPrompt = new("Delete", this) { connection = connection };
 
                 DialogResult result = userPrompt.ShowDialog(this);
-                Dashboard.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
-                Dashboard.SelectedRowChangeColor(UserTable, false);
+                Main.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
+                Main.SelectedRowChangeColor(UserTable, false);
             }
         }
 
         private void UserTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            Dashboard.ChangeCursor(UserTable, e);
+            Main.ChangeCursor(UserTable, e);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            Dashboard.ScrollUpDown(UserTable, e);
+            Main.ScrollUpDown(UserTable, e);
         }
     }
 }

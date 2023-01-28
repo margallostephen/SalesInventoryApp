@@ -191,7 +191,7 @@ namespace SalesInventoryApp
             }
 
             connection.Close();
-            Dashboard.ShowMessage(this, itemForm, info, message, DialogResult);
+            Main.ShowMessage(this, itemForm, info, message, DialogResult);
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)
@@ -207,7 +207,7 @@ namespace SalesInventoryApp
                 using OpenFileDialog selectPic = new();
                 selectPic.Filter = "Image Files(*.jpg; *.jpeg; *.png; *.jfif;) | *.jpg; *.jpeg; *.png; *.jfif;";
 
-                if (selectPic.ShowDialog(Dashboard.FindForm("Dashboard")) == DialogResult.OK)
+                if (selectPic.ShowDialog(Main.FindForm("Dashboard")) == DialogResult.OK)
                 {
                     ItemImage.Image = new Bitmap(selectPic.FileName);
                     imageChange = true;

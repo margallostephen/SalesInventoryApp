@@ -18,7 +18,7 @@ namespace SalesInventoryApp
 
         private void Item_Load(object sender, EventArgs e)
         {
-            Dashboard.LoadTableRecord(ItemTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(ItemTable, ActionLabel, NoLabel, connection);
         }
 
         private void ItemTable_SelectionChanged(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace SalesInventoryApp
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
-            Dashboard.MinimizedSideBar();
+            Main.MinimizedSideBar();
             bool[] tableNotNull = { false, false };
             string[] queryTable = { "item_category", "supplier" };
 
@@ -57,7 +57,7 @@ namespace SalesInventoryApp
                 connection.Close();
                 ItemPrompt itemPrompt = new("Add", this) { connection = connection };
                 DialogResult result = itemPrompt.ShowDialog(this);
-                Dashboard.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
             }
             else if (!tableNotNull[0] && !tableNotNull[1])
                 messageForm = new("Warning", "There are no categories and suppliers. Please add a category and supplier first.");
@@ -79,14 +79,14 @@ namespace SalesInventoryApp
 
             if (columnName == "ColumnEdit" || columnName == "ColumnDelete" || columnName == "ColumnImage")
             {
-                Dashboard.MinimizedSideBar();
-                Dashboard.SelectedRowChangeColor(ItemTable, true);
+                Main.MinimizedSideBar();
+                Main.SelectedRowChangeColor(ItemTable, true);
                 ItemPrompt itemPrompt;
 
                 if (columnName == "ColumnEdit")
                 {
                     itemPrompt = new("Edit", this) { connection = connection };
-                    itemPrompt.ItemImage.Image = Dashboard.ByteToImage(selectedItemImage);
+                    itemPrompt.ItemImage.Image = Main.ByteToImage(selectedItemImage);
                     itemPrompt.Item.Text = selectedRowItem;
                     itemPrompt.Price.Text = selectedRowBasePrice;
                 }
@@ -111,27 +111,27 @@ namespace SalesInventoryApp
                 else
                 {
                     itemPrompt = new("ViewImage", this) { connection = connection };
-                    itemPrompt.ItemImage.Image = Dashboard.ByteToImage(selectedItemImage);
+                    itemPrompt.ItemImage.Image = Main.ByteToImage(selectedItemImage);
                 }
 
                 if (itemPrompt!= null)
                 {
                     DialogResult result = itemPrompt.ShowDialog(this);
-                    Dashboard.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                    Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
                 }
 
-                Dashboard.SelectedRowChangeColor(ItemTable, false);
+                Main.SelectedRowChangeColor(ItemTable, false);
             }
         }
 
         private void ItemTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            Dashboard.ChangeCursor(ItemTable, e);
+            Main.ChangeCursor(ItemTable, e);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            Dashboard.ScrollUpDown(ItemTable, e);
+            Main.ScrollUpDown(ItemTable, e);
         }
     }
 }

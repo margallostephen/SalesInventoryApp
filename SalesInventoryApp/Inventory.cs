@@ -14,12 +14,12 @@ namespace SalesInventoryApp
 
         private void Inventory_Load(object sender, EventArgs e)
         {
-            Dashboard.LoadTableRecord(InventoryTable, null, NoLabel, connection);
+            Main.LoadTableRecord(InventoryTable, null, NoLabel, connection);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            Dashboard.ScrollUpDown(InventoryTable, e);
+            Main.ScrollUpDown(InventoryTable, e);
         }
     }
 }

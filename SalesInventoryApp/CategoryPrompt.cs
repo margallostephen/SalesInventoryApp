@@ -113,7 +113,7 @@ namespace SalesInventoryApp
             }
 
             connection.Close();
-            Dashboard.ShowMessage(this, categoryForm, info, message, DialogResult);
+            Main.ShowMessage(this, categoryForm, info, message, DialogResult);
         }
 
         private void BtnTwo_Click(object sender, EventArgs e)

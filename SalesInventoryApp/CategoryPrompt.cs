@@ -5,7 +5,7 @@ namespace SalesInventoryApp
 {
     public partial class CategoryPrompt : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         private readonly Category categoryForm;
 
         public CategoryPrompt(string operation, Category categoryForm)
@@ -44,15 +44,15 @@ namespace SalesInventoryApp
 
             DialogResult = DialogResult.None;
 
-            connection.Open();
+            Connection.Open();
 
-            using (MySqlCommand command = connection.CreateCommand())
+            using (MySqlCommand command = Connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
                     if (!categoryNull)
                     {
-                        using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", connection))
+                        using (MySqlCommand getAllCategories = new("SELECT * FROM item_category", Connection))
                         {
                             using MySqlDataReader dataReader = getAllCategories.ExecuteReader();
 
@@ -112,7 +112,7 @@ namespace SalesInventoryApp
                 }
             }
 
-            connection.Close();
+            Connection.Close();
             Main.ShowMessage(this, categoryForm, info, message, DialogResult);
         }
 

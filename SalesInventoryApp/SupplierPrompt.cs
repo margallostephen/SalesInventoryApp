@@ -6,7 +6,7 @@ namespace SalesInventoryApp
 {
     public partial class SupplierPrompt : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         private readonly Supplier supplierForm;
 
         public SupplierPrompt(string operation, Supplier supplierForm)
@@ -56,15 +56,15 @@ namespace SalesInventoryApp
 
             DialogResult = DialogResult.None;
 
-            connection.Open();
+            Connection.Open();
 
-            using (MySqlCommand command = connection.CreateCommand())
+            using (MySqlCommand command = Connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
                     if (!supplierNull && !addressNull && !contactNumberNull)
                     {
-                        using (MySqlCommand getAllSuppliers = new("SELECT * FROM supplier", connection))
+                        using (MySqlCommand getAllSuppliers = new("SELECT * FROM supplier", Connection))
                         {
                             using MySqlDataReader dataReader = getAllSuppliers.ExecuteReader();
 
@@ -87,18 +87,18 @@ namespace SalesInventoryApp
                             }
                         }
 
-                        if (Regex.IsMatch(ContactNumber.Text.Trim(), "^[0-9]+$"))
+                        if (NumberOnly().IsMatch(ContactNumber.Text.Trim()))
                         {
-                            if (allExist && (BtnOne.Text == "Add" || supplierNameInput != supplierForm.selectedRowSupplier && 
+                            if (allExist && (BtnOne.Text == "Add" || supplierNameInput != supplierForm.selectedRowSupplier &&
                                 addressInput != supplierForm.selectedRowAddress && contactNumberInput != supplierForm.selectedRowContactNumber))
                                 message = "All info already exist";
-                            else if (supplierExist && addressExist && (BtnOne.Text == "Add" || 
+                            else if (supplierExist && addressExist && (BtnOne.Text == "Add" ||
                                 supplierNameInput != supplierForm.selectedRowSupplier && addressInput != supplierForm.selectedRowAddress))
                                 message = "Supplier and address already exist.";
-                            else if (addressExist && contactNumberExist && (BtnOne.Text == "Add" || 
+                            else if (addressExist && contactNumberExist && (BtnOne.Text == "Add" ||
                                 addressInput != supplierForm.selectedRowAddress && contactNumberInput != supplierForm.selectedRowContactNumber))
                                 message = "Address and contact number already exist.";
-                            else if (contactNumberExist && supplierExist && (BtnOne.Text == "Add" || 
+                            else if (contactNumberExist && supplierExist && (BtnOne.Text == "Add" ||
                                 contactNumberInput != supplierForm.selectedRowContactNumber && supplierNameInput != supplierForm.selectedRowSupplier))
                                 message = "Supplier and contact number already exist.";
                             else if (supplierExist && (BtnOne.Text == "Add" || supplierNameInput != supplierForm.selectedRowSupplier))
@@ -140,15 +140,15 @@ namespace SalesInventoryApp
 
                         if (supplierNull && addressNull && contactNumberNull)
                             message = "Please fill out the required fields.";
-                        else if(supplierNull && addressNull)
+                        else if (supplierNull && addressNull)
                             message = "Please input supplier name and address.";
-                        else if(supplierNull && contactNumberNull)
+                        else if (supplierNull && contactNumberNull)
                             message = "Please input supplier name and contact number.";
-                        else if(addressNull && contactNumberNull)
+                        else if (addressNull && contactNumberNull)
                             message = "Please input address and contact number.";
-                        else if(supplierNull)
+                        else if (supplierNull)
                             message = "Please input supplier name.";
-                        else if(addressNull)
+                        else if (addressNull)
                             message = "Please input address.";
                         else
                             message = "Please input contact number.";
@@ -169,8 +169,8 @@ namespace SalesInventoryApp
                     command.ExecuteNonQuery();
                 }
             }
-            
-            connection.Close();
+
+            Connection.Close();
             Main.ShowMessage(this, supplierForm, info, message, DialogResult);
         }
 
@@ -179,5 +179,8 @@ namespace SalesInventoryApp
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        [GeneratedRegex("^[0-9]+$")]
+        private static partial Regex NumberOnly();
     }
 }

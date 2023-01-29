@@ -1,12 +1,12 @@
 ﻿using MySqlConnector;
-using System.Text;
 using System.Data;
+using System.Text;
 
 namespace SalesInventoryApp
 {
     public partial class UserPrompt : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         private readonly User userForm;
 
         public UserPrompt(string operation, User userForm)
@@ -40,7 +40,7 @@ namespace SalesInventoryApp
         private void BtnOne_Click(object sender, EventArgs e)
         {
             string username = Username.Text.Trim(),
-                   info = "Invalid", 
+                   info = "Invalid",
                    message;
 
             bool alreadyExist = false,
@@ -49,15 +49,15 @@ namespace SalesInventoryApp
 
             DialogResult = DialogResult.None;
 
-            connection.Open();
+            Connection.Open();
 
-            using (MySqlCommand command = connection.CreateCommand())
+            using (MySqlCommand command = Connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
                     if (!usernameNull && !passwordNull)
                     {
-                        using (MySqlCommand getAllUsers = new("SELECT * FROM users", connection))
+                        using (MySqlCommand getAllUsers = new("SELECT * FROM users", Connection))
                         {
                             using MySqlDataReader dataReader = getAllUsers.ExecuteReader();
 
@@ -70,13 +70,13 @@ namespace SalesInventoryApp
                                 }
                             }
                         }
-                                                
+
                         if (alreadyExist && BtnOne.Text == "Add" || alreadyExist && username != userForm.selectedRowUsername)
                             message = "Username " + username + " have already been taken.";
                         else
                         {
                             byte[] salt = PasswordSecurity.GenerateSalt();
-                            String password = Convert.ToBase64String(PasswordSecurity.CreateHash(Encoding.UTF8.GetBytes(Password.Text.ToString()), salt)), 
+                            String password = Convert.ToBase64String(PasswordSecurity.CreateHash(Encoding.UTF8.GetBytes(Password.Text.ToString()), salt)),
                                    saltString = Convert.ToBase64String(salt);
 
                             if (BtnOne.Text == "Add")
@@ -128,8 +128,8 @@ namespace SalesInventoryApp
                     command.ExecuteNonQuery();
                 }
             }
-            
-            connection.Close();
+
+            Connection.Close();
             Main.ShowMessage(this, userForm, info, message, DialogResult);
         }
 

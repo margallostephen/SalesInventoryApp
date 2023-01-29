@@ -5,8 +5,8 @@ namespace SalesInventoryApp
 {
     public partial class ReplenishItem : Form
     {
-        public MySqlConnection connection { get; set; }
-        Delivery deliveryForm;
+        public MySqlConnection Connection { get; set; }
+        readonly Delivery deliveryForm;
         PictureBox pic;
         Label id;
         string supplierName;
@@ -20,25 +20,29 @@ namespace SalesInventoryApp
 
         private void ReplenishItem_Load(object sender, EventArgs e)
         {
-            connection.Open();
+            Connection.Open();
 
             using (MySqlCommand command = new(
                 "SELECT items.image, items.id " +
                 "FROM inventory_stocks " +
                 "INNER JOIN items ON inventory_stocks.item_id = items.id " +
-                "ORDER BY item_id ASC", connection))
+                "ORDER BY item_id ASC", Connection))
             {
                 using MySqlDataReader dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    pic = new();
-                    pic.Width = 100;
-                    pic.Height = 95;
-                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pic.Image = Main.ByteToImage((byte[])dataReader[0]);
-                    id = new();
-                    id.Text = dataReader[1].ToString();
+                    pic = new()
+                    {
+                        Width = 100,
+                        Height = 95,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Image = Main.ByteToImage((byte[])dataReader[0])
+                    };
+                    id = new()
+                    {
+                        Text = dataReader[1].ToString()
+                    };
                     id.Hide();
                     pic.Controls.Add(id);
                     pic.Click += SelectItem;
@@ -46,7 +50,7 @@ namespace SalesInventoryApp
                 }
             }
 
-            connection.Close();
+            Connection.Close();
 
             if (ItemSelectionPanel.Controls.OfType<PictureBox>().Count() > 5)
             {
@@ -61,11 +65,11 @@ namespace SalesInventoryApp
             PictureBox picBox = sender as PictureBox;
             itemId = Convert.ToInt32(picBox.Controls[0].Text);
 
-            connection.Open();
+            Connection.Open();
 
             using (MySqlCommand command = new(
                 "SELECT items.name, inventory_stocks.quantity, items.supplier_name FROM items " +
-                "LEFT JOIN inventory_stocks ON items.id = inventory_stocks.item_id WHERE items.id = ?", connection))
+                "LEFT JOIN inventory_stocks ON items.id = inventory_stocks.item_id WHERE items.id = ?", Connection))
             {
                 command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
                 command.Prepare();
@@ -80,7 +84,7 @@ namespace SalesInventoryApp
                 supplierName = dataReader[2].ToString();
             }
 
-            connection.Close();
+            Connection.Close();
             AddQuantity.Text = NewQuantity.Text = "0";
         }
 
@@ -116,9 +120,9 @@ namespace SalesInventoryApp
 
             if (NewQuantity.Text != "0")
             {
-                connection.Open();
+                Connection.Open();
 
-                using (MySqlCommand command = new("UPDATE inventory_stocks SET quantity = ? WHERE item_id = ?", connection))
+                using (MySqlCommand command = new("UPDATE inventory_stocks SET quantity = ? WHERE item_id = ?", Connection))
                 {
                     command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = Convert.ToInt32(NewQuantity.Text);
                     command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
@@ -136,7 +140,7 @@ namespace SalesInventoryApp
                     command.ExecuteNonQuery();
                 }
 
-                connection.Close();
+                Connection.Close();
                 DialogResult = DialogResult.OK;
                 info = "Success";
                 message = "Successfully replenish an item.";

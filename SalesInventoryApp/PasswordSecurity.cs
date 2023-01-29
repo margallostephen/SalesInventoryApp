@@ -1,5 +1,5 @@
-﻿using System.Security.Cryptography;
-using Konscious.Security.Cryptography;
+﻿using Konscious.Security.Cryptography;
+using System.Security.Cryptography;
 
 namespace SalesInventoryApp
 {
@@ -11,7 +11,7 @@ namespace SalesInventoryApp
             argon2id.Salt = salt;
             argon2id.DegreeOfParallelism = 10;
             argon2id.Iterations = 8;
-            argon2id.MemorySize = 1024 *128;
+            argon2id.MemorySize = 1024 * 128;
             return argon2id.GetBytes(128);
         }
 

@@ -6,10 +6,10 @@ namespace SalesInventoryApp
 {
     public partial class ItemPrompt : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         private readonly Item itemForm;
-        private Dictionary<int, string> category = new();
-        private Dictionary<int, string> supplier = new();
+        private readonly Dictionary<int, string> category = new();
+        private readonly Dictionary<int, string> supplier = new();
         private Boolean imageChange = false;
 
         public ItemPrompt(string operation, Item itemForm)
@@ -72,21 +72,21 @@ namespace SalesInventoryApp
                  itemNull = string.IsNullOrWhiteSpace(itemName),
                  priceNull = string.IsNullOrWhiteSpace(price),
                  quantityNull = string.IsNullOrWhiteSpace(quantity),
-                 priceValid = Regex.IsMatch(price, "^[0-9.]+$"),
-                 quantityValid = Regex.IsMatch(quantity, "^[0-9.]+$");
+                 priceValid = NumberOnly().IsMatch(price),
+                 quantityValid = NumberOnly().IsMatch(quantity);
 
             DialogResult = DialogResult.None;
 
-            connection.Open();
+            Connection.Open();
 
-            using (MySqlCommand command = connection.CreateCommand())
+            using (MySqlCommand command = Connection.CreateCommand())
             {
                 if (BtnOne.Text != "Yes")
                 {
                     if (!imageNull && !categoryNull && !supplierNull && !itemNull && !priceNull &&
                        (quantityNull && BtnOne.Text == "Save" || !quantityNull && BtnOne.Text == "Add"))
                     {
-                        using (MySqlCommand getAllItems = new("SELECT * FROM items", connection))
+                        using (MySqlCommand getAllItems = new("SELECT * FROM items", Connection))
                         {
                             using MySqlDataReader dataReader = getAllItems.ExecuteReader();
 
@@ -190,7 +190,7 @@ namespace SalesInventoryApp
                 }
             }
 
-            connection.Close();
+            Connection.Close();
             Main.ShowMessage(this, itemForm, info, message, DialogResult);
         }
 
@@ -222,48 +222,46 @@ namespace SalesInventoryApp
             return ms.GetBuffer();
         }
 
-        private void BindSource(ComboBox comboBox, Dictionary<int, string> source)
+        private static void BindSource(ComboBox comboBox, Dictionary<int, string> source)
         {
             comboBox.DataSource = new BindingSource(source, null);
             comboBox.ValueMember = "Key";
             comboBox.DisplayMember = "Value";
         }
 
-        private string ComboBoxFindValue(int id, Dictionary<int, string> keyValuePairs)
+        private static string ComboBoxFindValue(int id, Dictionary<int, string> keyValuePairs)
         {
             foreach (KeyValuePair<int, string> items in keyValuePairs)
                 if (items.Key == id)
                     return items.Value;
-            
+
             return "Not Found";
         }
 
         private void ItemPrompt_Load(object sender, EventArgs e)
         {
-            connection.Open();
+            Connection.Open();
 
             int supplierId = 0;
             bool supplierNotExist = false;
 
             if (BtnOne.Text == "Save")
             {
-                using (MySqlCommand command = new("SELECT id FROM supplier WHERE name = ?", connection))
-                {
-                    command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowSupplierName;
-                    command.Prepare();
+                using MySqlCommand command = new("SELECT id FROM supplier WHERE name = ?", Connection);
+                command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowSupplierName;
+                command.Prepare();
 
-                    if (command.ExecuteReader().HasRows)
-                    {
-                        connection.Close();
-                        connection.Open();
-                        supplierId = (int)command.ExecuteScalar();
-                    } 
-                    else
-                        supplierNotExist = true;
+                if (command.ExecuteReader().HasRows)
+                {
+                    Connection.Close();
+                    Connection.Open();
+                    supplierId = (int)command.ExecuteScalar();
                 }
+                else
+                    supplierNotExist = true;
             }
 
-            connection.Close();
+            Connection.Close();
 
             int[] selectedId = { itemForm.selectedRowCategoryId, supplierId };
             string[] queryTable = { "item_category", "supplier" };
@@ -271,11 +269,11 @@ namespace SalesInventoryApp
             ComboBox[] comboBox = { CategoryComboBox, SupplierComboBox };
             TextBox[] textBox = { Category, Supplier };
 
-            connection.Open();
+            Connection.Open();
 
             for (int i = 0; i < 2; i++)
             {
-                using (MySqlCommand command = new("SELECT id, name FROM " + queryTable[i] + " ORDER BY id ASC", connection))
+                using (MySqlCommand command = new("SELECT id, name FROM " + queryTable[i] + " ORDER BY id ASC", Connection))
                 {
                     using MySqlDataReader dataReader = command.ExecuteReader();
 
@@ -309,10 +307,10 @@ namespace SalesInventoryApp
                     ComboBoxSelectDefaultValue(comboBox[i]);
             }
 
-            connection.Close();
+            Connection.Close();
         }
 
-        private void RemoveLabel(ComboBox comboBox, Dictionary<int, string> source)
+        private static void RemoveLabel(ComboBox comboBox, Dictionary<int, string> source)
         {
             if (source.ContainsKey(-1))
             {
@@ -323,7 +321,7 @@ namespace SalesInventoryApp
             }
         }
 
-        private void AddLabel(TextBox textBox, ComboBox comboBox, Dictionary<int, string> source)
+        private static void AddLabel(TextBox textBox, ComboBox comboBox, Dictionary<int, string> source)
         {
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
@@ -333,7 +331,7 @@ namespace SalesInventoryApp
             }
         }
 
-        private void ComboBoxSelectDefaultValue(ComboBox comboBox)
+        private static void ComboBoxSelectDefaultValue(ComboBox comboBox)
         {
             comboBox.SelectedIndex = comboBox.Items.Count - 1;
         }
@@ -367,5 +365,8 @@ namespace SalesInventoryApp
         {
             Supplier.Text = ((KeyValuePair<int, string>)SupplierComboBox.SelectedItem).Value;
         }
+
+        [GeneratedRegex("^[0-9.]+$")]
+        private static partial Regex NumberOnly();
     }
 }

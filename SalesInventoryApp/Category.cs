@@ -5,7 +5,7 @@ namespace SalesInventoryApp
 {
     public partial class Category : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         public int selectedRowId;
         public string selectedRowCategory;
 
@@ -17,15 +17,15 @@ namespace SalesInventoryApp
 
         private void Category_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(CategoryTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(CategoryTable, ActionLabel, NoLabel, Connection);
         }
 
         private void AddCategoryBtn_Click(object sender, EventArgs e)
         {
             Main.MinimizedSideBar();
-            CategoryPrompt categoryPrompt = new("Add", this) { connection = connection };
+            CategoryPrompt categoryPrompt = new("Add", this) { Connection = Connection };
             DialogResult result = categoryPrompt.ShowDialog(this);
-            Main.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
+            Main.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, Connection);
         }
 
         private void CategoryTable_SelectionChanged(object sender, EventArgs e)
@@ -50,35 +50,35 @@ namespace SalesInventoryApp
 
                 if (columnName == "ColumnEdit")
                 {
-                    categoryPrompt = new("Edit", this) { connection = connection };
+                    categoryPrompt = new("Edit", this) { Connection = Connection };
                     categoryPrompt.Category.Text = selectedRowCategory;
                 }
                 else
                 {
-                    connection.Open();
-                    using MySqlCommand command = new("SELECT * FROM items WHERE category_id = ?", connection);
+                    Connection.Open();
+                    using MySqlCommand command = new("SELECT * FROM items WHERE category_id = ?", Connection);
                     command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = selectedRowId;
                     command.Prepare();
                     using MySqlDataReader dataReader = command.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
-                        connection.Close();
+                        Connection.Close();
                         categoryPrompt = null;
                         Message messageForm = new("Error", "This category cannot be deleted because there are items in it.");
                         messageForm.ShowDialog(this);
                     }
                     else
                     {
-                        connection.Close();
-                        categoryPrompt = new("Delete", this) { connection = connection };
+                        Connection.Close();
+                        categoryPrompt = new("Delete", this) { Connection = Connection };
                     }
                 }
-                
+
                 if (categoryPrompt != null)
                 {
                     DialogResult result = categoryPrompt.ShowDialog(this);
-                    Main.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, connection);
+                    Main.DisposePrompt(result, categoryPrompt, CategoryTable, ActionLabel, NoLabel, Connection);
                 }
 
                 Main.SelectedRowChangeColor(CategoryTable, false);

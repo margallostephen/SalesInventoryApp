@@ -4,7 +4,7 @@ namespace SalesInventoryApp
 {
     public partial class Delivery : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
 
         public Delivery()
         {
@@ -14,28 +14,28 @@ namespace SalesInventoryApp
 
         private void Delivery_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(DeliveryTable, null, NoLabel, connection);
+            Main.LoadTableRecord(DeliveryTable, null, NoLabel, Connection);
         }
 
         private void ReplenishItemBtn_Click(object sender, EventArgs e)
         {
             Main.MinimizedSideBar();
-            connection.Open();
-            using MySqlCommand command = connection.CreateCommand();
+            Connection.Open();
+            using MySqlCommand command = Connection.CreateCommand();
             command.CommandText = "SELECT * FROM inventory_stocks";
             command.Prepare();
             using MySqlDataReader dataReader = command.ExecuteReader();
 
             if (dataReader.HasRows)
             {
-                connection.Close();
-                ReplenishItem replenishPrompt = new(this) { connection = connection };
+                Connection.Close();
+                ReplenishItem replenishPrompt = new(this) { Connection = Connection };
                 DialogResult result = replenishPrompt.ShowDialog();
-                Main.DisposePrompt(result, replenishPrompt, DeliveryTable, null, NoLabel, connection);
+                Main.DisposePrompt(result, replenishPrompt, DeliveryTable, null, NoLabel, Connection);
             }
             else
             {
-                connection.Close();
+                Connection.Close();
                 Message messageForm = new("Warning", "No items are available. Please add first item.");
                 messageForm.ShowDialog(this);
             }

@@ -4,7 +4,7 @@ namespace SalesInventoryApp
 {
     public partial class Sales : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
 
         public Sales()
         {
@@ -14,14 +14,14 @@ namespace SalesInventoryApp
 
         private void Sales_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(SalesTable, null, NoLabel, connection);
+            Main.LoadTableRecord(SalesTable, null, NoLabel, Connection);
         }
 
         private void SelItemBtn_Click(object sender, EventArgs e)
         {
             Main.MinimizedSideBar();
-            connection.Open();
-            using MySqlCommand command = connection.CreateCommand();
+            Connection.Open();
+            using MySqlCommand command = Connection.CreateCommand();
             command.CommandText = "SELECT * FROM inventory_stocks";
             command.Prepare();
             using MySqlDataReader dataReader = command.ExecuteReader();
@@ -39,10 +39,10 @@ namespace SalesInventoryApp
                     messageForm = new("Error", "All items are out of stock.");
                 else
                 {
-                    connection.Close();
-                    SellItem sellPrompt = new(this) { connection = connection };
+                    Connection.Close();
+                    SellItem sellPrompt = new(this) { Connection = Connection };
                     DialogResult result = sellPrompt.ShowDialog();
-                    Main.DisposePrompt(result, sellPrompt, SalesTable, null, NoLabel, connection);
+                    Main.DisposePrompt(result, sellPrompt, SalesTable, null, NoLabel, Connection);
                 }
             }
             else
@@ -50,7 +50,7 @@ namespace SalesInventoryApp
 
             if (messageForm != null)
             {
-                connection.Close();
+                Connection.Close();
                 messageForm.ShowDialog(this);
             }
         }

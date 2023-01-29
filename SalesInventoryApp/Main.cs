@@ -6,10 +6,10 @@ namespace SalesInventoryApp
 {
     public partial class Main : Form
     {
-        public Form loginForm { get; set; }
-        public MySqlConnection connection { get; set; }
+        public Form LoginForm { get; set; }
+        public MySqlConnection Connection { get; set; }
         private IconButton activeBtn;
-        private Panel activeBtnPanel;
+        private readonly Panel activeBtnPanel;
         private Form currentChildForm;
         private Dashboard dashboardForm;
         private Inventory inventoryForm;
@@ -101,28 +101,28 @@ namespace SalesInventoryApp
         private void DashboardBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            dashboardForm = new() { connection = connection };
+            dashboardForm = new() { Connection = Connection };
             OpenChildForm(dashboardForm);
         }
 
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            inventoryForm = new() { connection = connection };
+            inventoryForm = new() { Connection = Connection };
             OpenChildForm(inventoryForm);
         }
 
         private void SalesBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            salesForm = new() { connection = connection };
+            salesForm = new() { Connection = Connection };
             OpenChildForm(salesForm);
         }
 
         private void DeliveryBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            deliveryForm = new() { connection = connection };
+            deliveryForm = new() { Connection = Connection };
             OpenChildForm(deliveryForm);
         }
 
@@ -133,25 +133,25 @@ namespace SalesInventoryApp
 
         private void UserBtn_Click(object sender, EventArgs e)
         {
-            userForm = new() { connection = connection };
+            userForm = new() { Connection = Connection };
             OpenChildForm(userForm);
         }
 
         private void CategoryBtn_Click(object sender, EventArgs e)
         {
-            categoryForm = new() { connection = connection };
+            categoryForm = new() { Connection = Connection };
             OpenChildForm(categoryForm);
         }
 
         private void SupplierBtn_Click(object sender, EventArgs e)
         {
-            supplierForm = new() { connection = connection };
+            supplierForm = new() { Connection = Connection };
             OpenChildForm(supplierForm);
         }
 
         private void ItemBtn_Click(object sender, EventArgs e)
         {
-            itemForm = new() { connection = connection };
+            itemForm = new() { Connection = Connection };
             OpenChildForm(itemForm);
         }
 
@@ -161,7 +161,7 @@ namespace SalesInventoryApp
             Close();
             Dispose();
             message.ShowDialog();
-            loginForm.Show();
+            LoginForm.Show();
         }
 
         public static void LoadTableRecord(DataGridView formTable, Label actionLabel, Label noLabel, MySqlConnection connection)
@@ -172,7 +172,7 @@ namespace SalesInventoryApp
 
             switch (formTable.Name.ToString())
             {
-                case "UserTable": 
+                case "UserTable":
                     query = "SELECT * FROM users ORDER BY username ASC";
                     break;
                 case "SupplierTable":
@@ -203,9 +203,8 @@ namespace SalesInventoryApp
             if (dataReader.HasRows)
             {
                 formTable.BringToFront();
-                
-                if (actionLabel != null)
-                    actionLabel.BringToFront();
+
+                actionLabel?.BringToFront();
 
                 while (dataReader.Read())
                 {
@@ -231,7 +230,7 @@ namespace SalesInventoryApp
             }
             else
                 noLabel.BringToFront();
-            
+
             connection.Close();
         }
 

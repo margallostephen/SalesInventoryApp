@@ -4,7 +4,7 @@ namespace SalesInventoryApp
 {
     public partial class Dashboard : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
 
         public Dashboard()
         {
@@ -21,16 +21,16 @@ namespace SalesInventoryApp
 
         private string GetData(string operation, string tableName)
         {
-            connection.Open();
+            Connection.Open();
             string query = "SELECT " + operation + " FROM " + tableName;
 
             if (tableName == "sales")
                 query += " WHERE date = \"" + DateTime.Now.ToShortDateString() + "\"";
 
-            using MySqlCommand command = new(query, connection);
+            using MySqlCommand command = new(query, Connection);
             command.Prepare();
             string data = command.ExecuteScalar().ToString();
-            connection.Close();
+            Connection.Close();
             return data;
         }
     }

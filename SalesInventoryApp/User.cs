@@ -4,7 +4,7 @@ namespace SalesInventoryApp
 {
     public partial class User : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         public string selectedRowUsername, selectedRowPassword;
 
         public User()
@@ -15,15 +15,15 @@ namespace SalesInventoryApp
 
         private void User_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(UserTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(UserTable, ActionLabel, NoLabel, Connection);
         }
 
         private void AddUserBtn_Click(object sender, EventArgs e)
         {
             Main.MinimizedSideBar();
-            UserPrompt userPrompt = new("Add", this) { connection = connection };
+            UserPrompt userPrompt = new("Add", this) { Connection = Connection };
             DialogResult result = userPrompt.ShowDialog(this);
-            Main.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
+            Main.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, Connection);
         }
 
         private void UserTable_SelectionChanged(object sender, EventArgs e)
@@ -48,14 +48,14 @@ namespace SalesInventoryApp
 
                 if (columnName == "ColumnEdit")
                 {
-                    userPrompt = new("Edit", this) { connection = connection };
+                    userPrompt = new("Edit", this) { Connection = Connection };
                     userPrompt.Username.Text = selectedRowUsername;
                 }
                 else
-                    userPrompt = new("Delete", this) { connection = connection };
+                    userPrompt = new("Delete", this) { Connection = Connection };
 
                 DialogResult result = userPrompt.ShowDialog(this);
-                Main.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, connection);
+                Main.DisposePrompt(result, userPrompt, UserTable, ActionLabel, NoLabel, Connection);
                 Main.SelectedRowChangeColor(UserTable, false);
             }
         }

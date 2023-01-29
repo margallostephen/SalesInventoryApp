@@ -4,7 +4,7 @@ namespace SalesInventoryApp
 {
     public partial class Supplier : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         public int selectedRowId;
         public string selectedRowSupplier, selectedRowAddress, selectedRowContactNumber;
 
@@ -16,15 +16,15 @@ namespace SalesInventoryApp
 
         private void Supplier_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(SupplierTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(SupplierTable, ActionLabel, NoLabel, Connection);
         }
 
         private void AddSupplierBtn_Click(object sender, EventArgs e)
         {
             Main.MinimizedSideBar();
-            SupplierPrompt supplierPrompt = new("Add", this) { connection = connection };
+            SupplierPrompt supplierPrompt = new("Add", this) { Connection = Connection };
             DialogResult result = supplierPrompt.ShowDialog(this);
-            Main.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
+            Main.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, Connection);
         }
 
         private void SupplierTable_SelectionChanged(object sender, EventArgs e)
@@ -51,16 +51,16 @@ namespace SalesInventoryApp
 
                 if (columnName == "ColumnEdit")
                 {
-                    supplierPrompt = new("Edit", this) { connection = connection };
+                    supplierPrompt = new("Edit", this) { Connection = Connection };
                     supplierPrompt.Supplier.Text = selectedRowSupplier;
                     supplierPrompt.Address.Text = selectedRowAddress;
                     supplierPrompt.ContactNumber.Text = selectedRowContactNumber;
                 }
                 else
-                    supplierPrompt = new("Delete", this) { connection = connection };
+                    supplierPrompt = new("Delete", this) { Connection = Connection };
 
                 DialogResult result = supplierPrompt.ShowDialog(this);
-                Main.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, connection);
+                Main.DisposePrompt(result, supplierPrompt, SupplierTable, ActionLabel, NoLabel, Connection);
                 Main.SelectedRowChangeColor(SupplierTable, false);
             }
         }

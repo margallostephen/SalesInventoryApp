@@ -4,7 +4,7 @@ namespace SalesInventoryApp
 {
     public partial class Inventory : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
 
         public Inventory()
         {
@@ -14,7 +14,7 @@ namespace SalesInventoryApp
 
         private void Inventory_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(InventoryTable, null, NoLabel, connection);
+            Main.LoadTableRecord(InventoryTable, null, NoLabel, Connection);
         }
 
         private new void MouseWheel(object sender, MouseEventArgs e)

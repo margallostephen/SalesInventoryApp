@@ -5,7 +5,7 @@ namespace SalesInventoryApp
 {
     public partial class Item : Form
     {
-        public MySqlConnection connection { get; set; }
+        public MySqlConnection Connection { get; set; }
         public int selectedRowItemId, selectedRowCategoryId;
         public string selectedRowItem, selectedRowBasePrice, selectedRowSupplierName;
         public byte[] selectedItemImage;
@@ -18,7 +18,7 @@ namespace SalesInventoryApp
 
         private void Item_Load(object sender, EventArgs e)
         {
-            Main.LoadTableRecord(ItemTable, ActionLabel, NoLabel, connection);
+            Main.LoadTableRecord(ItemTable, ActionLabel, NoLabel, Connection);
         }
 
         private void ItemTable_SelectionChanged(object sender, EventArgs e)
@@ -41,11 +41,11 @@ namespace SalesInventoryApp
             bool[] tableNotNull = { false, false };
             string[] queryTable = { "item_category", "supplier" };
 
-            connection.Open();
+            Connection.Open();
 
             for (int i = 0; i < 2; i++)
             {
-                using MySqlCommand command = new("SELECT * FROM " + queryTable[i], connection);
+                using MySqlCommand command = new("SELECT * FROM " + queryTable[i], Connection);
                 using MySqlDataReader dataReader = command.ExecuteReader();
                 tableNotNull[i] = dataReader.HasRows;
             }
@@ -54,10 +54,10 @@ namespace SalesInventoryApp
 
             if (tableNotNull[0] && tableNotNull[1])
             {
-                connection.Close();
-                ItemPrompt itemPrompt = new("Add", this) { connection = connection };
+                Connection.Close();
+                ItemPrompt itemPrompt = new("Add", this) { Connection = Connection };
                 DialogResult result = itemPrompt.ShowDialog(this);
-                Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, Connection);
             }
             else if (!tableNotNull[0] && !tableNotNull[1])
                 messageForm = new("Warning", "There are no categories and suppliers. Please add a category and supplier first.");
@@ -68,7 +68,7 @@ namespace SalesInventoryApp
 
             if (messageForm != null)
             {
-                connection.Close();
+                Connection.Close();
                 messageForm.ShowDialog(this);
             }
         }
@@ -87,33 +87,33 @@ namespace SalesInventoryApp
 
                 if (columnName == "ColumnEdit")
                 {
-                    connection.Open();
-                    using MySqlCommand command = new("SELECT * FROM supplier", connection);
+                    Connection.Open();
+                    using MySqlCommand command = new("SELECT * FROM supplier", Connection);
                     using MySqlDataReader dataReader = command.ExecuteReader();
-                    
+
                     if (dataReader.HasRows)
                     {
-                        connection.Close();
-                        itemPrompt = new("Edit", this) { connection = connection };
+                        Connection.Close();
+                        itemPrompt = new("Edit", this) { Connection = Connection };
                         itemPrompt.ItemImage.Image = Main.ByteToImage(selectedItemImage);
                         itemPrompt.Item.Text = selectedRowItem;
                         itemPrompt.Price.Text = selectedRowBasePrice;
                     }
                     else
                     {
-                        connection.Close();
+                        Connection.Close();
                         itemPrompt = null;
                         message = "Please add a supplier first before you can edit this item.";
                     }
                 }
                 else if (columnName == "ColumnDelete")
                 {
-                    connection.Open();
-                    using MySqlCommand command = new("SELECT quantity FROM inventory_stocks WHERE item_id = ?", connection);
+                    Connection.Open();
+                    using MySqlCommand command = new("SELECT quantity FROM inventory_stocks WHERE item_id = ?", Connection);
                     command.Parameters.Add("id", (DbType)SqlDbType.Int).Value = selectedRowItemId;
                     command.Prepare();
                     int quantity = (int)command.ExecuteScalar();
-                    connection.Close();
+                    Connection.Close();
 
                     if (quantity > 0)
                     {
@@ -121,18 +121,18 @@ namespace SalesInventoryApp
                         message = "This item cannot be deleted because there are still remaining stock.";
                     }
                     else
-                        itemPrompt = new("Delete", this) { connection = connection };
+                        itemPrompt = new("Delete", this) { Connection = Connection };
                 }
                 else
                 {
-                    itemPrompt = new("ViewImage", this) { connection = connection };
+                    itemPrompt = new("ViewImage", this) { Connection = Connection };
                     itemPrompt.ItemImage.Image = Main.ByteToImage(selectedItemImage);
                 }
 
-                if (itemPrompt!= null)
+                if (itemPrompt != null)
                 {
                     DialogResult result = itemPrompt.ShowDialog(this);
-                    Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                    Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, Connection);
                 }
 
                 if (message != "")

@@ -135,11 +135,11 @@ namespace SalesInventoryApp
                     command.Prepare();
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO sales(date, time, item_id, quantity, total_amount) VALUES(?, ?, ?, ?, ?)";
+                    command.CommandText = "INSERT INTO sales(date, time, item_name, quantity, total_amount) VALUES(?, ?, ?, ?, ?)";
                     command.Parameters.Clear();
                     command.Parameters.Add("date", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortDateString();
                     command.Parameters.Add("time", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortTimeString();
-                    command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
+                    command.Parameters.Add("itemName", (DbType)SqlDbType.Int).Value = ItemName.Text;
                     command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = quantityToSell;
                     command.Parameters.Add("totalAmount", (DbType)SqlDbType.Decimal).Value = Convert.ToDecimal(TotalAmount.Text);
                     command.Prepare();

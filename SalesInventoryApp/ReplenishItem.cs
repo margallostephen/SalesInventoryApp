@@ -9,7 +9,8 @@ namespace SalesInventoryApp
         Delivery deliveryForm;
         PictureBox pic;
         Label id;
-        int itemId, supplierId, remainingQuantity, quantityToAdd;
+        string supplierName;
+        int itemId, remainingQuantity, quantityToAdd;
 
         public ReplenishItem(Delivery DeliveryForm)
         {
@@ -63,7 +64,7 @@ namespace SalesInventoryApp
             connection.Open();
 
             using (MySqlCommand command = new(
-                "SELECT items.name, inventory_stocks.quantity, items.supplier_id FROM items " +
+                "SELECT items.name, inventory_stocks.quantity, items.supplier_name FROM items " +
                 "LEFT JOIN inventory_stocks ON items.id = inventory_stocks.item_id WHERE items.id = ?", connection))
             {
                 command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
@@ -76,7 +77,7 @@ namespace SalesInventoryApp
                 ItemName.Text = dataReader[0].ToString();
                 remainingQuantity = (int)dataReader[1];
                 RemainingQuantity.Text = remainingQuantity.ToString();
-                supplierId = (int)dataReader[2];
+                supplierName = dataReader[2].ToString();
             }
 
             connection.Close();
@@ -124,13 +125,13 @@ namespace SalesInventoryApp
                     command.Prepare();
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO delivery(date, time, item_id, quantity, supplier_id) VALUES(?, ?, ?, ?, ?)";
+                    command.CommandText = "INSERT INTO delivery(date, time, item_id, quantity, supplier_name) VALUES(?, ?, ?, ?, ?)";
                     command.Parameters.Clear();
                     command.Parameters.Add("date", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortDateString();
                     command.Parameters.Add("time", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortTimeString();
-                    command.Parameters.Add("itemId", (DbType)SqlDbType.Int).Value = itemId;
+                    command.Parameters.Add("itemName", (DbType)SqlDbType.Int).Value = ItemName.Text;
                     command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = quantityToAdd;
-                    command.Parameters.Add("supplierId", (DbType)SqlDbType.Int).Value = supplierId;
+                    command.Parameters.Add("supplierName", (DbType)SqlDbType.Int).Value = supplierName;
                     command.Prepare();
                     command.ExecuteNonQuery();
                 }

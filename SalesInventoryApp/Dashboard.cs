@@ -22,7 +22,12 @@ namespace SalesInventoryApp
         private string GetData(string operation, string tableName)
         {
             connection.Open();
-            using MySqlCommand command = new("SELECT " + operation + " FROM " + tableName, connection);
+            string query = "SELECT " + operation + " FROM " + tableName;
+
+            if (tableName == "sales")
+                query += " WHERE date = " + DateTime.Now.ToShortDateString();
+
+            using MySqlCommand command = new(query, connection);
             command.Prepare();
             string data = command.ExecuteScalar().ToString();
             connection.Close();

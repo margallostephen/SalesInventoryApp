@@ -48,8 +48,7 @@
             // 
             // NoLabel
             // 
-            this.NoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.NoLabel.ForeColor = System.Drawing.Color.Black;
@@ -142,7 +141,7 @@
             this.InventoryTable.ShowCellToolTips = false;
             this.InventoryTable.ShowEditingIcon = false;
             this.InventoryTable.ShowRowErrors = false;
-            this.InventoryTable.Size = new System.Drawing.Size(1115, 431);
+            this.InventoryTable.Size = new System.Drawing.Size(1115, 427);
             this.InventoryTable.TabIndex = 20;
             this.InventoryTable.TabStop = false;
             // 

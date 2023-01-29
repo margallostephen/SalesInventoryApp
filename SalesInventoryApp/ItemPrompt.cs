@@ -207,7 +207,7 @@ namespace SalesInventoryApp
                 using OpenFileDialog selectPic = new();
                 selectPic.Filter = "Image Files(*.jpg; *.jpeg; *.png; *.jfif;) | *.jpg; *.jpeg; *.png; *.jfif;";
 
-                if (selectPic.ShowDialog(Main.FindForm("Dashboard")) == DialogResult.OK)
+                if (selectPic.ShowDialog(itemForm) == DialogResult.OK)
                 {
                     ItemImage.Image = new Bitmap(selectPic.FileName);
                     imageChange = true;

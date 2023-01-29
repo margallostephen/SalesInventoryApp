@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.TotalRevenue = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -65,6 +66,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.iconPictureBox1);
             this.panel1.Controls.Add(this.TotalRevenue);
             this.panel1.Controls.Add(this.label9);
@@ -73,6 +75,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(176, 107);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft PhagsPa", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 32);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 14);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "This Month";
             // 
             // iconPictureBox1
             // 
@@ -291,7 +306,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 61);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 70);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -373,5 +388,6 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox4;
         private Label ItemsCount;
         private Label label8;
+        private Label label1;
     }
 }

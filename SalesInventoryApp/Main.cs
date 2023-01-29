@@ -290,20 +290,14 @@ namespace SalesInventoryApp
                 formTable.FirstDisplayedScrollingRowIndex++;
         }
 
-        public static Form FindForm(string formName)
-        {
-            FormCollection forms = Application.OpenForms;
-
-            foreach (Form form in forms)
-                if (form.Name == formName)
-                    return form;
-
-            return null;
-        }
-
         public static void MinimizedSideBar()
         {
-            Main dashboardForm = Main.FindForm("Main") as Main;
+            FormCollection forms = Application.OpenForms;
+            Main dashboardForm = null;
+
+            foreach (Form form in forms)
+                if (form.Name == "Main")
+                    dashboardForm = form as Main;
 
             if (dashboardForm.SideBar.Width == 211)
                 dashboardForm.MenuBtn.PerformClick();

@@ -122,7 +122,7 @@ namespace SalesInventoryApp
                                 }
                                 else
                                 {
-                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? supplier_NAME = ? WHERE id = ?";
+                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ?, supplier_name = ? WHERE id = ?";
                                     message = "Item " + itemForm.selectedRowItem + " updated successfully.";
 
                                     if (imageChange)
@@ -234,7 +234,7 @@ namespace SalesInventoryApp
             foreach (KeyValuePair<int, string> items in keyValuePairs)
                 if (items.Key == id)
                     return items.Value;
-
+            
             return "Not Found";
         }
 
@@ -242,11 +242,36 @@ namespace SalesInventoryApp
         {
             connection.Open();
 
+            int supplierId = 0;
+            bool supplierNotExist = false;
+
+            if (BtnOne.Text == "Save")
+            {
+                using (MySqlCommand command = new("SELECT id FROM supplier WHERE name = ?", connection))
+                {
+                    command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowSupplierName;
+                    command.Prepare();
+
+                    if (command.ExecuteReader().HasRows)
+                    {
+                        connection.Close();
+                        connection.Open();
+                        supplierId = (int)command.ExecuteScalar();
+                    } 
+                    else
+                        supplierNotExist = true;
+                }
+            }
+
+            connection.Close();
+
+            int[] selectedId = { itemForm.selectedRowCategoryId, supplierId };
             string[] queryTable = { "item_category", "supplier" };
-            int[] selectedId = { itemForm.selectedRowCategoryId, itemForm.selectedRowSupplierId };
             Dictionary<int, string>[] keyValuePairs = { category, supplier };
             ComboBox[] comboBox = { CategoryComboBox, SupplierComboBox };
             TextBox[] textBox = { Category, Supplier };
+
+            connection.Open();
 
             for (int i = 0; i < 2; i++)
             {
@@ -258,8 +283,11 @@ namespace SalesInventoryApp
                         keyValuePairs[i].Add((int)dataReader[0], dataReader[1].ToString());
                 }
 
-                keyValuePairs[i].Add(-1, "Select a " + textBox[i].Name.ToLower());
-                BindSource(comboBox[i], keyValuePairs[i]);
+                if (BtnOne.Text == "Add" || supplierNotExist)
+                    keyValuePairs[i].Add(-1, "Select a " + textBox[i].Name.ToLower());
+
+                if (BtnOne.Text != "Yes" || supplierNotExist)
+                    BindSource(comboBox[i], keyValuePairs[i]);
 
                 if (BtnOne.Text == "Save")
                 {
@@ -268,11 +296,17 @@ namespace SalesInventoryApp
                     if (value != "Not Found")
                     {
                         comboBox[i].Text = value;
-                        textBox[i].Text = selectedId[i].ToString();
+
+                        if (i == 0)
+                            textBox[i].Text = selectedId[i].ToString();
+                        else
+                            textBox[i].Text = itemForm.selectedRowSupplierName;
                     }
+                    else
+                        ComboBoxSelectDefaultValue(comboBox[i]);
                 }
                 else
-                    comboBox[i].SelectedIndex = comboBox[i].Items.Count - 1;
+                    ComboBoxSelectDefaultValue(comboBox[i]);
             }
 
             connection.Close();
@@ -297,6 +331,11 @@ namespace SalesInventoryApp
                 BindSource(comboBox, source);
                 comboBox.SelectedIndex = comboBox.Items.Count - 1;
             }
+        }
+
+        private void ComboBoxSelectDefaultValue(ComboBox comboBox)
+        {
+            comboBox.SelectedIndex = comboBox.Items.Count - 1;
         }
 
         private void CategoryComboBox_DropDown(object sender, EventArgs e)

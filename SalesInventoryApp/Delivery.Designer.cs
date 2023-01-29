@@ -57,10 +57,10 @@
             this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.NoLabel.ForeColor = System.Drawing.Color.Black;
-            this.NoLabel.Location = new System.Drawing.Point(28, 114);
+            this.NoLabel.Location = new System.Drawing.Point(523, 254);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(718, 312);
+            this.NoLabel.Size = new System.Drawing.Size(106, 40);
             this.NoLabel.TabIndex = 45;
             this.NoLabel.Text = "No Delivery";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,7 +78,7 @@
             this.ReplenishItemBtn.IconColor = System.Drawing.Color.White;
             this.ReplenishItemBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ReplenishItemBtn.IconSize = 35;
-            this.ReplenishItemBtn.Location = new System.Drawing.Point(603, 454);
+            this.ReplenishItemBtn.Location = new System.Drawing.Point(978, 454);
             this.ReplenishItemBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ReplenishItemBtn.Name = "ReplenishItemBtn";
             this.ReplenishItemBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -173,7 +173,7 @@
             this.DeliveryTable.ShowCellToolTips = false;
             this.DeliveryTable.ShowEditingIcon = false;
             this.DeliveryTable.ShowRowErrors = false;
-            this.DeliveryTable.Size = new System.Drawing.Size(740, 366);
+            this.DeliveryTable.Size = new System.Drawing.Size(1115, 366);
             this.DeliveryTable.TabIndex = 43;
             this.DeliveryTable.TabStop = false;
             // 
@@ -185,7 +185,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.Size = new System.Drawing.Size(1115, 2);
             this.panel1.TabIndex = 42;
             // 
             // label1
@@ -201,12 +201,11 @@
             // 
             // Column1
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.FillWeight = 16.49484F;
             this.Column1.HeaderText = "Delivery ID";
-            this.Column1.MinimumWidth = 120;
+            this.Column1.MinimumWidth = 100;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -214,12 +213,11 @@
             // 
             // Column2
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.FillWeight = 183.5052F;
             this.Column2.HeaderText = "Date";
-            this.Column2.MinimumWidth = 150;
+            this.Column2.MinimumWidth = 100;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -228,17 +226,16 @@
             // Column6
             // 
             this.Column6.HeaderText = "Time";
-            this.Column6.MinimumWidth = 125;
+            this.Column6.MinimumWidth = 100;
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column6.Width = 125;
             // 
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "Item ID";
+            this.Column3.HeaderText = "Item Name";
             this.Column3.MinimumWidth = 100;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -247,19 +244,19 @@
             // 
             // Column4
             // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column4.HeaderText = "Quantity";
-            this.Column4.MinimumWidth = 115;
+            this.Column4.MinimumWidth = 125;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column4.Width = 125;
             // 
             // Column5
             // 
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.HeaderText = "Supplier ID";
-            this.Column5.MinimumWidth = 125;
+            this.Column5.HeaderText = "Supplier Name";
+            this.Column5.MinimumWidth = 350;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -270,7 +267,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(773, 518);
+            this.ClientSize = new System.Drawing.Size(1148, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.ReplenishItemBtn);
             this.Controls.Add(this.DeliveryTable);

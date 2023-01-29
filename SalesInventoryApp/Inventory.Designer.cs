@@ -53,10 +53,10 @@
             this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.NoLabel.ForeColor = System.Drawing.Color.Black;
-            this.NoLabel.Location = new System.Drawing.Point(28, 117);
+            this.NoLabel.Location = new System.Drawing.Point(523, 254);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(718, 371);
+            this.NoLabel.Size = new System.Drawing.Size(106, 40);
             this.NoLabel.TabIndex = 23;
             this.NoLabel.Text = "No Stocks";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,22 +142,22 @@
             this.InventoryTable.ShowCellToolTips = false;
             this.InventoryTable.ShowEditingIcon = false;
             this.InventoryTable.ShowRowErrors = false;
-            this.InventoryTable.Size = new System.Drawing.Size(740, 431);
+            this.InventoryTable.Size = new System.Drawing.Size(1115, 431);
             this.InventoryTable.TabIndex = 20;
             this.InventoryTable.TabStop = false;
             // 
             // Column1
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.FillWeight = 16.49484F;
             this.Column1.HeaderText = "Item ID";
-            this.Column1.MinimumWidth = 200;
+            this.Column1.MinimumWidth = 150;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 262;
             // 
             // Column3
             // 
@@ -168,17 +168,16 @@
             // 
             // Column2
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.FillWeight = 183.5052F;
             this.Column2.HeaderText = "Quantity";
-            this.Column2.MinimumWidth = 300;
+            this.Column2.MinimumWidth = 150;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 300;
+            this.Column2.Width = 150;
             // 
             // panel1
             // 
@@ -188,7 +187,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.Size = new System.Drawing.Size(1115, 2);
             this.panel1.TabIndex = 19;
             // 
             // label1
@@ -207,7 +206,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(773, 518);
+            this.ClientSize = new System.Drawing.Size(1148, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.InventoryTable);
             this.Controls.Add(this.panel1);

@@ -125,7 +125,7 @@ namespace SalesInventoryApp
                     command.Prepare();
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO delivery(date, time, item_id, quantity, supplier_name) VALUES(?, ?, ?, ?, ?)";
+                    command.CommandText = "INSERT INTO delivery(date, time, item_name, quantity, supplier_name) VALUES(?, ?, ?, ?, ?)";
                     command.Parameters.Clear();
                     command.Parameters.Add("date", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortDateString();
                     command.Parameters.Add("time", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortTimeString();

@@ -64,7 +64,7 @@
             this.AddCategoryBtn.IconColor = System.Drawing.Color.White;
             this.AddCategoryBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.AddCategoryBtn.IconSize = 35;
-            this.AddCategoryBtn.Location = new System.Drawing.Point(603, 454);
+            this.AddCategoryBtn.Location = new System.Drawing.Point(978, 454);
             this.AddCategoryBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddCategoryBtn.Name = "AddCategoryBtn";
             this.AddCategoryBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -81,7 +81,7 @@
             this.ActionLabel.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ActionLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ActionLabel.ForeColor = System.Drawing.Color.White;
-            this.ActionLabel.Location = new System.Drawing.Point(647, 72);
+            this.ActionLabel.Location = new System.Drawing.Point(1022, 72);
             this.ActionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ActionLabel.Name = "ActionLabel";
             this.ActionLabel.Size = new System.Drawing.Size(105, 33);
@@ -171,7 +171,7 @@
             this.CategoryTable.ShowCellToolTips = false;
             this.CategoryTable.ShowEditingIcon = false;
             this.CategoryTable.ShowRowErrors = false;
-            this.CategoryTable.Size = new System.Drawing.Size(740, 366);
+            this.CategoryTable.Size = new System.Drawing.Size(1115, 366);
             this.CategoryTable.TabIndex = 19;
             this.CategoryTable.TabStop = false;
             this.CategoryTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CategoryTable_CellContentClick);
@@ -243,7 +243,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.Size = new System.Drawing.Size(1115, 2);
             this.panel1.TabIndex = 18;
             // 
             // label1
@@ -264,10 +264,10 @@
             this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.NoLabel.ForeColor = System.Drawing.Color.Black;
-            this.NoLabel.Location = new System.Drawing.Point(28, 114);
+            this.NoLabel.Location = new System.Drawing.Point(523, 254);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(718, 312);
+            this.NoLabel.Size = new System.Drawing.Size(106, 40);
             this.NoLabel.TabIndex = 22;
             this.NoLabel.Text = "No Category";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -277,7 +277,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(773, 518);
+            this.ClientSize = new System.Drawing.Size(1148, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.AddCategoryBtn);
             this.Controls.Add(this.ActionLabel);

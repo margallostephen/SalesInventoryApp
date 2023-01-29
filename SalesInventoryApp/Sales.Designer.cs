@@ -57,10 +57,10 @@
             this.NoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.NoLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.NoLabel.ForeColor = System.Drawing.Color.Black;
-            this.NoLabel.Location = new System.Drawing.Point(28, 114);
+            this.NoLabel.Location = new System.Drawing.Point(523, 254);
             this.NoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NoLabel.Name = "NoLabel";
-            this.NoLabel.Size = new System.Drawing.Size(718, 312);
+            this.NoLabel.Size = new System.Drawing.Size(106, 40);
             this.NoLabel.TabIndex = 40;
             this.NoLabel.Text = "No Sales";
             this.NoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,7 +78,7 @@
             this.SelItemBtn.IconColor = System.Drawing.Color.White;
             this.SelItemBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.SelItemBtn.IconSize = 35;
-            this.SelItemBtn.Location = new System.Drawing.Point(603, 454);
+            this.SelItemBtn.Location = new System.Drawing.Point(978, 454);
             this.SelItemBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SelItemBtn.Name = "SelItemBtn";
             this.SelItemBtn.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -173,7 +173,7 @@
             this.SalesTable.ShowCellToolTips = false;
             this.SalesTable.ShowEditingIcon = false;
             this.SalesTable.ShowRowErrors = false;
-            this.SalesTable.Size = new System.Drawing.Size(740, 366);
+            this.SalesTable.Size = new System.Drawing.Size(1115, 366);
             this.SalesTable.TabIndex = 37;
             this.SalesTable.TabStop = false;
             // 
@@ -185,7 +185,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 51);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 2);
+            this.panel1.Size = new System.Drawing.Size(1115, 2);
             this.panel1.TabIndex = 36;
             // 
             // label1
@@ -206,7 +206,7 @@
             this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.FillWeight = 16.49484F;
             this.Column1.HeaderText = "Sales ID";
-            this.Column1.MinimumWidth = 120;
+            this.Column1.MinimumWidth = 100;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -214,7 +214,6 @@
             // 
             // Column2
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.FillWeight = 183.5052F;
@@ -238,7 +237,7 @@
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "Item ID";
+            this.Column3.HeaderText = "Item Name";
             this.Column3.MinimumWidth = 100;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -247,9 +246,8 @@
             // 
             // Column4
             // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column4.HeaderText = "Quantity";
-            this.Column4.MinimumWidth = 115;
+            this.Column4.MinimumWidth = 100;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -257,20 +255,20 @@
             // 
             // Column5
             // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column5.HeaderText = "Total Amount";
-            this.Column5.MinimumWidth = 125;
+            this.Column5.MinimumWidth = 150;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column5.Width = 150;
             // 
             // Sales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(773, 518);
+            this.ClientSize = new System.Drawing.Size(1148, 518);
             this.Controls.Add(this.NoLabel);
             this.Controls.Add(this.SelItemBtn);
             this.Controls.Add(this.SalesTable);

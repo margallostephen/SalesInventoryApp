@@ -6,8 +6,8 @@ namespace SalesInventoryApp
     public partial class Item : Form
     {
         public MySqlConnection connection { get; set; }
-        public int selectedRowItemId, selectedRowCategoryId, selectedRowSupplierId;
-        public string selectedRowItem, selectedRowBasePrice;
+        public int selectedRowItemId, selectedRowCategoryId;
+        public string selectedRowItem, selectedRowBasePrice, selectedRowSupplierName;
         public byte[] selectedItemImage;
 
         public Item()
@@ -31,7 +31,7 @@ namespace SalesInventoryApp
                 selectedRowItem = ItemTable[2, index].Value.ToString();
                 selectedRowCategoryId = Convert.ToInt32(ItemTable[3, index].Value);
                 selectedRowBasePrice = ItemTable[4, index].Value.ToString();
-                selectedRowSupplierId = Convert.ToInt32(ItemTable[5, index].Value);
+                selectedRowSupplierName = ItemTable[5, index].Value.ToString();
             }
         }
 
@@ -82,13 +82,29 @@ namespace SalesInventoryApp
                 Main.MinimizedSideBar();
                 Main.SelectedRowChangeColor(ItemTable, true);
                 ItemPrompt itemPrompt;
+                string message = "";
+
 
                 if (columnName == "ColumnEdit")
                 {
-                    itemPrompt = new("Edit", this) { connection = connection };
-                    itemPrompt.ItemImage.Image = Main.ByteToImage(selectedItemImage);
-                    itemPrompt.Item.Text = selectedRowItem;
-                    itemPrompt.Price.Text = selectedRowBasePrice;
+                    connection.Open();
+                    using MySqlCommand command = new("SELECT * FROM supplier", connection);
+                    using MySqlDataReader dataReader = command.ExecuteReader();
+                    
+                    if (dataReader.HasRows)
+                    {
+                        connection.Close();
+                        itemPrompt = new("Edit", this) { connection = connection };
+                        itemPrompt.ItemImage.Image = Main.ByteToImage(selectedItemImage);
+                        itemPrompt.Item.Text = selectedRowItem;
+                        itemPrompt.Price.Text = selectedRowBasePrice;
+                    }
+                    else
+                    {
+                        connection.Close();
+                        itemPrompt = null;
+                        message = "Please add a supplier first before you can edit this item.";
+                    }
                 }
                 else if (columnName == "ColumnDelete")
                 {
@@ -102,8 +118,7 @@ namespace SalesInventoryApp
                     if (quantity > 0)
                     {
                         itemPrompt = null;
-                        Message messageForm = new("Error", "This item cannot be deleted because there are still remaining stock.");
-                        messageForm.ShowDialog(this);
+                        message = "This item cannot be deleted because there are still remaining stock.";
                     }
                     else
                         itemPrompt = new("Delete", this) { connection = connection };
@@ -118,6 +133,12 @@ namespace SalesInventoryApp
                 {
                     DialogResult result = itemPrompt.ShowDialog(this);
                     Main.DisposePrompt(result, itemPrompt, ItemTable, ActionLabel, NoLabel, connection);
+                }
+
+                if (message != "")
+                {
+                    Message messageForm = new("Error", message);
+                    messageForm.ShowDialog(this);
                 }
 
                 Main.SelectedRowChangeColor(ItemTable, false);

@@ -25,7 +25,7 @@ namespace SalesInventoryApp
             string query = "SELECT " + operation + " FROM " + tableName;
 
             if (tableName == "sales")
-                query += " WHERE date = " + DateTime.Now.ToShortDateString();
+                query += " WHERE date = \"" + DateTime.Now.ToShortDateString() + "\"";
 
             using MySqlCommand command = new(query, connection);
             command.Prepare();

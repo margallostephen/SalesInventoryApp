@@ -13,7 +13,7 @@ namespace SalesInventoryApp
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            TotalRevenue.Text = GetData("SUM(total_amount)", "sales");
+            TotalRevenue.Text = GetData("SUM(total_amount)", "sales") != "" ? GetData("SUM(total_amount)", "sales") : "0";
             ItemsCount.Text = GetData("COUNT(*)", "items");
             CategoriesCount.Text = GetData("COUNT(*)", "item_category");
             UsersCount.Text = GetData("COUNT(*)", "users");

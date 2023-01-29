@@ -131,7 +131,7 @@ namespace SalesInventoryApp
                     command.Parameters.Add("time", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortTimeString();
                     command.Parameters.Add("itemName", (DbType)SqlDbType.Int).Value = ItemName.Text;
                     command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = quantityToAdd;
-                    command.Parameters.Add("supplierName", (DbType)SqlDbType.Int).Value = supplierName;
+                    command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = supplierName;
                     command.Prepare();
                     command.ExecuteNonQuery();
                 }

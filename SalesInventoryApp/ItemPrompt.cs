@@ -29,7 +29,7 @@ namespace SalesInventoryApp
                     Price.Location = new Point(125, 115);
                     panel2.Width = 220;
                     panel2.Location = new Point(123, 139);
-                } 
+                }
                 else if (operation == "ViewImage")
                 {
                     Text = HeaderText.Text = "View Image";
@@ -116,13 +116,13 @@ namespace SalesInventoryApp
 
                                 if (BtnOne.Text == "Add")
                                 {
-                                    command.CommandText = "INSERT INTO items(image, name, category_id, price, supplier_id) VALUES(?, ?, ?, ?, ?)";
+                                    command.CommandText = "INSERT INTO items(image, name, category_id, price, supplier_name) VALUES(?, ?, ?, ?, ?)";
                                     message = "New item added successfully.";
                                     itemImage = ConvertImageToByte();
                                 }
                                 else
                                 {
-                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? supplier_id = ? WHERE id = ?";
+                                    command.CommandText = "UPDATE items SET image = ?, name = ?, category_id = ?, price = ? supplier_NAME = ? WHERE id = ?";
                                     message = "Item " + itemForm.selectedRowItem + " updated successfully.";
 
                                     if (imageChange)
@@ -135,7 +135,7 @@ namespace SalesInventoryApp
                                 command.Parameters.Add("itemName", (DbType)SqlDbType.VarChar).Value = itemName;
                                 command.Parameters.Add("categoryId", (DbType)SqlDbType.Int).Value = Convert.ToInt32(Category.Text);
                                 command.Parameters.Add("price", (DbType)SqlDbType.Decimal).Value = Convert.ToDecimal(price);
-                                command.Parameters.Add("supplierId", (DbType)SqlDbType.Int).Value = Convert.ToInt32(Supplier.Text);
+                                command.Parameters.Add("supplierName", (DbType)SqlDbType.VarChar).Value = Supplier.Text;
 
                                 if (BtnOne.Text == "Save")
                                     command.Parameters.Add("id", (DbType)SqlDbType.VarChar).Value = itemForm.selectedRowItemId;
@@ -230,7 +230,7 @@ namespace SalesInventoryApp
         }
 
         private string ComboBoxFindValue(int id, Dictionary<int, string> keyValuePairs)
-        { 
+        {
             foreach (KeyValuePair<int, string> items in keyValuePairs)
                 if (items.Key == id)
                     return items.Value;
@@ -299,11 +299,6 @@ namespace SalesInventoryApp
             }
         }
 
-        private string SelectItem(ComboBox comboBox)
-        {
-            return ((KeyValuePair<int, string>)comboBox.SelectedItem).Key.ToString();
-        }
-
         private void CategoryComboBox_DropDown(object sender, EventArgs e)
         {
             RemoveLabel(CategoryComboBox, category);
@@ -316,7 +311,7 @@ namespace SalesInventoryApp
 
         private void CategoryComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Category.Text = SelectItem(CategoryComboBox);
+            Category.Text = ((KeyValuePair<int, string>)CategoryComboBox.SelectedItem).Key.ToString();
         }
 
         private void SupplierComboBox_DropDown(object sender, EventArgs e)
@@ -331,7 +326,7 @@ namespace SalesInventoryApp
 
         private void SupplierComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Supplier.Text = SelectItem(SupplierComboBox);
+            Supplier.Text = ((KeyValuePair<int, string>)SupplierComboBox.SelectedItem).Value;
         }
     }
 }

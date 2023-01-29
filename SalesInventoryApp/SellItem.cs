@@ -139,7 +139,7 @@ namespace SalesInventoryApp
                     command.Parameters.Clear();
                     command.Parameters.Add("date", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortDateString();
                     command.Parameters.Add("time", (DbType)SqlDbType.VarChar).Value = DateTime.Now.ToShortTimeString();
-                    command.Parameters.Add("itemName", (DbType)SqlDbType.Int).Value = ItemName.Text;
+                    command.Parameters.Add("itemName", (DbType)SqlDbType.VarChar).Value = ItemName.Text;
                     command.Parameters.Add("quantity", (DbType)SqlDbType.Int).Value = quantityToSell;
                     command.Parameters.Add("totalAmount", (DbType)SqlDbType.Decimal).Value = Convert.ToDecimal(TotalAmount.Text);
                     command.Prepare();

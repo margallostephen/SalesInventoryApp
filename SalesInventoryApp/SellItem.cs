@@ -99,8 +99,8 @@ namespace SalesInventoryApp
             }
             else
             {
-                quantityToSell++;
-                remainingQuantity--;
+                quantityToSell--;
+                remainingQuantity++;
             }
             
             Quantity.Text = quantityToSell.ToString();

@@ -65,11 +65,6 @@ namespace SalesInventoryApp
             }
         }
 
-        private void ActionLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void SupplierTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             Main.ChangeCursor(SupplierTable, e);

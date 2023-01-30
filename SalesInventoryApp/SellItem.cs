@@ -90,6 +90,24 @@ namespace SalesInventoryApp
             TotalAmount.Text = "0.00";
         }
 
+        private void ChangeQuantity(string operation)
+        {
+            if (operation == "Add")
+            {
+                quantityToSell++;
+                remainingQuantity--;
+            }
+            else
+            {
+                quantityToSell++;
+                remainingQuantity--;
+            }
+            
+            Quantity.Text = quantityToSell.ToString();
+            RemainingQuantity.Text = remainingQuantity.ToString();
+            TotalAmount.Text = (Convert.ToDecimal(quantityToSell) * Convert.ToDecimal(Price.Text)).ToString();
+        }
+
         private void AddQuantityBtn_Click(object sender, EventArgs e)
         {
             if (ItemName.Text != "")
@@ -97,31 +115,14 @@ namespace SalesInventoryApp
                 quantityToSell = Convert.ToInt32(Quantity.Text);
 
                 if (remainingQuantity != 0)
-                {
-                    quantityToSell++;
-                    remainingQuantity--;
-                    Quantity.Text = quantityToSell.ToString();
-                    RemainingQuantity.Text = remainingQuantity.ToString();
-                    TotalAmount.Text = ComputePrice();
-                }
+                    ChangeQuantity("Add");
             }
         }
 
         private void MinusQuantityBtn_Click(object sender, EventArgs e)
         {
             if (quantityToSell != 0)
-            {
-                quantityToSell--;
-                remainingQuantity++;
-                Quantity.Text = quantityToSell.ToString();
-                RemainingQuantity.Text = remainingQuantity.ToString();
-                TotalAmount.Text = ComputePrice();
-            }
-        }
-
-        private string ComputePrice()
-        {
-            return (Convert.ToDecimal(quantityToSell) * Convert.ToDecimal(Price.Text)).ToString();
+                ChangeQuantity("Minus");
         }
 
         private void SellBtn_Click(object sender, EventArgs e)

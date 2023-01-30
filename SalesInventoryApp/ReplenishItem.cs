@@ -88,30 +88,30 @@ namespace SalesInventoryApp
             AddQuantity.Text = NewQuantity.Text = "0";
         }
 
-        private void AddQuantityBtn_Click(object sender, EventArgs e)
+        private void ChangeQuantity(string operation)
         {
-            if (ItemName.Text != "")
+            if (operation == "Add")
             {
                 quantityToAdd = Convert.ToInt32(AddQuantity.Text);
                 quantityToAdd++;
-                AddQuantity.Text = quantityToAdd.ToString();
-                NewQuantity.Text = ComputePrice();
             }
+            else
+                quantityToAdd--;
+
+            AddQuantity.Text = quantityToAdd.ToString();
+            NewQuantity.Text = (remainingQuantity + quantityToAdd).ToString();
+        }
+
+        private void AddQuantityBtn_Click(object sender, EventArgs e)
+        {
+            if (ItemName.Text != "")
+                ChangeQuantity("Add");
         }
 
         private void MinusQuantityBtn_Click(object sender, EventArgs e)
         {
             if (ItemName.Text != "" && quantityToAdd > 0)
-            {
-                quantityToAdd--;
-                AddQuantity.Text = quantityToAdd.ToString();
-                NewQuantity.Text = ComputePrice();
-            }
-        }
-
-        private string ComputePrice()
-        {
-            return (remainingQuantity + quantityToAdd).ToString();
+                ChangeQuantity("Minus");
         }
 
         private void ReplenishBtn_Click(object sender, EventArgs e)

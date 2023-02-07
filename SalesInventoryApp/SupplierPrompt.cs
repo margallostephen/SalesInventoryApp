@@ -9,6 +9,9 @@ namespace SalesInventoryApp
         public MySqlConnection Connection { get; set; }
         private readonly Supplier supplierForm;
 
+        [GeneratedRegex("^[0-9]+$")]
+        private static partial Regex NumberOnly();
+
         public SupplierPrompt(string operation, Supplier supplierForm)
         {
             InitializeComponent();
@@ -179,8 +182,5 @@ namespace SalesInventoryApp
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        [GeneratedRegex("^[0-9]+$")]
-        private static partial Regex NumberOnly();
     }
 }

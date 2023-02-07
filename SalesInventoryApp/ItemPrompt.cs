@@ -11,6 +11,9 @@ namespace SalesInventoryApp
         private readonly Dictionary<int, string> category = new();
         private readonly Dictionary<int, string> supplier = new();
         private Boolean imageChange = false;
+        
+        [GeneratedRegex("^[0-9.]+$")]
+        private static partial Regex NumberOnly();
 
         public ItemPrompt(string operation, Item itemForm)
         {
@@ -302,7 +305,6 @@ namespace SalesInventoryApp
                     }
                     else
                         ComboBoxSelectDefaultValue(comboBox[i]);
-
                 }
                 else
                     ComboBoxSelectDefaultValue(comboBox[i]);
@@ -366,8 +368,5 @@ namespace SalesInventoryApp
         {
             Supplier.Text = ((KeyValuePair<int, string>)SupplierComboBox.SelectedItem).Value;
         }
-
-        [GeneratedRegex("^[0-9.]+$")]
-        private static partial Regex NumberOnly();
     }
 }

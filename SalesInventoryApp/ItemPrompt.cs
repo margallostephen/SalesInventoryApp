@@ -302,6 +302,7 @@ namespace SalesInventoryApp
                     }
                     else
                         ComboBoxSelectDefaultValue(comboBox[i]);
+
                 }
                 else
                     ComboBoxSelectDefaultValue(comboBox[i]);
@@ -310,14 +311,14 @@ namespace SalesInventoryApp
             Connection.Close();
         }
 
-        private static void RemoveLabel(ComboBox comboBox, Dictionary<int, string> source)
+        private static void RemoveLabel(ComboBox comboBox, Dictionary<int, string> source, TextBox textBox)
         {
             if (source.ContainsKey(-1))
             {
-                comboBox.SelectedIndex = 0;
                 comboBox.DataSource = null;
                 source.Remove(-1);
                 BindSource(comboBox, source);
+                comboBox.SelectedIndex = string.IsNullOrWhiteSpace(textBox.Text) ? -1 : Convert.ToInt32(textBox.Text) - 1;
             }
         }
 
@@ -338,7 +339,7 @@ namespace SalesInventoryApp
 
         private void CategoryComboBox_DropDown(object sender, EventArgs e)
         {
-            RemoveLabel(CategoryComboBox, category);
+            RemoveLabel(CategoryComboBox, category, Category);
         }
 
         private void CategoryComboBox_DropDownClosed(object sender, EventArgs e)
@@ -353,7 +354,7 @@ namespace SalesInventoryApp
 
         private void SupplierComboBox_DropDown(object sender, EventArgs e)
         {
-            RemoveLabel(SupplierComboBox, supplier);
+            RemoveLabel(SupplierComboBox, supplier, Supplier);
         }
 
         private void SupplierComboBox_DropDownClosed(object sender, EventArgs e)

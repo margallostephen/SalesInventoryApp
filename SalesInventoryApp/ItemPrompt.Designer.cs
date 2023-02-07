@@ -40,8 +40,8 @@
             this.Item = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
-            this.Category = new System.Windows.Forms.TextBox();
             this.SupplierComboBox = new System.Windows.Forms.ComboBox();
+            this.Category = new System.Windows.Forms.TextBox();
             this.Supplier = new System.Windows.Forms.TextBox();
             this.BtnTwo = new System.Windows.Forms.Button();
             this.BtnOne = new System.Windows.Forms.Button();
@@ -89,8 +89,8 @@
             this.InputPanel.Controls.Add(this.Item);
             this.InputPanel.Controls.Add(this.panel4);
             this.InputPanel.Controls.Add(this.CategoryComboBox);
-            this.InputPanel.Controls.Add(this.Category);
             this.InputPanel.Controls.Add(this.SupplierComboBox);
+            this.InputPanel.Controls.Add(this.Category);
             this.InputPanel.Controls.Add(this.Supplier);
             this.InputPanel.Location = new System.Drawing.Point(12, 46);
             this.InputPanel.Name = "InputPanel";
@@ -194,7 +194,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.CategoryComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CategoryComboBox.DropDownHeight = 128;
+            this.CategoryComboBox.DropDownHeight = 107;
             this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CategoryComboBox.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -211,27 +211,13 @@
             this.CategoryComboBox.SelectionChangeCommitted += new System.EventHandler(this.CategoryComboBox_SelectionChangeCommitted);
             this.CategoryComboBox.DropDownClosed += new System.EventHandler(this.CategoryComboBox_DropDownClosed);
             // 
-            // Category
-            // 
-            this.Category.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Category.BackColor = System.Drawing.Color.White;
-            this.Category.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Category.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Category.Location = new System.Drawing.Point(133, 13);
-            this.Category.Margin = new System.Windows.Forms.Padding(2);
-            this.Category.Name = "Category";
-            this.Category.PlaceholderText = "Category";
-            this.Category.Size = new System.Drawing.Size(183, 22);
-            this.Category.TabIndex = 38;
-            // 
             // SupplierComboBox
             // 
             this.SupplierComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SupplierComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.SupplierComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SupplierComboBox.DropDownHeight = 128;
+            this.SupplierComboBox.DropDownHeight = 107;
             this.SupplierComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SupplierComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SupplierComboBox.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -247,6 +233,20 @@
             this.SupplierComboBox.DropDown += new System.EventHandler(this.SupplierComboBox_DropDown);
             this.SupplierComboBox.SelectionChangeCommitted += new System.EventHandler(this.SupplierComboBox_SelectionChangeCommitted);
             this.SupplierComboBox.DropDownClosed += new System.EventHandler(this.SupplierComboBox_DropDownClosed);
+            // 
+            // Category
+            // 
+            this.Category.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Category.BackColor = System.Drawing.Color.White;
+            this.Category.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Category.Font = new System.Drawing.Font("Segoe UI Variable Display", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Category.Location = new System.Drawing.Point(133, 13);
+            this.Category.Margin = new System.Windows.Forms.Padding(2);
+            this.Category.Name = "Category";
+            this.Category.PlaceholderText = "Category";
+            this.Category.Size = new System.Drawing.Size(183, 22);
+            this.Category.TabIndex = 38;
             // 
             // Supplier
             // 
